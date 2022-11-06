@@ -9,13 +9,15 @@ import { MaintainPatientsComponent } from './maintain-patients/maintain-patients
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChildComponent } from './child/child.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientsComponent,
     HomeComponent,
-    MaintainPatientsComponent
+    MaintainPatientsComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
