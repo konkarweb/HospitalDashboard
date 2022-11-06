@@ -53,3 +53,23 @@
     padding: 2px 20px;
   }
   
+
+  .FormRow{
+    padding-top: 20px;
+  }
+
+  .FormFooterActions{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 60px;
+    background-color: #fffffffc;
+    
+  }
+  .FormFooterActions .Save {
+    margin-right:10px ;
+  }
+
+  .leftNavText {
+    color: white;
+    text-decoration: none;
+  }

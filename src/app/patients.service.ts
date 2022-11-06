@@ -10,7 +10,7 @@ export class PatientsService {
 
   private _url:string = "http://localhost:8080/api/getAllPatient";
   private _urlSingle:string = "http://localhost:8080/api/getPatientById?patientId=";
-
+  private _urlSavept:string = "http://localhost:8080/api/createPatient";
   constructor(private http: HttpClient) { }
 
   getUsers():Observable<IPatients[]>{
@@ -18,7 +18,11 @@ export class PatientsService {
   }
 
   getSingleUser(id:any):Observable<IPatients[]>{
-    return this.http.get<IPatients[]>( this._urlSingle + id );
+    let tmp = this._urlSingle + encodeURIComponent(id);
+    return this.http.get<IPatients[]>( tmp );
 
+  }
+  SavePatient(PatientData:any){
+    return this.http.post<any>(this._urlSavept, PatientData);
   }
 }

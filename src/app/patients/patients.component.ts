@@ -35,4 +35,8 @@ export class PatientsComponent implements OnInit {
 
   }
 
+  OnNew(){
+    this.router.navigate(['/Patient', 'New']);
+  }
+
 }
