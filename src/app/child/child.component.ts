@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChildService } from '../child.service';
+
 
 @Component({
   selector: 'app-child',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChildComponent implements OnInit {
 
-  constructor() { }
+  public ChildList:any;
+  constructor( private router: Router, private _childService: ChildService ) { }
 
   ngOnInit(): void {
+    this._childService.getUsers()
+    .subscribe((v:any) => {
+      this.ChildList = v;
+      console.log(this.ChildList);
+    })
+    
   }
 
+  OnNewChild(){
+    this.router.navigate(['/Child', 'New']);
+  }
+  OnSelect(patient: any){
+    this.router.navigate(['/Patient', patient.patientId]);
+
+  }
 }
