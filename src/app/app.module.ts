@@ -9,6 +9,8 @@ import { MaintainPatientsComponent } from './maintain-patients/maintain-patients
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChildComponent } from './child/child.component';
+
 
 @NgModule({
   declarations: [
@@ -24,9 +26,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAnalyticsModule,
-    AngularFirestoreModule
   ],
   providers: [
   ],
