@@ -1,0 +1,61 @@
+
+<div class="row">
+    <div class=" col-10">
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Childs</li>
+        </ol>
+      </nav>
+    </div>
+    <div class=" col-2">
+      <div class="float-end">
+  
+        <button type ="button" (click)="OnNewChild()" class="btn btn-primary">New</button>
+      </div>  
+    </div>
+  </div>
+  
+  
+  <table class="table table-hover">
+      <thead>
+          <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Contact Number</th>
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let patient of ChildList;  index as i">
+        <tr>
+          <th scope="row"><a (click)="OnSelect(patient)" routerLink="">{{i+1}}</a></th>
+          <td>{{patient.firstName}} {{ patient.middleName }} {{patient.lastName}}</td>
+          <td>{{patient.uid}}</td>
+          <td>{{patient.mobileNumber}}</td>
+          <td>{{patient.gender}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  
+  <div class="float-end">
+    <nav aria-label="Page navigation example ">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+    

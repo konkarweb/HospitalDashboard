@@ -9,17 +9,14 @@ import { MaintainPatientsComponent } from './maintain-patients/maintain-patients
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientsComponent,
     HomeComponent,
-    MaintainPatientsComponent
+    MaintainPatientsComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
