@@ -27,13 +27,13 @@
           <th scope="col">Contact Number</th>
         </tr>
       </thead>
-      <tbody ng *ngFor="let patient of ChildList;  index as i">
+      <tbody ng *ngFor="let Childs of ChildList;  index as i">
         <tr>
-          <th scope="row"><a (click)="OnSelect(patient)" routerLink="">{{i+1}}</a></th>
-          <td>{{patient.firstName}} {{ patient.middleName }} {{patient.lastName}}</td>
-          <td>{{patient.uid}}</td>
-          <td>{{patient.mobileNumber}}</td>
-          <td>{{patient.gender}}</td>
+          <th scope="row"><a (click)="OnSelect(Childs)" routerLink="">{{i+1}}</a></th>
+          <td>{{Childs.FirstName}} {{ Childs.MiddleName }} {{Childs.LastName}}</td>
+          <td>{{Childs.Aadhar}}</td>
+          <td>{{Childs.MobileNo}}</td>
+          <td>{{Childs.Gender}}</td>
         </tr>
         
       </tbody>

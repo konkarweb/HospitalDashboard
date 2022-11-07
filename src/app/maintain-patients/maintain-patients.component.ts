@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PatientsService } from '../patients.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-maintain-patients',
@@ -15,10 +16,11 @@ export class MaintainPatientsComponent implements OnInit {
   public SLpatient:any;
   public PatientsList:any;
   public PtName:any
-
+  visible:boolean = false;
    
   constructor(private route: ActivatedRoute,
-              private _paitentsService: PatientsService) { 
+              private _paitentsService: PatientsService,
+              private firestore: AngularFirestore) { 
                 
               }
 
@@ -44,11 +46,35 @@ export class MaintainPatientsComponent implements OnInit {
 
 
     OnSave(){
+
+      if(this.Ptid === 'New')
+    {
+
       console.log(this.PatientsDetails.value);
       this._paitentsService.SavePatient(this.PatientsDetails.value)
       .subscribe(
         response => console.log('Sucess!', response)
       )
+    }
+    else
+    {
+
+
+      this.firestore
+  .collection('Patients')
+  .doc('/' + this.Ptid)
+  .update({bloodGroup: this.PatientsDetails.value.bloodGroup})
+  .then(() => {
+    this.visible = true; 
+    console.log('done');
+  })
+  .catch(function(error) {
+    //this.visible = false; 
+   console.error('Error writing document: ', error);
+  });
+
+}
+     
     }
 
   ngOnInit(): void {

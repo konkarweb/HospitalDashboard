@@ -14,7 +14,7 @@ export class ChildComponent implements OnInit {
   constructor( private router: Router, private _childService: ChildService ) { }
 
   ngOnInit(): void {
-    this._childService.getUsers()
+    this._childService.get_Childs()
     .subscribe((v:any) => {
       this.ChildList = v;
       console.log(this.ChildList);

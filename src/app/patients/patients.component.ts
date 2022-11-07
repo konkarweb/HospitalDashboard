@@ -21,7 +21,6 @@ export class PatientsComponent implements OnInit {
   public PatientsList:any;
   public itemsTemp:any;
   //items: Observable<any[]>;
-  public PT:any;
 
   //PTTT: PTT[]; 
 
@@ -33,8 +32,7 @@ export class PatientsComponent implements OnInit {
 
  
   constructor( private router: Router,
-               private _paitentsService: PatientsService,
-               private firestore: AngularFirestore ) { 
+               private _paitentsService: PatientsService ) { 
              //   this.items = firestore.collection('/Patients/0xPyvLrrn8bG18rNsfxo/Medical History').valueChanges();
                 
               }
@@ -50,20 +48,6 @@ export class PatientsComponent implements OnInit {
       console.log(this.PatientsList);
     })
     
- //   console.log(this.items);
-
-       this.firestore
-     .collection("Patients")
-     .valueChanges({ idField: 'docId' })
-     .subscribe((ss:any) => {
-
-      console.log(ss);
-      this.PT = ss;
-      //`idprefix-${ss.doc.id}`;
-     // console.log(ss.doc.id);
-       
-     });
-
 
 
   }

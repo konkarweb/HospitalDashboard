@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPatients } from './patients';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs'
 
 @Injectable({
@@ -8,10 +9,21 @@ import { Observable } from 'rxjs'
 })
 export class ChildService {
 
+ 
+  public Childs: any;
   private _url:string = "http://localhost:8080/api/getAllPatient";
   private _urlSingle:string = "http://localhost:8080/api/getPatientById?patientId=";
   private _urlSavept:string = "http://localhost:8080/api/createPatient";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private firestore: AngularFirestore) {
+                this.Childs =  this.firestore
+                .collection("Childs")
+                .valueChanges({ idField: 'docId' });
+              }
+
+  get_Childs(){
+  return this.Childs;
+  }
 
   getUsers():Observable<IPatients[]>{
     return this.http.get<IPatients[]>(this._url);
