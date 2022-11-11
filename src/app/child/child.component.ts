@@ -17,6 +17,7 @@ export class ChildComponent implements OnInit {
     this._childService.get_Childs()
     .subscribe((v:any) => {
       this.ChildList = v;
+      console.log(v);
       console.log(this.ChildList);
     })
     
@@ -25,8 +26,8 @@ export class ChildComponent implements OnInit {
   OnNewChild(){
     this.router.navigate(['/Child', 'New']);
   }
-  OnSelect(patient: any){
-    this.router.navigate(['/Patient', patient.patientId]);
+  OnSelect(child: any){
+    this.router.navigate(['/Child', child.docId]);
 
   }
 }

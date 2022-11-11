@@ -22,18 +22,18 @@
           <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
-          <th scope="col">Date of Birth</th>
+          <th scope="col">Blood Group</th>
           <th scope="col">Gender</th>
-          <th scope="col">Contact Number</th>
+          <th scope="col">Date of Birth</th>
         </tr>
       </thead>
       <tbody ng *ngFor="let Childs of ChildList;  index as i">
-        <tr>
+        <tr (click)="OnSelect(Childs)" routerLink="">
           <th scope="row"><a (click)="OnSelect(Childs)" routerLink="">{{i+1}}</a></th>
           <td>{{Childs.FirstName}} {{ Childs.MiddleName }} {{Childs.LastName}}</td>
-          <td>{{Childs.Aadhar}}</td>
-          <td>{{Childs.MobileNo}}</td>
+          <td>{{Childs.BloodGroup}}</td>
           <td>{{Childs.Gender}}</td>
+          <td>{{Childs.DOB}}</td>
         </tr>
         
       </tbody>
