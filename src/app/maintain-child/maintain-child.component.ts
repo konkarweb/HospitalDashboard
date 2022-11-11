@@ -3,13 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ChildService } from '../child.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maintain-child',
   templateUrl: './maintain-child.component.html',
   styleUrls: ['./maintain-child.component.css']
 })
-export class MaintainChildComponent implements OnInit {
+export class MaintainChildComponent implements OnInit { 
 
   public Ptid: any;
   public child: any;
@@ -20,6 +21,7 @@ export class MaintainChildComponent implements OnInit {
   has_parent : boolean = false;
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private _childService: ChildService,
     private firestore: AngularFirestore) {
 
@@ -29,34 +31,101 @@ export class MaintainChildComponent implements OnInit {
 
   ChildDetails = new FormGroup(
     {
-      childId: new FormControl(''),
+      ChildId: new FormControl(''),
       patientType: new FormControl('Childs'),
       FirstName: new FormControl(''),
       LastName: new FormControl(''),
       MiddleName: new FormControl(''),
-      bloodGroup: new FormControl(''),
+      BloodGroup: new FormControl(''),
       MobileNumber: new FormControl(''),
+      DOB: new FormControl(''),      
       Gender: new FormControl(''),
+      BirthHeadCircumference: new FormControl(''),
+      BirthHeight: new FormControl(''),
+      BirthWeight: new FormControl(''),      
     }
   );
+    onSelect(ChildID :  any){
+      // console.log(Patient);
+      this.router.navigate(['/Vaccines', ChildID]);
+    }
+    OnSave() {
 
-
-  OnSave() {
-
-    if (this.Ptid === 'New') {
-
-      this.firestore
-        .collection('Childs')
-        .add({ FirstName: this.ChildDetails.value.FirstName })
+      if (this.Ptid === 'New') {
+  
+        this.firestore
+          .collection('Childs')
+        .add({
+          FirstName: this.ChildDetails.value.FirstName,
+          ChildId: this.ChildDetails.value.ChildId,
+          patientType: this.ChildDetails.value.patientType,
+          LastName: this.ChildDetails.value.LastName,
+          MiddleName: this.ChildDetails.value.MiddleName,
+          BloodGroup: this.ChildDetails.value.BloodGroup,
+          Gender: this.ChildDetails.value.Gender,          
+          MobileNumber: this.ChildDetails.value.MobileNumber,
+          DOB: this.ChildDetails.value.DOB,
+          BirthHeadCircumference: this.ChildDetails.value.BirthHeadCircumference,
+          BirthHeight: this.ChildDetails.value.BirthHeight,
+          BirthWeight: this.ChildDetails.value.BirthWeight,
+        })
         .then(res => {
+          const id = res.id;
+          this.router.navigate(['/Child', id]);
           console.log(res);
-          //this.form.reset();
-      })
-      .catch(e => {
-          console.log(e);
-      });
+          this.firestore
+          .collection('MotherVaccineDetails')
+          .add({
+            patientID: id,
+            Date: "",
+            Vaccine: "DTP 1,2 3",
+            VaccineDetail: "At 6 Weeks, 10 Weeks 14 Weeks",
+            NextVaccineDate: ""
+          },)
+          .then(res1 => { 
+            console.log(res1.id);
+          }).catch(e => {
+            console.log(e);
+          });
 
-    
+          this.firestore
+          .collection('MotherVaccineDetails')
+          .add({
+            patientID: id,
+            Date: "",
+            Vaccine: "BCG",
+            VaccineDetail: "At birth or as early as possible till one year of age",
+            NextVaccineDate: ""
+          },)
+          .then(res2 => { 
+            console.log(res2.id);
+          }).catch(e => {
+            console.log(e);
+          });
+
+          this.firestore
+          .collection('MotherVaccineDetails')
+          .add({
+            patientID: id,
+            Date: "",
+            Vaccine: "Hepatitis",
+            VaccineDetail: "At birth or as early as possible within 24 hours",
+            NextVaccineDate: ""
+          },)
+          .then(res3 => {
+            console.log(res3.id);
+           }).catch(e => {
+            console.log(e);
+          });
+
+          this.visible = true;
+          //this.form.reset();
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+
 
       // console.log(this.PatientsDetails.value);
       // this._paitentsService.SavePatient(this.PatientsDetails.value)
@@ -69,7 +138,21 @@ export class MaintainChildComponent implements OnInit {
       this.firestore
         .collection('Childs')
         .doc('/' + this.Ptid)
-        .update({ bloodGroup: this.ChildDetails.value.bloodGroup })
+        .update({
+          FirstName: this.ChildDetails.value.FirstName,
+          ChildId: this.ChildDetails.value.ChildId,
+          patientType: this.ChildDetails.value.patientType,
+          LastName: this.ChildDetails.value.LastName,
+          MiddleName: this.ChildDetails.value.MiddleName,
+          BloodGroup: this.ChildDetails.value.BloodGroup,
+          Gender: this.ChildDetails.value.Gender,          
+          MobileNumber: this.ChildDetails.value.MobileNumber,
+          DOB: this.ChildDetails.value.DOB,
+          BirthHeadCircumference: this.ChildDetails.value.BirthHeadCircumference,
+          BirthHeight: this.ChildDetails.value.BirthHeight,
+          BirthWeight: this.ChildDetails.value.BirthWeight,          
+
+        })
         .then(() => {
           this.visible = true;
           console.log('done');
@@ -90,11 +173,10 @@ export class MaintainChildComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this.Ptid = id;
 
-    console.log(this.Ptid);
 
     if (this.Ptid === 'New') {
       this.PtName = "New";
-      this.ChildDetails.patchValue({ childId: this.Ptid });
+      this.ChildDetails.patchValue({ ChildId: this.Ptid });
     }
     else {
 
@@ -104,19 +186,24 @@ export class MaintainChildComponent implements OnInit {
           if (doc.exists) {
             console.log("Document data: ", doc.data());
             this.child = doc.data();
-            this.PtName = this.child.FirstName;
-            console.log(this.child);
-            this.ChildDetails.patchValue({ childId: this.Ptid });
+            this.PtName = this.child.firstName;
+            // console.log(this.patient);
+            this.ChildDetails.patchValue({ ChildId: this.Ptid });
             this.ChildDetails.patchValue({ patientType: this.child.patientType });
             this.ChildDetails.patchValue({ FirstName: this.child.FirstName });
             this.ChildDetails.patchValue({ LastName: this.child.LastName });
             this.ChildDetails.patchValue({ MiddleName: this.child.MiddleName });
-            this.ChildDetails.patchValue({ bloodGroup: this.child.BloodGroup });
-            this.ChildDetails.patchValue({ MobileNumber: this.child.MobileNo });
-            this.ChildDetails.patchValue({ Gender: this.child.Gender});
+            this.ChildDetails.patchValue({ BloodGroup: this.child.BloodGroup });
+            this.ChildDetails.patchValue({ Gender: this.child.Gender });            
+            this.ChildDetails.patchValue({ MobileNumber: this.child.MobileNumber });
+            this.ChildDetails.patchValue({ DOB: this.child.DOB });
+            this.ChildDetails.patchValue({ BirthHeadCircumference: this.child.BirthHeadCircumference });
+            this.ChildDetails.patchValue({ BirthHeight: this.child.BirthHeight });
+            this.ChildDetails.patchValue({ BirthWeight: this.child.BirthWeight });
+
           }
         })
-      
+
 
 
 
