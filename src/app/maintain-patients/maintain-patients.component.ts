@@ -81,6 +81,52 @@ export class MaintainPatientsComponent implements OnInit {
           const id = res.id;
           this.router.navigate(['/Patient', id]);
           console.log(res);
+
+          this.firestore
+            .collection('MotherVaccineDetails')
+            .add({
+              patientID: id,
+              Date: "",
+              Vaccine: "TT-1",
+              VaccineDetail: "Early in pregnancy",
+              NextVaccineDate: ""
+            },)
+            .then(res1 => { 
+              console.log(res1.id);
+            }).catch(e => {
+              console.log(e);
+            });
+
+            this.firestore
+            .collection('MotherVaccineDetails')
+            .add({
+              patientID: id,
+              Date: "",
+              Vaccine: "TT-2",
+              VaccineDetail: "4 weeks After TT-1*",
+              NextVaccineDate: ""
+            },)
+            .then(res2 => { 
+              console.log(res2.id);
+            }).catch(e => {
+              console.log(e);
+            });
+
+            this.firestore
+            .collection('MotherVaccineDetails')
+            .add({
+              patientID: id,
+              Date: "",
+              Vaccine: "TT-Booster",
+              VaccineDetail: "If received 2 TT doses in a pregnancy within the last 3 yrs*",
+              NextVaccineDate: ""
+            },)
+            .then(res3 => {
+              console.log(res3.id);
+             }).catch(e => {
+              console.log(e);
+            });
+
           this.visible = true;
           //this.form.reset();
         })

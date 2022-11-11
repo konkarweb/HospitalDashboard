@@ -10,7 +10,7 @@
 <!-- <p>maintain-patients works! Id Is {{ Ptid }}</p> -->
 <ng-container *ngIf="visible">
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success</strong> Updated Successfully.
+  <strong>Success</strong> Record Updated.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 </ng-container>
@@ -23,20 +23,20 @@
   <li class="nav-item">
     <a class="nav-link" (click)="onSelect(Ptid)">Vaccines</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Medical History</a>
-  </li>
-
-  <!-- <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+ 
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Other</a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="onSelect(Ptid)">Medical History</a>
+      </li>
+      <li><a class="dropdown-item" href="#">Pregnancy Outcome</a></li>
       <li><a class="dropdown-item" href="#">Another action</a></li>
       <li><a class="dropdown-item" href="#">Something else here</a></li>
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" href="#">Separated link</a></li>
     </ul>
-  </li> -->
+  </li>
   <!-- <li class="nav-item">
     <a class="nav-link" href="#">Link</a>
   </li> -->
@@ -142,7 +142,7 @@
             </div>
 
 
-            <div class="row FormRow">
+            <div class="row FormRow last">
 
             
 
@@ -164,7 +164,7 @@
           </form>
        
 
-{{PatientsDetails.value | json}}
+
 
 
   <div class="fixed-bottom FormFooterActions border border-secondary">

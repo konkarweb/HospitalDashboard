@@ -23,7 +23,7 @@
         <th scope="col">Name</th>
         <th scope="col">Adhar ID</th>
         <th scope="col">Contact No</th>
-        <th scope="col">Blood Group</th>
+        
       </tr>
     </thead>
     <tbody ng *ngFor="let patient of PatientsList;  index as i">
@@ -31,7 +31,7 @@
         <td>{{patient.firstName}} {{ patient.middleName }} {{patient.lastName}}</td>
         <td>{{patient.uid}}</td>
         <td>{{patient.mobileNumber}}</td>
-        <td>{{patient.bloodGroup}}</td>
+        
       </tr>
       
     </tbody>
