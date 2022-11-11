@@ -20,7 +20,7 @@
   <table class="table table-hover">
       <thead>
           <tr>
-          <th scope="col">#</th>
+          <!-- <th scope="col">#</th> -->
           <th scope="col">Name</th>
           <th scope="col">Blood Group</th>
           <th scope="col">Gender</th>
@@ -29,7 +29,7 @@
       </thead>
       <tbody ng *ngFor="let Childs of ChildList;  index as i">
         <tr (click)="OnSelect(Childs)" routerLink="">
-          <th scope="row"><a (click)="OnSelect(Childs)" routerLink="">{{i+1}}</a></th>
+          <!-- <th scope="row"><a (click)="OnSelect(Childs)" routerLink="">{{i+1}}</a></th> -->
           <td>{{Childs.FirstName}} {{ Childs.MiddleName }} {{Childs.LastName}}</td>
           <td>{{Childs.BloodGroup}}</td>
           <td>{{Childs.Gender}}</td>

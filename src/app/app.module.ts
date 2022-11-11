@@ -14,6 +14,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { MaintainChildComponent } from './maintain-child/maintain-child.component';
+import { VaccineComponent } from './vaccine/vaccine.component';
 
 
 
@@ -24,7 +25,8 @@ import { MaintainChildComponent } from './maintain-child/maintain-child.componen
     HomeComponent,
     MaintainPatientsComponent,
     ChildComponent,
-    MaintainChildComponent
+    MaintainChildComponent,
+    VaccineComponent
   ],
   imports: [
     BrowserModule,

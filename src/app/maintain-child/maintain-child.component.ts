@@ -17,6 +17,7 @@ export class MaintainChildComponent implements OnInit {
   public childList: any;
   public PtName: any
   visible: boolean = false;
+  has_parent : boolean = false;
 
   constructor(private route: ActivatedRoute,
     private _childService: ChildService,
@@ -29,12 +30,13 @@ export class MaintainChildComponent implements OnInit {
   ChildDetails = new FormGroup(
     {
       childId: new FormControl(''),
-      patientType: new FormControl('Mother'),
+      patientType: new FormControl('Childs'),
       FirstName: new FormControl(''),
       LastName: new FormControl(''),
       MiddleName: new FormControl(''),
-      BloodGroup: new FormControl(''),
+      bloodGroup: new FormControl(''),
       MobileNumber: new FormControl(''),
+      Gender: new FormControl(''),
     }
   );
 
@@ -67,7 +69,7 @@ export class MaintainChildComponent implements OnInit {
       this.firestore
         .collection('Childs')
         .doc('/' + this.Ptid)
-        .update({ bloodGroup: this.ChildDetails.value.BloodGroup })
+        .update({ bloodGroup: this.ChildDetails.value.bloodGroup })
         .then(() => {
           this.visible = true;
           console.log('done');
@@ -88,6 +90,7 @@ export class MaintainChildComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this.Ptid = id;
 
+    console.log(this.Ptid);
 
     if (this.Ptid === 'New') {
       this.PtName = "New";
@@ -101,15 +104,16 @@ export class MaintainChildComponent implements OnInit {
           if (doc.exists) {
             console.log("Document data: ", doc.data());
             this.child = doc.data();
-            this.PtName = this.child.firstName;
-           // console.log(this.patient);
+            this.PtName = this.child.FirstName;
+            console.log(this.child);
             this.ChildDetails.patchValue({ childId: this.Ptid });
             this.ChildDetails.patchValue({ patientType: this.child.patientType });
-            this.ChildDetails.patchValue({ FirstName: this.child.firstName });
-            this.ChildDetails.patchValue({ LastName: this.child.lastName });
-            this.ChildDetails.patchValue({ MiddleName: this.child.middleName });
-            this.ChildDetails.patchValue({ BloodGroup: this.child.bloodGroup });
-            this.ChildDetails.patchValue({ MobileNumber: this.child.mobileNumber });
+            this.ChildDetails.patchValue({ FirstName: this.child.FirstName });
+            this.ChildDetails.patchValue({ LastName: this.child.LastName });
+            this.ChildDetails.patchValue({ MiddleName: this.child.MiddleName });
+            this.ChildDetails.patchValue({ bloodGroup: this.child.BloodGroup });
+            this.ChildDetails.patchValue({ MobileNumber: this.child.MobileNo });
+            this.ChildDetails.patchValue({ Gender: this.child.Gender});
           }
         })
       
