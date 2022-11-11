@@ -53,7 +53,7 @@ export class PatientsComponent implements OnInit {
   }
 
   OnSelect(patient: any){
-    this.router.navigate(['/Patient', patient.patientId]);
+    this.router.navigate(['/Patient', patient.docId]);
 
   }
 
