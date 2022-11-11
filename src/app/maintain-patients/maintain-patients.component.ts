@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientsService } from '../patients.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maintain-patients',
@@ -19,6 +20,7 @@ export class MaintainPatientsComponent implements OnInit {
   visible: boolean = false;
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private _paitentsService: PatientsService,
     private firestore: AngularFirestore) {
 
@@ -41,6 +43,9 @@ export class MaintainPatientsComponent implements OnInit {
       uid: new FormControl(''),
       ageAtMarraige: new FormControl(''),
       dob: new FormControl(''),
+      pregnancyType: new FormControl(''),
+      noOfChildren: new FormControl(''),
+      familyIncome: new FormControl(''),
     }
   );
 
@@ -51,16 +56,36 @@ export class MaintainPatientsComponent implements OnInit {
 
       this.firestore
         .collection('Patients')
-        .add({ firstName: this.PatientsDetails.value.firstName })
+        .add({
+          firstName: this.PatientsDetails.value.firstName,
+          patientId: this.PatientsDetails.value.patientId,
+          patientType: this.PatientsDetails.value.patientType,
+          lastName: this.PatientsDetails.value.lastName,
+          middleName: this.PatientsDetails.value.middleName,
+          bloodGroup: this.PatientsDetails.value.bloodGroup,
+          mobileNumber: this.PatientsDetails.value.mobileNumber,
+          alternateNumber: this.PatientsDetails.value.alternateNumber,
+          qualification: this.PatientsDetails.value.qualification,
+          employmentStatus: this.PatientsDetails.value.employmentStatus,
+          uid: this.PatientsDetails.value.uid,
+          ageAtMarraige: this.PatientsDetails.value.ageAtMarraige,
+          dob: this.PatientsDetails.value.dob,
+          pregnancyType: this.PatientsDetails.value.pregnancyType,
+          noOfChildren: this.PatientsDetails.value.noOfChildren,
+          familyIncome: this.PatientsDetails.value.familyIncome
+        })
         .then(res => {
+          const id = res.id;
+          this.router.navigate(['/Patient', id]);
           console.log(res);
+          this.visible = true;
           //this.form.reset();
-      })
-      .catch(e => {
+        })
+        .catch(e => {
           console.log(e);
-      });
+        });
 
-    
+
 
       // console.log(this.PatientsDetails.value);
       // this._paitentsService.SavePatient(this.PatientsDetails.value)
@@ -73,7 +98,24 @@ export class MaintainPatientsComponent implements OnInit {
       this.firestore
         .collection('Patients')
         .doc('/' + this.Ptid)
-        .update({ bloodGroup: this.PatientsDetails.value.bloodGroup })
+        .update({
+          firstName: this.PatientsDetails.value.firstName,
+          patientId: this.PatientsDetails.value.patientId,
+          patientType: this.PatientsDetails.value.patientType,
+          lastName: this.PatientsDetails.value.lastName,
+          middleName: this.PatientsDetails.value.middleName,
+          bloodGroup: this.PatientsDetails.value.bloodGroup,
+          mobileNumber: this.PatientsDetails.value.mobileNumber,
+          alternateNumber: this.PatientsDetails.value.alternateNumber,
+          qualification: this.PatientsDetails.value.qualification,
+          employmentStatus: this.PatientsDetails.value.employmentStatus,
+          uid: this.PatientsDetails.value.uid,
+          ageAtMarraige: this.PatientsDetails.value.ageAtMarraige,
+          dob: this.PatientsDetails.value.dob,
+          pregnancyType: this.PatientsDetails.value.pregnancyType,
+          noOfChildren: this.PatientsDetails.value.noOfChildren,
+          familyIncome: this.PatientsDetails.value.familyIncome
+        })
         .then(() => {
           this.visible = true;
           console.log('done');
@@ -108,7 +150,7 @@ export class MaintainPatientsComponent implements OnInit {
             console.log("Document data: ", doc.data());
             this.patient = doc.data();
             this.PtName = this.patient.firstName;
-           // console.log(this.patient);
+            // console.log(this.patient);
             this.PatientsDetails.patchValue({ patientId: this.Ptid });
             this.PatientsDetails.patchValue({ patientType: this.patient.patientType });
             this.PatientsDetails.patchValue({ firstName: this.patient.firstName });
@@ -122,10 +164,12 @@ export class MaintainPatientsComponent implements OnInit {
             this.PatientsDetails.patchValue({ uid: this.patient.uid });
             this.PatientsDetails.patchValue({ ageAtMarraige: this.patient.ageAtMarraige });
             this.PatientsDetails.patchValue({ dob: this.patient.dob });
+            this.PatientsDetails.patchValue({ pregnancyType: this.patient.pregnancyType });
+            this.PatientsDetails.patchValue({ noOfChildren: this.patient.noOfChildren });
 
           }
         })
-      
+
 
 
 

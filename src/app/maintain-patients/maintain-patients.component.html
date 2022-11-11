@@ -15,17 +15,36 @@
 </div>
 </ng-container>
 
-  <div class="accordion" id="accordionExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <strong>Details</strong>
-        </button>
-      </h2>
 
-      
-      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Vaccines</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Medical History</a>
+  </li>
+
+  <!-- <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li>
+    </ul>
+  </li> -->
+  <!-- <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li> -->
+  <!-- <li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li> -->
+</ul>
+
           <form [formGroup]="PatientsDetails">
             <div class="row FormRow">
               
@@ -65,7 +84,7 @@
 
               <div class="col-md-4">
                 <div class="form-floating">
-                  <input type="number" formControlName="mobileNumber" class="form-control" id="floatingInputGrid" >
+                  <input type="number" formControlName="alternateNumber" class="form-control" id="floatingInputGrid" >
                   <label for="floatingInputGrid">Alternate Number</label>
                 </div>
               </div>
@@ -95,17 +114,17 @@
 
               
 
-              <!-- <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="form-floating">
-                  <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                    <option selected>Select ID Type</option>
-                    <option value="Adhar">Adhar</option>
-                    <option value="Pan">Pan</option>
-                    <option value="Voter ID">Voter ID</option>
+
+                  <select formControlName="pregnancyType" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                    <option value=""></option>
+                    <option value="Primy Gravida">Primy Gravida</option>
+                    <option value="Multi Gravida">Multi Gravida</option>
                   </select>
-                  <label for="floatingSelectGrid">ID Type</label>
+                  <label for="floatingSelectGrid">Pregnancy Type</label>
                 </div>
-              </div> -->
+              </div>
 
               <div class="col-md-4">
                 <div class="form-floating">
@@ -114,58 +133,41 @@
                 </div>
               </div>
 
-              <!-- <div class="col-md-4">
+              <div class="col-md-4">
                 <div class="form-floating">
                   <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
                   <label for="floatingInputGrid">Date of Birth</label>
                 </div>
+              </div>
+            </div>
+
+
+            <div class="row FormRow">
+
+            
+
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="text" formControlName="noOfChildren" class="form-control" id="floatingInputGrid">
+                  <label for="floatingInputGrid">No. of Children</label>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="date" formControlName="pregnancyType" class="form-control" id="floatingInputGrid">
+                  <label for="floatingInputGrid">pregnancyType</label>
+                </div>
               </div> -->
             </div>
+
           </form>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <strong>Childs</strong>
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <strong>Visites</strong>
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
-  </div>
+       
 
-<!-- {{PatientsDetails.value | json}} -->
+{{PatientsDetails.value | json}}
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-  <div class="sticky-bottom FormFooterActions border border-secondary">
+
+  <div class="fixed-bottom FormFooterActions border border-secondary">
     <div class="row float-end">
 
       <div>
