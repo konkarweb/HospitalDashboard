@@ -1,157 +1,178 @@
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="">Home</a></li>
-      <li *ngIf="has_parent" class="breadcrumb-item"><a routerLink="/Parent">Parent</a></li>
-      <li class="breadcrumb-item"><a routerLink="/Child">Child</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+    <li *ngIf="has_parent" class="breadcrumb-item"><a routerLink="/Parent">Parent</a></li>
+    <li class="breadcrumb-item"><a routerLink="/Child">Child</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+  </ol>
 </nav>
 
 
 <!-- <p>maintain-patients works! Id Is {{ Ptid }}</p> -->
 <ng-container *ngIf="visible">
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success</strong> Child details submitted successfully.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<strong>Success</strong> Updated Successfully.
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 </ng-container>
 
-  <div class="accordion" id="accordionExample">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <strong>Child details</strong>
-        </button>
-      </h2>
 
+<ul class="nav nav-tabs">
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="#">Details</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" (click)="onSelect(Ptid)">Vaccines</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Medical History</a>
+</li>
+
+<!-- <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</li> -->
+<!-- <li class="nav-item">
+  <a class="nav-link" href="#">Link</a>
+</li> -->
+<!-- <li class="nav-item">
+  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+</li> -->
+</ul>
+
+<form [formGroup]="ChildDetails">
+  <div class="row FormRow">
+    
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <label for="floatingInputGrid">First Name</label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
+        <label for="floatingInputGrid">Middle Name</label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
+        <label for="floatingInputGrid">Last Name</label>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <div class="row FormRow">
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select formControlName="Gender" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+            <option value="M">M</option>
+            <option value="F">F</option>
+          </select>
+          <label for="floatingSelectGrid">Gender</label>
+        </div>
+      </div>      
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid">
+          <label for="floatingInputGrid">Date of Birth</label>
+        </div>
+      </div>
       
-      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <form [formGroup]="ChildDetails">
-            <div class="row FormRow">
-              
-
-              <div class="col-md-4">
-                <div class="form-floating">
-                  <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
-                  <label for="floatingInputGrid">First Name</label>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-floating">
-                  <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
-                  <label for="floatingInputGrid">Middle Name</label>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-floating">
-                  <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
-                  <label for="floatingInputGrid">Last Name</label>
-                </div>
-              </div>
-
-            </div>
-
-            
-            <div class="row FormRow">
-
-                <div class="col-md-4">
-                    <div class="form-floating">
-                      <input type="text" formControlName="Gender" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
-                      <label for="floatingInputGrid">Gender</label>
-                    </div>
-                </div>
-                
-              <div class="col-md-4">
-                <div class="form-floating">
-                  <select formControlName="bloodGroup" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                    <option value=""></option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB">AB</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                  </select>
-                  <label for="floatingSelectGrid">Blood Group</label>
-                </div>
-              </div>
-
-            </div>
-
-            
-            <div class="row FormRow">
-
-              
-
-              <!-- <div class="col-md-4">
-                <div class="form-floating">
-                  <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                    <option selected>Select ID Type</option>
-                    <option value="Adhar">Adhar</option>
-                    <option value="Pan">Pan</option>
-                    <option value="Voter ID">Voter ID</option>
-                  </select>
-                  <label for="floatingSelectGrid">ID Type</label>
-                </div>
-              </div> -->
-
-              <div class="col-md-4">
-                <div class="form-floating">
-                  <input type="text" formControlName="uid" class="form-control" id="floatingInputGrid">
-                  <label for="floatingInputGrid">ID Number</label>
-                </div>
-              </div>
-
-              <!-- <div class="col-md-4">
-                <div class="form-floating">
-                  <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
-                  <label for="floatingInputGrid">Date of Birth</label>
-                </div>
-              </div> -->
-            </div>
-          </form>
-        </div>
+    <div class="col-md-4">
+      <div class="form-floating">
+        <select formControlName="BloodGroup" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+          <option value=""></option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB">AB</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+        <label for="floatingSelectGrid">Blood Group</label>
       </div>
     </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <strong>Childs</strong>
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <strong>Visites</strong>
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </div>
-    </div>
+
   </div>
 
-<!-- {{PatientsDetails.value | json}} -->
+  <div class="row FormRow">
 
-
-  <div class="fixed-bottom FormFooterActions border border-secondary foot">
-    <div class="row float-end">
-
-      <div>
-        <button (click)="OnSave()" type="button"  class="btn btn-primary Save">Save</button>
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="BirthHeadCircumference" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <label for="floatingInputGrid">Birth Head Circumference (cm)</label>
       </div>
     </div>
+    
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="BirthHeight" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <label for="floatingInputGrid">Birth Height (in)</label>
+      </div>
+    </div>    
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="BirthWeight" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <label for="floatingInputGrid">Birth Weight (kg)</label>
+      </div>
+    </div>    
+
+
+
   </div>
+
+
+  <div class="row FormRow">
+
+    
+
+    <!-- <div class="col-md-4">
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+          <option selected>Select ID Type</option>
+          <option value="Adhar">Adhar</option>
+          <option value="Pan">Pan</option>
+          <option value="Voter ID">Voter ID</option>
+        </select>
+        <label for="floatingSelectGrid">ID Type</label>
+      </div>
+    </div> -->
+
+    <!-- <div class="col-md-4">
+      <div class="form-floating">
+        <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
+        <label for="floatingInputGrid">Date of Birth</label>
+      </div>
+    </div> -->
+  </div>
+</form>     
+
+<!-- {{ChildDetails.value | json}} -->
+
+
+<div class="fixed-bottom FormFooterActions border border-secondary">
+  <div class="row float-end">
+
+    <div>
+      <button (click)="OnSave()" type="button"  class="btn btn-primary Save">Save</button>
+    </div>
+  </div>
+</div>
