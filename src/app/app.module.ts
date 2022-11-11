@@ -13,6 +13,7 @@ import { ChildComponent } from './child/child.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
+import { MaintainChildComponent } from './maintain-child/maintain-child.component';
 
 
 
@@ -22,7 +23,8 @@ import { environment } from '../environments/environment';
     PatientsComponent,
     HomeComponent,
     MaintainPatientsComponent,
-    ChildComponent
+    ChildComponent,
+    MaintainChildComponent
   ],
   imports: [
     BrowserModule,
