@@ -49,7 +49,10 @@ export class MaintainPatientsComponent implements OnInit {
     }
   );
 
-
+    onSelect(PatientID :  any){
+      // console.log(Patient);
+      this.router.navigate(['/Vaccines', PatientID]);
+    }
   OnSave() {
 
     if (this.Ptid === 'New') {

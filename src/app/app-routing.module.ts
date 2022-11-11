@@ -5,6 +5,7 @@ import { MaintainPatientsComponent } from './maintain-patients/maintain-patients
 import { PatientsComponent } from './patients/patients.component';
 import { ChildComponent } from './child/child.component';
 import { MaintainChildComponent } from './maintain-child/maintain-child.component';
+import { VaccineComponent } from './vaccine/vaccine.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'Patient/:id', component: MaintainPatientsComponent},
   { path: 'Child',component: ChildComponent},
   { path: 'Child/:id', component: MaintainChildComponent},
+  { path: 'Vaccines/:id', component: VaccineComponent},
 ];
 
 @NgModule({

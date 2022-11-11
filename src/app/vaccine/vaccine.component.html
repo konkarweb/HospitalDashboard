@@ -28,11 +28,11 @@
       </tr>
     </thead>
     <tbody ng *ngFor="let vaccine of VaccinesList;  index as i">
-      <tr (click)="OnSelect(Vaccine)" routerLink="">
+      <tr (click)="OnSelect(vaccine)" routerLink="">
         <td>{{vaccine.vaccine}}</td>
-        <td>{{patient.VaccineDetail}}</td>
-        <td>{{patient.Date}}</td>
-        <td>{{patient.NextVaccineDate}}</td>
+        <td>{{vaccine.VaccineDetail}}</td>
+        <td>{{vaccine.Date}}</td>
+        <td>{{vaccine.NextVaccineDate}}</td>
       </tr>
     </tbody>
   </table>
