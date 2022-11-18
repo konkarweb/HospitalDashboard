@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { VaccineService } from '../vaccine.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 //  interface PTT{
@@ -36,6 +37,16 @@ export class VaccineComponent implements OnInit {
   }
 
 
+  VaccineDetails = new FormGroup(
+    {
+      Vaccine : new FormControl(''),
+      patientId: new FormControl(''),
+      VaccineDetail: new FormControl(''),
+      Date: new FormControl(''),
+      NextVaccineDate: new FormControl('')
+    }
+  )
+
 
 
 
@@ -53,15 +64,17 @@ export class VaccineComponent implements OnInit {
 
         }
       })
-    this._vaccineService.getVaccine()
+    this._vaccineService.getVaccine(this.Ptid)
       .subscribe((v: any) => {
         this.VaccinesList = v;
-
+        for(let i=0;i<this.VaccinesList.length ;i++){  //How to properly iterate here!!
+          console.log(this.VaccinesList[0])
+       }
              
         console.log(this.VaccinesList);
       })
 
-      console.log(this.VaccinesList);
+      //console.log(this.VaccinesList);
 
   }
 

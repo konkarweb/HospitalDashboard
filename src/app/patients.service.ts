@@ -17,13 +17,14 @@ export class PatientsService {
   constructor(private http: HttpClient,
      private firestore: AngularFirestore)
      { 
-      this.Patients =  this.firestore
-      .collection("Patients")
-      .valueChanges({ idField: 'docId' });
+      
     }
 
   getUsers():Observable<IPatients[]>{
     // return this.http.get<IPatients[]>(this._url);
+    this.Patients =  this.firestore
+      .collection("Patients")
+      .valueChanges({ idField: 'docId' });
     return this.Patients;
   }
 
