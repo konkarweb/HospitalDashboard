@@ -12,8 +12,13 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'Patients', component: PatientsComponent},
   { path: 'Patient/:id', component: MaintainPatientsComponent},
+
   { path: 'Child',component: ChildComponent},
+  { path: 'Childs/:PTid/:PTname', component: ChildComponent},
+
   { path: 'Child/:id', component: MaintainChildComponent},
+  { path: 'Child/:MTid/:MTname/:id', component: MaintainChildComponent},
+
   { path: 'Vaccines/:id', component: VaccineComponent},
   { path: 'Medical/:id', component: MedicalHistoryComponent}
 ];

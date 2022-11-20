@@ -1,34 +1,45 @@
-<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+<nav
+  style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+  aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="">Home</a></li>
-    <li *ngIf="has_parent" class="breadcrumb-item"><a routerLink="/Parent">Parent</a></li>
-    <li class="breadcrumb-item"><a routerLink="/Child">Child</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+    <ng-container *ngIf="!CallFromMother">
+      <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/Child">Child</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+    </ng-container>
+
+    <ng-container *ngIf="CallFromMother">
+      <li class="breadcrumb-item"><a class="Breadnav" (click)="OnSelectMother(MotherID)">{{MotherName}}</a></li>
+      <li class="breadcrumb-item"><a class="Breadnav" (click)="ShowChilds(MotherID, MotherName)">Childs</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+    </ng-container>
+
+
   </ol>
 </nav>
 
 
 <!-- <p>maintain-patients works! Id Is {{ Ptid }}</p> -->
 <ng-container *ngIf="visible">
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-<strong>Success</strong> Updated Successfully.
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success</strong> Updated Successfully.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 </ng-container>
 
 
 <ul class="nav nav-tabs">
-<li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="#">Details</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" (click)="onSelect(Ptid)">Vaccines</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="#">Medical History</a>
-</li>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="onSelect(Ptid)">Vaccines</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Medical History</a>
+  </li>
 
-<!-- <li class="nav-item dropdown">
+  <!-- <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Action</a></li>
@@ -38,64 +49,69 @@
     <li><a class="dropdown-item" href="#">Separated link</a></li>
   </ul>
 </li> -->
-<!-- <li class="nav-item">
+  <!-- <li class="nav-item">
   <a class="nav-link" href="#">Link</a>
 </li> -->
-<!-- <li class="nav-item">
+  <!-- <li class="nav-item">
   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
 </li> -->
 </ul>
 
 <form [formGroup]="ChildDetails">
   <div class="row FormRow">
-    
+
 
     <div class="col-md-4">
       <div class="form-floating">
-        <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid"
+          placeholder="enter Name Here">
         <label for="floatingInputGrid">First Name</label>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="form-floating">
-        <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
+        <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid"
+          placeholder="enter Name Here">
         <label for="floatingInputGrid">Middle Name</label>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="form-floating">
-        <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid" placeholder="enter Name Here">
+        <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid"
+          placeholder="enter Name Here">
         <label for="floatingInputGrid">Last Name</label>
       </div>
     </div>
 
   </div>
 
-  
+
   <div class="row FormRow">
 
-      <div class="col-md-4">
-        <div class="form-floating">
-          <select formControlName="Gender" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-            <option value="M">M</option>
-            <option value="F">F</option>
-          </select>
-          <label for="floatingSelectGrid">Gender</label>
-        </div>
-      </div>      
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid">
-          <label for="floatingInputGrid">Date of Birth</label>
-        </div>
-      </div>
-      
     <div class="col-md-4">
       <div class="form-floating">
-        <select formControlName="BloodGroup" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+        <select formControlName="Gender" class="form-select" id="floatingSelectGrid"
+          aria-label="Floating label select example">
+          <option value="M">M</option>
+          <option value="F">F</option>
+        </select>
+        <label for="floatingSelectGrid">Gender</label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid">
+        <label for="floatingInputGrid">Date of Birth</label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <select formControlName="BloodGroup" class="form-select" id="floatingSelectGrid"
+          aria-label="Floating label select example">
           <option value=""></option>
           <option value="A+">A+</option>
           <option value="A-">A-</option>
@@ -116,24 +132,27 @@
 
     <div class="col-md-4">
       <div class="form-floating">
-        <input type="text" formControlName="BirthHeadCircumference" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <input type="text" formControlName="BirthHeadCircumference" class="form-control" id="floatingInputGrid"
+          placeholder="enter Name Here">
         <label for="floatingInputGrid">Birth Head Circumference (cm)</label>
       </div>
     </div>
-    
-    <div class="col-md-4">
-      <div class="form-floating">
-        <input type="text" formControlName="BirthHeight" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
-        <label for="floatingInputGrid">Birth Height (in)</label>
-      </div>
-    </div>    
 
     <div class="col-md-4">
       <div class="form-floating">
-        <input type="text" formControlName="BirthWeight" class="form-control" id="floatingInputGrid" placeholder="enter Name Here" >
+        <input type="text" formControlName="BirthHeight" class="form-control" id="floatingInputGrid"
+          placeholder="enter Name Here">
+        <label for="floatingInputGrid">Birth Height (in)</label>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-floating">
+        <input type="text" formControlName="BirthWeight" class="form-control" id="floatingInputGrid"
+          placeholder="enter Name Here">
         <label for="floatingInputGrid">Birth Weight (kg)</label>
       </div>
-    </div>    
+    </div>
 
 
 
@@ -142,7 +161,7 @@
 
   <div class="row FormRow">
 
-    
+
 
     <!-- <div class="col-md-4">
       <div class="form-floating">
@@ -163,16 +182,19 @@
       </div>
     </div> -->
   </div>
-</form>     
+</form>
 
-<!-- {{ChildDetails.value | json}} -->
+{{ChildDetails.value | json}}
+<br>
+<br>
+<br>
 
 
 <div class="fixed-bottom FormFooterActions border border-secondary">
   <div class="row float-end">
 
     <div>
-      <button (click)="OnSave()" type="button"  class="btn btn-primary Save">Save</button>
+      <button (click)="OnSave()" type="button" class="btn btn-primary Save">Save</button>
     </div>
   </div>
 </div>

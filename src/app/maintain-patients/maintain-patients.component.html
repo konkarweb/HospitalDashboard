@@ -1,3 +1,7 @@
+
+
+<div class="row">
+  <div class=" col-10">
 <nav
   style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
   aria-label="breadcrumb">
@@ -10,12 +14,21 @@
     </ng-container>
 
     <ng-container *ngIf="PageVC">
-      <li  class="breadcrumb-item"><a style = "cursor: pointer; color: blue; text-decoration: underline;" (click)="onSelectDetails()" >{{PtName}}</a></li>
-      <li class="breadcrumb-item"><a  style = "cursor: pointer; color: blue; text-decoration: underline;" (click)="onSelectVaccines(Ptid)" >Vaccines</a></li>
+      <li  class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()" >{{PtName}}</a></li>
+      <li class="breadcrumb-item"><a  class="Breadnav" (click)="onSelectVaccines(Ptid)" >Vaccines</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{VaccineDetails.Vaccine}}</li>
     </ng-container>
   </ol>
 </nav>
+
+</div>
+<div class=" col-2">
+  <div class="float-end">
+
+    <button type ="button" (click)="ShowChilds(Ptid, PtName)" class="btn btn-primary">Childs</button>
+  </div>  
+</div>
+</div>
 
 
 <!-- <p>maintain-patients works! Id Is {{ Ptid }}</p> -->

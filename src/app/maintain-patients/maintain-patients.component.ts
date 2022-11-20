@@ -254,6 +254,32 @@ export class MaintainPatientsComponent implements OnInit {
           //this.visible = false; 
           console.error('Error writing document: ', error);
         });
+        let VCLenght = this.VaccinesList.length;
+        for (let i = 0 ; i < VCLenght; i++ )
+        {
+          
+          let VCID = this.VaccinesList[i].docId;
+          console.log(this.VaccinesList[i]);
+          this.firestore
+        .collection('MotherVaccineDetails')
+        .doc('/' + VCID)
+        .update({
+          Date: this.VaccinesList[i].Date,
+          NextVaccineDate: this.VaccinesList[i].NextVaccineDate,
+          Vaccine: this.VaccinesList[i].Vaccine,
+          VaccineDetail: this.VaccinesList[i].VaccineDetail,
+          patientID: this.VaccinesList[i].patientID
+        })
+        .then(() => {
+          this.visible = true;
+          console.log('done');
+        })
+        .catch(function (error) {
+          //this.visible = false; 
+          console.error('Error writing document: ', error);
+        });
+
+        }
 
     }
 
@@ -277,8 +303,8 @@ export class MaintainPatientsComponent implements OnInit {
     this.FGVaccineDetails.patchValue({ VaccineDetail: this.VaccineDetails.VaccineDetail });
     this.FGVaccineDetails.patchValue({ NextVaccineDate: this.VaccineDetails.NextVaccineDate });
     this.FGVaccineDetails.patchValue({ Vaccine: this.VaccineDetails.Vaccine });
-    this.FGVaccineDetails.patchValue({ patientID: this.Ptid.patientID });
-    this.FGVaccineDetails.patchValue({ Date: this.VaccineDetails.middleName.Date });
+    this.FGVaccineDetails.patchValue({ patientID: this.VaccineDetails.patientID });
+    this.FGVaccineDetails.patchValue({ Date: this.VaccineDetails.Date });
 
   }
 
@@ -298,6 +324,10 @@ export class MaintainPatientsComponent implements OnInit {
 
   OnVCCancel(){
 
+  }
+
+  ShowChilds(PTID:any, PTNAME:any){
+    this.router.navigate(['/Childs', PTID, PTNAME]);
   }
 
   ngOnInit(): void {

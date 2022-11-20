@@ -17,8 +17,11 @@ export class MaintainChildComponent implements OnInit {
   public SLchild: any;
   public childList: any;
   public PtName: any
+  public MotherID: any;
+  public MotherName: any;
   visible: boolean = false;
   has_parent : boolean = false;
+  CallFromMother:boolean = false;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -43,6 +46,7 @@ export class MaintainChildComponent implements OnInit {
       BirthHeadCircumference: new FormControl(''),
       BirthHeight: new FormControl(''),
       BirthWeight: new FormControl(''),      
+      MotherID: new FormControl(''),
     }
   );
     onSelect(ChildID :  any){
@@ -68,10 +72,11 @@ export class MaintainChildComponent implements OnInit {
           BirthHeadCircumference: this.ChildDetails.value.BirthHeadCircumference,
           BirthHeight: this.ChildDetails.value.BirthHeight,
           BirthWeight: this.ChildDetails.value.BirthWeight,
+          MotherID: this.ChildDetails.value.MotherID,
         })
         .then(res => {
           const id = res.id;
-          this.router.navigate(['/Child', id]);
+          
           console.log(res);
           this.firestore
           .collection('MotherVaccineDetails')
@@ -120,6 +125,20 @@ export class MaintainChildComponent implements OnInit {
 
           this.visible = true;
           //this.form.reset();
+
+          this.Ptid = id;
+
+          if(this.CallFromMother)
+          {
+            this.router.navigate(['/Child', this.MotherID, this.MotherName, id]);
+          }
+          else
+          {
+            this.router.navigate(['/Child', id]);
+          }
+
+         
+
         })
         .catch(e => {
           console.log(e);
@@ -150,7 +169,8 @@ export class MaintainChildComponent implements OnInit {
           DOB: this.ChildDetails.value.DOB,
           BirthHeadCircumference: this.ChildDetails.value.BirthHeadCircumference,
           BirthHeight: this.ChildDetails.value.BirthHeight,
-          BirthWeight: this.ChildDetails.value.BirthWeight,          
+          BirthWeight: this.ChildDetails.value.BirthWeight,    
+          MotherID: this.ChildDetails.value.MotherID,      
 
         })
         .then(() => {
@@ -166,17 +186,37 @@ export class MaintainChildComponent implements OnInit {
 
   }
 
+  ShowChilds(PTID:any, PTNAME:any){
+    this.router.navigate(['/Childs', PTID, PTNAME]);
+  }
+
+  OnSelectMother(PTID: any) {
+    this.router.navigate(['/Patient', PTID]);
+
+  }
+
   ngOnInit(): void {
 
 
 
     let id = this.route.snapshot.paramMap.get('id');
+    this.MotherID = this.route.snapshot.paramMap.get('MTid');
+    this.MotherName = this.route.snapshot.paramMap.get('MTname');
     this.Ptid = id;
 
+    if(!this.MotherID)
+    {
+      this.CallFromMother = false;
+    }
+    else
+    {
+      this.CallFromMother = true;
+    }
 
     if (this.Ptid === 'New') {
       this.PtName = "New";
       this.ChildDetails.patchValue({ ChildId: this.Ptid });
+      this.ChildDetails.patchValue({MotherID: this.MotherID});
     }
     else {
 
@@ -186,7 +226,7 @@ export class MaintainChildComponent implements OnInit {
           if (doc.exists) {
             console.log("Document data: ", doc.data());
             this.child = doc.data();
-            this.PtName = this.child.firstName;
+            this.PtName = this.child.FirstName;
             // console.log(this.patient);
             this.ChildDetails.patchValue({ ChildId: this.Ptid });
             this.ChildDetails.patchValue({ patientType: this.child.patientType });
@@ -200,7 +240,7 @@ export class MaintainChildComponent implements OnInit {
             this.ChildDetails.patchValue({ BirthHeadCircumference: this.child.BirthHeadCircumference });
             this.ChildDetails.patchValue({ BirthHeight: this.child.BirthHeight });
             this.ChildDetails.patchValue({ BirthWeight: this.child.BirthWeight });
-
+            this.ChildDetails.patchValue({MotherID: this.child.MotherID});
           }
         })
 
