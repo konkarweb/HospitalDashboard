@@ -11,6 +11,10 @@ import { Observable } from 'rxjs'
 export class PatientsService {
 
   public Patients: any;
+  public MedicalHistory:any;
+  public PregnancyOutcome:any;
+  public VisitDetails:any;
+
   private _url:string = "http://localhost:8080/api/getAllPatient";
   private _urlSingle:string = "http://localhost:8080/api/getPatientById?patientId=";
   private _urlSavept:string = "http://localhost:8080/api/createPatient";
@@ -26,6 +30,37 @@ export class PatientsService {
       .collection("Patients")
       .valueChanges({ idField: 'docId' });
     return this.Patients;
+  }
+
+ 
+  getMedicalHistory(PTid:any):Observable<[]>{
+    // return this.http.get<IPatients[]>(this._url);
+    let tmp = "/Patients/" + PTid + "/Medical History";
+    console.log(tmp);
+    this.MedicalHistory =  this.firestore
+      .collection(tmp)
+      .valueChanges({ idField: 'docId' });
+    return this.MedicalHistory;
+  }
+
+  getPregnancyOutcome(PTid:any):Observable<[]>{
+    // return this.http.get<IPatients[]>(this._url);
+    let tmp = "/Patients/" + PTid + "/Pregnancy Outcome";
+    console.log(tmp);
+    this.PregnancyOutcome =  this.firestore
+      .collection(tmp)
+      .valueChanges({ idField: 'docId' });
+    return this.PregnancyOutcome;
+  }
+
+  getVisitDetails(PTid:any):Observable<[]>{
+    // return this.http.get<IPatients[]>(this._url);
+    let tmp = "/Patients/" + PTid + "/Visit Details";
+    console.log(tmp);
+    this.VisitDetails =  this.firestore
+      .collection(tmp)
+      .valueChanges({ idField: 'docId' });
+    return this.VisitDetails;
   }
 
   getSingleUser(id:any):Observable<IPatients[]>{

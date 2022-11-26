@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PatientsService } from '../patients.service';
 import { VaccineService } from '../vaccine.service';
+import { MedicalHistoryService } from '../medical-history.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { Call } from '@angular/compiler';
 
 @Component({
   selector: 'app-maintain-patients',
@@ -28,13 +30,25 @@ export class MaintainPatientsComponent implements OnInit {
   ChangeMode: boolean = false;
   PagePT: boolean = true;
   PageVC: boolean = false;
+  PageHS: Boolean = false;
+
   public VaccineDetails: any;
   public VCIndex: any;
+
+  public HistoryList: any;
+  public History: any;
+
+  public PregnancyOutcomeList: any;
+  public PregnancyOutcome: any;
+
+  public VisitDetailsList: any;
+  public VisitDetails: any;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private _paitentsService: PatientsService,
     private _vaccineService: VaccineService,
+    private _medicalHistoryServive : MedicalHistoryService,
     private firestore: AngularFirestore) {
 
   }
@@ -104,10 +118,13 @@ export class MaintainPatientsComponent implements OnInit {
 
 
     this.PagePT = true;
-    this.PageVC = false;
-
-    this.Vaccines = true;
     this.Details = false;
+    this.Vaccines = true;
+    this.History = false;
+    this.PregnancyOutcome = false;
+    this.VisitDetails = false;
+
+    this.PageVC = false;
 
 
     if (!this.VaccinesList) {
@@ -123,13 +140,103 @@ export class MaintainPatientsComponent implements OnInit {
 
   }
 
+  onSelectHistory(PatientID: any) {
+    // console.log(Patient);
+    //DetailsChangedCheck(this.DetailsChanged);
+
+
+    this.PagePT = true;
+    this.Details = false;
+    this.Vaccines = false;
+    this.History = true;
+    this.PregnancyOutcome = false;
+    this.VisitDetails = false;
+
+    this.PageVC = false;
+
+
+    if (!this.HistoryList) {
+
+      this._paitentsService.getMedicalHistory(PatientID)
+        .subscribe((v: any) => {
+          this.HistoryList= v;
+
+          console.log(this.HistoryList);
+        })
+
+    }
+
+  }
+
+
+  onSelectPregnancyOutcome(PatientID: any) {
+    // console.log(Patient);
+    //DetailsChangedCheck(this.DetailsChanged);
+
+
+    this.PagePT = true;
+    this.Details = false;
+    this.Vaccines = false;
+    this.History = false;
+    this.PregnancyOutcome = true;
+    this.VisitDetails = false;
+
+
+    this.PageVC = false;
+
+
+    if (!this.PregnancyOutcomeList) {
+
+      this._paitentsService.getPregnancyOutcome(PatientID)
+        .subscribe((v: any) => {
+          this.PregnancyOutcomeList= v;
+
+          console.log(this.PregnancyOutcomeList);
+        })
+
+    }
+
+  }
+
+  onSelectVisitDetails(PatientID: any) {
+    // console.log(Patient);
+    //DetailsChangedCheck(this.DetailsChanged);
+
+
+    this.PagePT = true;
+    this.Details = false;
+    this.Vaccines = false;
+    this.History = false;
+    this.PregnancyOutcome = false;
+    this.VisitDetails = true;
+
+
+    this.PageVC = false;
+
+
+    if (!this.VisitDetailsList) {
+
+      this._paitentsService.getVisitDetails(PatientID)
+        .subscribe((v: any) => {
+          this.VisitDetailsList= v;
+
+          console.log(this.VisitDetailsList);
+        })
+
+    }
+
+  }
+
 
   onSelectDetails() {
     this.PagePT = true;
-    this.PageVC = false;
-
-    this.Vaccines = false;
     this.Details = true;
+    this.Vaccines = false;
+    this.History = false;
+    this.PregnancyOutcome = false;
+    this.VisitDetails = false;
+
+    this.PageVC = false;
   }
 
   OnSave() {
@@ -308,6 +415,10 @@ export class MaintainPatientsComponent implements OnInit {
 
   }
 
+  OnHostoryDetails(Index: any){
+
+  }
+
   OnVCApply(){
     this.VaccinesList[this.VCIndex].VaccineDetail =  this.FGVaccineDetails.value.VaccineDetail;
     this.VaccinesList[this.VCIndex].NextVaccineDate =  this.FGVaccineDetails.value.NextVaccineDate;
@@ -315,11 +426,12 @@ export class MaintainPatientsComponent implements OnInit {
     this.VaccinesList[this.VCIndex].patientID =  this.FGVaccineDetails.value.patientID;
     this.VaccinesList[this.VCIndex].Date =  this.FGVaccineDetails.value.Date;
 
-    this.PagePT = true;
-    this.PageVC = false;
+    this.onSelectVaccines(this.FGVaccineDetails.value.patientID);
+    // this.PagePT = true;
+    // this.PageVC = false;
 
-    this.Vaccines = true;
-    this.Details = false;
+    // this.Vaccines = true;
+    // this.Details = false;
   }
 
   OnVCCancel(){

@@ -25,7 +25,7 @@
 <div class=" col-2">
   <div class="float-end">
 
-    <button type ="button" (click)="ShowChilds(Ptid, PtName)" class="btn btn-primary">Childs</button>
+    <a type ="button" (click)="ShowChilds(Ptid, PtName)" class="breadcrumb-item">Childs</a>
   </div>  
 </div>
 </div>
@@ -56,16 +56,15 @@
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
           aria-expanded="false">Other</a>
         <ul class="dropdown-menu">
-          <li class="nav-item">
-            <a class="nav-link">Medical History</a>
+          <li class="nav-item"> 
+            <a class="nav-link" [ngClass]="{'active': History === true}" (click)="onSelectHistory(Ptid)">Medical History</a>
           </li>
-          <li><a class="dropdown-item" href="#">Pregnancy Outcome</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-          <li>
-            <hr class="dropdown-divider">
+          <li class="nav-item"> 
+            <a class="nav-link" [ngClass]="{'active': PregnancyOutcome === true}" (click)="onSelectPregnancyOutcome(Ptid)">Pregnancy Outcome</a>
           </li>
-          <li><a class="dropdown-item" href="#">Separated link</a></li>
+          <li class="nav-item"> 
+            <a class="nav-link"  [ngClass]="{'active': VisitDetails === true}" (click)="onSelectVisitDetails(Ptid)">Visit Details</a>
+          </li>
         </ul>
       </li>
     </ng-container>
@@ -231,6 +230,66 @@
 
   </ng-container>
 
+  <ng-container *ngIf="History">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Disease</th>
+          <th scope="col">comments</th>
+          <th scope="col">fromDate</th>
+          <th scope="col">toDate</th>
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let history of HistoryList;  index as i">
+        <tr (click)="OnHostoryDetails(i)" routerLink="">
+          <td>{{history.Disease}}</td>
+          <td>{{history.comments}}</td>
+          <td>{{history.fromDate}}</td>
+          <td>{{history.toDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-container *ngIf="PregnancyOutcome">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Delivery Date</th>
+          <th scope="col">Outcome</th>
+          <!-- <th scope="col">deliveryPlace</th>
+          <th scope="col">comments</th> -->
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let pregnancyoutcome of PregnancyOutcomeList;  index as i">
+        <tr (click)="OnHostoryDetails(i)" routerLink="">
+          <td>{{pregnancyoutcome.deliveryDate}}</td>
+          <td>{{pregnancyoutcome.outcome}}</td>
+          <!-- <td>{{pregnancyoutcome.deliveryPlace}}</td>
+          <td>{{pregnancyoutcome.comments}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-container *ngIf="VisitDetails">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">visitedBy</th>
+          <th scope="col">visitDate</th>
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let visitdetails of VisitDetailsList;  index as i">
+        <tr (click)="OnHostoryDetails(i)" routerLink="">
+          <td>{{visitdetails.visitedBy}}</td>
+          <td>{{visitdetails.visitDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  
+  
 
 
 
@@ -296,6 +355,10 @@
     </form>
   </div>
 
+</ng-container>
+
+<ng-container *ngIf="PageHS">
+  
 </ng-container>
 
 <div class="fixed-bottom FormFooterActions border border-secondary">
