@@ -1,33 +1,31 @@
-
-
 <div class="row">
   <div class=" col-10">
-<nav
-  style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-  aria-label="breadcrumb">
-  <ol class="breadcrumb">
+    <nav
+      style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+      aria-label="breadcrumb">
+      <ol class="breadcrumb">
 
-    <ng-container *ngIf="PagePT">
-      <li class="breadcrumb-item"><a routerLink="">Home</a></li>
-      <li class="breadcrumb-item"><a routerLink="/Patients">Patients</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
-    </ng-container>
+        <ng-container *ngIf="PagePT">
+          <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/Patients">Patients</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+        </ng-container>
 
-    <ng-container *ngIf="PageVC">
-      <li  class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()" >{{PtName}}</a></li>
-      <li class="breadcrumb-item"><a  class="Breadnav" (click)="onSelectVaccines(Ptid)" >Vaccines</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{VaccineDetails.Vaccine}}</li>
-    </ng-container>
-  </ol>
-</nav>
+        <ng-container *ngIf="PageVC">
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()">{{PtName}}</a></li>
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectVaccines(Ptid)">Vaccines</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{VaccineDetails.Vaccine}}</li>
+        </ng-container>
+      </ol>
+    </nav>
 
-</div>
-<div class=" col-2">
-  <div class="float-end">
+  </div>
+  <div class=" col-2">
+    <div class="float-end">
 
-    <a type ="button" (click)="ShowChilds(Ptid, PtName)" class="breadcrumb-item">Childs</a>
-  </div>  
-</div>
+      <a type="button" (click)="ShowChilds(Ptid, PtName)" class="breadcrumb-item">Childs</a>
+    </div>
+  </div>
 </div>
 
 
@@ -56,14 +54,17 @@
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
           aria-expanded="false">Other</a>
         <ul class="dropdown-menu">
-          <li class="nav-item"> 
-            <a class="nav-link" [ngClass]="{'active': History === true}" (click)="onSelectHistory(Ptid)">Medical History</a>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': History === true}" (click)="onSelectHistory(Ptid)">Medical
+              History</a>
           </li>
-          <li class="nav-item"> 
-            <a class="nav-link" [ngClass]="{'active': PregnancyOutcome === true}" (click)="onSelectPregnancyOutcome(Ptid)">Pregnancy Outcome</a>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': PregnancyOutcome === true}"
+              (click)="onSelectPregnancyOutcome(Ptid)">Pregnancy Outcome</a>
           </li>
-          <li class="nav-item"> 
-            <a class="nav-link"  [ngClass]="{'active': VisitDetails === true}" (click)="onSelectVisitDetails(Ptid)">Visit Details</a>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': VisitDetails === true}" (click)="onSelectVisitDetails(Ptid)">Visit
+              Details</a>
           </li>
         </ul>
       </li>
@@ -206,6 +207,25 @@
 
 
   <ng-container *ngIf="Vaccines">
+    <div style="background-color:#ebebeb;" class="p-2 mb-2 text-black">
+      <div class="row">
+        <div class="col-10">
+          <strong>Vaccines ({{VaccinesList.length}})</strong>
+        </div>
+        <div class="col-2">
+          <div style="background-color:#ffffff;" class="p-1 mb-2text-black text-center">
+            <a class="">
+              <svg width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -231,6 +251,25 @@
   </ng-container>
 
   <ng-container *ngIf="History">
+    <div style="background-color:#ebebeb;" class="p-2 mb-2 text-black">
+      <div class="row">
+        <div class="col-10">
+          <strong>Medical History ({{HistoryList.length}})</strong>
+        </div>
+        <div class="col-2">
+          <div style="background-color:#ffffff;" class="p-1 mb-2text-black text-center">
+            <a class="">
+              <svg width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -252,6 +291,25 @@
   </ng-container>
 
   <ng-container *ngIf="PregnancyOutcome">
+    <div style="background-color:#ebebeb;" class="p-2 mb-2 text-black">
+      <div class="row">
+        <div class="col-10">
+          <strong>Pregnancy Outcome ({{PregnancyOutcomeList.length}})</strong>
+        </div>
+        <div class="col-2">
+          <div style="background-color:#ffffff;" class="p-1 mb-2text-black text-center">
+            <a class="">
+              <svg width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -273,6 +331,25 @@
   </ng-container>
 
   <ng-container *ngIf="VisitDetails">
+    <div style="background-color:#ebebeb;" class="p-2 mb-2 text-black">
+      <div class="row">
+        <div class="col-10">
+          <strong>VisitDetails ({{VisitDetails.length}})</strong>
+        </div>
+        <div class="col-2">
+          <div style="background-color:#ffffff;" class="p-1 mb-2text-black text-center">
+            <a class="">
+              <svg width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -288,8 +365,8 @@
       </tbody>
     </table>
   </ng-container>
-  
-  
+
+
 
 
 
@@ -345,12 +422,12 @@
         </div>
 
 
-       
+
 
       </div>
 
 
-     
+
 
     </form>
   </div>
@@ -358,27 +435,27 @@
 </ng-container>
 
 <ng-container *ngIf="PageHS">
-  
+
 </ng-container>
 
 <div class="fixed-bottom FormFooterActions border border-secondary">
   <div class="row float-end">
 
     <ng-container *ngIf="PagePT">
-    <div>
-      <button (click)="OnSave()" type="button" class="btn btn-primary Save">Save</button>
-    </div>
-  </ng-container>
+      <div>
+        <button (click)="OnSave()" type="button" class="btn btn-primary Save">Save</button>
+      </div>
+    </ng-container>
 
-  <ng-container *ngIf="PageVC">
-    
-    <div class="col-4">
-      <button (click)="OnVCApply()" type="button" class="btn btn-primary Save">Apply</button>
-    </div>
-    <div  class="col-4">
-      <button (click)="onSelectVaccines(Ptid)" type="button" class="btn btn-default Save">cancel</button>
-    </div>
-  
-  </ng-container>
+    <ng-container *ngIf="PageVC">
+
+      <div class="col-4">
+        <button (click)="OnVCApply()" type="button" class="btn btn-primary Save">Apply</button>
+      </div>
+      <div class="col-4">
+        <button (click)="onSelectVaccines(Ptid)" type="button" class="btn btn-default Save">cancel</button>
+      </div>
+
+    </ng-container>
   </div>
 </div>
