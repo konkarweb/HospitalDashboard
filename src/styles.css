@@ -13,6 +13,28 @@ body {
   min-height: 100vh;
   background-color: #fff;
 }
+.navProperty{
+  background-image: linear-gradient(to right, #1051cf, #3d5e94);
+}
+
+.navbarbrand, .navbarbrand:hover {
+  color: rgb(253 253 253 / 90%);
+  text-decoration: none;
+}
+.BreadcumProp{
+  background-color: #ffffff;
+    border: 1px solid;
+    border-color: #0f396c;
+}
+
+.BreadcumProp nav{
+  padding-top: 10px;
+}
+
+.BreadcumProp nav ol li a{
+  color: #000000;
+  text-decoration: none;
+}
 
 .side-navbar {
   width: 180px;
@@ -105,14 +127,18 @@ body {
 }
 
 .HomeCards {
-  background-color: red;
-  background-image: linear-gradient(to right, #ffffff, #e68888);
-  color: black;
-  padding: 30px;
-      border-radius: 20px;
-      border: 1px solid;
-      box-shadow: 6px 13px #eeeded;
-      margin: 15px;
+    background-image: linear-gradient(to right, #badaf7, #2f7fff);
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 20px;
+    border: 1px solid;
+    box-shadow: 7px 3px #397fbf47;
+    margin-right: 2px;
+    margin-bottom: 20px;
+    border-color: #397fbf;
 }
 .HomeCards a{
 text-decoration: none;
@@ -125,8 +151,66 @@ text-decoration: none;
   }
 
   .HomeCards .count{
-    font-size: 70px;
+    font-size: 50px;
   }
 .HomeCards svg{
-  width: 70px;
+  width: 50px;
 }
+
+.HomeCards h3{
+  font-size: 20px;
+}
+
+
+.MotherListSerch{
+  background-color: #129fece3;
+  color: white;
+  padding: 50px;
+}
+
+.MotherList{
+  background-color: #ffffffe3;
+  border: 1px solid;
+  border-color: #000000;
+  padding: 20px;
+}
+
+.MotherList .Micon{
+  font-size: 40px;
+    font-weight: 700;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.MotherList .Mname{
+  font-size: 15px;
+    font-weight: 800;
+    width:100%;
+    padding-top: 5px;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .FormRow div{
+      padding-bottom: 10px;
+  }
+  .last{
+      margin-bottom: 35px;
+  }
+
+  .HomeCards svg{
+    width: 45px;
+  }
+
+  .HomeCards .count{
+    font-size: 30px;
+  }
+
+  .HomeCards h3{
+    font-size: 20px;
+  }
+  
+
+  }
