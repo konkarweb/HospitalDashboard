@@ -21,6 +21,8 @@ export class MaintainChildComponent implements OnInit {
   public MotherName: any;
   visible: boolean = false;
   has_parent : boolean = false;
+  PagePT: boolean = true;
+  PageVC: boolean = false;
   CallFromMother:boolean = false;
 
   constructor(private route: ActivatedRoute,
