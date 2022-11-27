@@ -1,81 +1,132 @@
 /* You can add global styles to this file, and also import other style files */
-.wrapper{
-    padding-top: 20px ;
+.wrapper {
+  padding-top: 20px;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    min-height: 100vh;
-    background-color: #fff;
-  }
-  
-  .side-navbar {
-    width: 180px;
-    height: 100%;
-    position: fixed;
-    margin-left: -300px;
-    background-color: #100901;
-    transition: 0.5s;
-  }
-  
-  .nav-link:active,
-  .nav-link:focus,
-  .nav-link:hover {
-    background-color: #ffffff26;
-  }
-  
-  .my-container {
-    transition: 0.4s;
-  }
-  
-  .active-nav {
-    margin-left: 0;
-  }
-  
-  /* for main section */
-  .active-cont {
-    margin-left: 180px;
-  }
-  
-  #menu-btn {
-    background-color: #100901;
-    color: #fff;
-    margin-left: -62px;
-  }
-  
-  .my-container input {
-    border-radius: 2rem;
-    padding: 2px 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .FormRow{
-    padding-top: 20px;
+body {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.side-navbar {
+  width: 180px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: #100901;
+  transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 180px;
+}
+
+#menu-btn {
+  background-color: #100901;
+  color: #fff;
+  margin-left: -62px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+
+
+.FormRow {
+  padding-top: 20px;
+}
+
+.FormFooterActions {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 60px;
+  background-color: #fffffffc;
+
+}
+
+.FormFooterActions .Save {
+  margin-right: 10px;
+}
+
+.leftNavText {
+  color: white;
+  text-decoration: none;
+}
+
+.Breadnav {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.TableToolbar {
+  padding: 4px;
+  margin-bottom: 4px;
+  color: #000000;
+  background-color: #ebebeb;
+}
+
+.TableToolbar div .float-end button {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-size: 10px;
+  border-radius: 0.5px;
+  border-color: #cccccc;
+  color: #212529;
+  margin-right: 2px;
+}
+
+.TableToolbar div svg {
+  width: 12px;
+}
+
+.HomeCards {
+  background-color: red;
+  background-image: linear-gradient(to right, #ffffff, #e68888);
+  color: black;
+  padding: 30px;
+      border-radius: 20px;
+      border: 1px solid;
+      box-shadow: 6px 13px #eeeded;
+      margin: 15px;
+}
+.HomeCards a{
+text-decoration: none;
+  color: black;
+}
+
+.HomeCards a :hover{
+  text-decoration: none;
+    color: #190a5a;
   }
 
-  .FormFooterActions{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 60px;
-    background-color: #fffffffc;
-    
+  .HomeCards .count{
+    font-size: 70px;
   }
-  .FormFooterActions .Save {
-    margin-right:10px ;
-  }
-
-  .leftNavText {
-    color: white;
-    text-decoration: none;
-  }
-
-  .Breadnav{
-    cursor: pointer;
-    color: blue; 
-    text-decoration: underline;
-  }
+.HomeCards svg{
+  width: 70px;
+}

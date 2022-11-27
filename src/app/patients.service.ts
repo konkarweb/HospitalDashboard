@@ -13,7 +13,7 @@ export class PatientsService {
   public Patients: any;
   public MedicalHistory:any;
   public PregnancyOutcome:any;
-  public VisitDetails:any;
+  public Visits:any;
 
   private _url:string = "http://localhost:8080/api/getAllPatient";
   private _urlSingle:string = "http://localhost:8080/api/getPatientById?patientId=";
@@ -22,6 +22,13 @@ export class PatientsService {
      private firestore: AngularFirestore)
      { 
       
+    }
+
+    getPatientsCount():Observable<[]>{
+      this.Patients =  this.firestore
+      .collection("Patients")
+      .valueChanges();
+    return this.Patients;
     }
 
   getUsers():Observable<IPatients[]>{
@@ -53,14 +60,14 @@ export class PatientsService {
     return this.PregnancyOutcome;
   }
 
-  getVisitDetails(PTid:any):Observable<[]>{
+  getVisits(PTid:any):Observable<[]>{
     // return this.http.get<IPatients[]>(this._url);
     let tmp = "/Patients/" + PTid + "/Visit Details";
     console.log(tmp);
-    this.VisitDetails =  this.firestore
+    this.Visits =  this.firestore
       .collection(tmp)
       .valueChanges({ idField: 'docId' });
-    return this.VisitDetails;
+    return this.Visits;
   }
 
   getSingleUser(id:any):Observable<IPatients[]>{

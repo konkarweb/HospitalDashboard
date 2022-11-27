@@ -41,8 +41,8 @@ export class MaintainPatientsComponent implements OnInit {
   public PregnancyOutcomeList: any;
   public PregnancyOutcome: any;
 
-  public VisitDetailsList: any;
-  public VisitDetails: any;
+  public VisitsList: any;
+  public Visits: any;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -122,7 +122,7 @@ export class MaintainPatientsComponent implements OnInit {
     this.Vaccines = true;
     this.History = false;
     this.PregnancyOutcome = false;
-    this.VisitDetails = false;
+    this.Visits = false;
 
     this.PageVC = false;
 
@@ -150,7 +150,7 @@ export class MaintainPatientsComponent implements OnInit {
     this.Vaccines = false;
     this.History = true;
     this.PregnancyOutcome = false;
-    this.VisitDetails = false;
+    this.Visits = false;
 
     this.PageVC = false;
 
@@ -179,7 +179,7 @@ export class MaintainPatientsComponent implements OnInit {
     this.Vaccines = false;
     this.History = false;
     this.PregnancyOutcome = true;
-    this.VisitDetails = false;
+    this.Visits = false;
 
 
     this.PageVC = false;
@@ -198,7 +198,7 @@ export class MaintainPatientsComponent implements OnInit {
 
   }
 
-  onSelectVisitDetails(PatientID: any) {
+  onSelectVisits(PatientID: any) {
     // console.log(Patient);
     //DetailsChangedCheck(this.DetailsChanged);
 
@@ -208,19 +208,19 @@ export class MaintainPatientsComponent implements OnInit {
     this.Vaccines = false;
     this.History = false;
     this.PregnancyOutcome = false;
-    this.VisitDetails = true;
+    this.Visits = true;
 
 
     this.PageVC = false;
 
 
-    if (!this.VisitDetailsList) {
+    if (!this.VisitsList) {
 
-      this._paitentsService.getVisitDetails(PatientID)
+      this._paitentsService.getVisits(PatientID)
         .subscribe((v: any) => {
-          this.VisitDetailsList= v;
+          this.VisitsList= v;
 
-          console.log(this.VisitDetailsList);
+          console.log(this.VisitsList);
         })
 
     }
@@ -234,7 +234,7 @@ export class MaintainPatientsComponent implements OnInit {
     this.Vaccines = false;
     this.History = false;
     this.PregnancyOutcome = false;
-    this.VisitDetails = false;
+    this.Visits = false;
 
     this.PageVC = false;
   }
