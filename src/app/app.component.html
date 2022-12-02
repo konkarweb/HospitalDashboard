@@ -9,9 +9,12 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark navProperty">
   <div class="container-fluid">
-    <a (click)="onclick()" class="btn border-0" >
-      <span class="navbar-toggler-icon"></span> 
-    </a>
+    <ng-container *ngIf="AppPage">
+      <a (click)="onclick()" class="btn border-0" >
+        <span class="navbar-toggler-icon"></span> 
+      </a>
+    </ng-container>
+   
     <a class="navbarbrand" routerLink="">Vistex Hospital</a>
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,8 +31,8 @@
         </li> -->
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <button class="btn btn-outline-light"  (click)="authService.SignOut()" >Log Out</button>
       </form>
 
     </div>
