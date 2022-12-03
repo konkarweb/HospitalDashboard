@@ -29,7 +29,7 @@
                     </div>
                
                 <div class="redirectToLogin">
-                    <span>Go back to?<span class="redirect" routerLink="/sign-in"> Sign in</span></span>
+                    <span>Go back to?<span class="redirect" style="cursor: pointer;" (click)="authService.SignOut()"><strong> Sign in</strong></span></span>
                 </div>
                 </div>
             </div>
