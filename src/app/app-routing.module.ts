@@ -12,6 +12,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { UserComponent } from './user/user.component';
+import { MaintainUserComponent } from './maintain-user/maintain-user.component';
 const routes: Routes = [
   // { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
@@ -29,7 +31,10 @@ const routes: Routes = [
   { path: 'Child/:MTid/:MTname/:id', component: MaintainChildComponent, canActivate: [AuthGuard]},
 
   { path: 'Vaccines/:id', component: VaccineComponent, canActivate: [AuthGuard]},
-  { path: 'Medical/:id', component: MedicalHistoryComponent, canActivate: [AuthGuard]}
+  { path: 'Medical/:id', component: MedicalHistoryComponent, canActivate: [AuthGuard]},
+
+  {path: 'Users',component: UserComponent, canActivate : [AuthGuard]},
+  {path: 'UserDetail/:id', component:MaintainUserComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({
