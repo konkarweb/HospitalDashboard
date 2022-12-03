@@ -22,6 +22,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { AuthServiceService } from './auth-service.service';
 import { UserComponent } from './user/user.component';
+import { MaintainUserComponent } from './maintain-user/maintain-user.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { UserComponent } from './user/user.component';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    UserComponent
+    UserComponent,
+    MaintainUserComponent
   ],
   imports: [
     BrowserModule,
