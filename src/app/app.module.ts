@@ -16,7 +16,11 @@ import { environment } from '../environments/environment';
 import { MaintainChildComponent } from './maintain-child/maintain-child.component';
 import { VaccineComponent } from './vaccine/vaccine.component';
 import { MedicalHistoryComponent } from './medical-history/medical-history.component';
-
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { AuthServiceService } from './auth-service.service';
 
 
 @NgModule({
@@ -28,7 +32,11 @@ import { MedicalHistoryComponent } from './medical-history/medical-history.compo
     ChildComponent,
     MaintainChildComponent,
     VaccineComponent,
-    MedicalHistoryComponent
+    MedicalHistoryComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,7 @@ import { MedicalHistoryComponent } from './medical-history/medical-history.compo
     AngularFirestoreModule
   ],
   providers: [
-
+    AuthServiceService
   ],
   bootstrap: [AppComponent]
 })

@@ -30,7 +30,9 @@ body {
 .BreadcumProp nav{
   padding-top: 10px;
 }
-
+.BreadcumProp .Actions{
+  padding-top: 10px;
+}
 .BreadcumProp nav ol li a{
   color: #000000;
   text-decoration: none;
@@ -104,10 +106,10 @@ body {
 }
 
 .TableToolbar {
-  padding: 4px;
-  margin-bottom: 4px;
-  color: #000000;
-  background-color: #ebebeb;
+  padding: 10px;
+    margin-bottom: 4px;
+    color: #000000;
+    background-color: #dcebff;
 }
 
 .TableToolbar div .float-end button {
@@ -117,9 +119,15 @@ body {
   padding-bottom: 3px;
   font-size: 10px;
   border-radius: 0.5px;
-  border-color: #cccccc;
-  color: #212529;
+  border-color: #1200ff;
+  color: #ffffff;
+  background-color: #1088ff;
   margin-right: 2px;
+}
+
+.TableToolbar div .float-end button svg{
+  filter: invert(98%) sepia(79%) saturate(2476%) hue-rotate(278deg) brightness(118%) contrast(209%);
+ 
 }
 
 .TableToolbar div svg {

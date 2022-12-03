@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Call } from '@angular/compiler';
+import { ignoreElements } from 'rxjs';
 
 @Component({
   selector: 'app-maintain-patients',
@@ -31,9 +32,19 @@ export class MaintainPatientsComponent implements OnInit {
   PagePT: boolean = true;
   PageVC: boolean = false;
   PageHS: Boolean = false;
+  PagePO: Boolean = false;
+  PageVS: Boolean = false;
+
 
   public VaccineDetails: any;
+  public MHistoryDetails: any;
+  public POutcomeDetails: any;
+  public VisitDetails: any;
+
   public VCIndex: any;
+  public MHIndex: any;
+  public POIndex: any;
+  public VSIndex: any;
 
   public HistoryList: any;
   public History: any;
@@ -48,7 +59,7 @@ export class MaintainPatientsComponent implements OnInit {
     private router: Router,
     private _paitentsService: PatientsService,
     private _vaccineService: VaccineService,
-    private _medicalHistoryServive : MedicalHistoryService,
+    private _medicalHistoryServive: MedicalHistoryService,
     private firestore: AngularFirestore) {
 
   }
@@ -90,6 +101,37 @@ export class MaintainPatientsComponent implements OnInit {
   );
 
 
+  FGMHistoryDetails = new FormGroup(
+    {
+      Disease: new FormControl(''),
+      comments: new FormControl(''),
+      fromDate: new FormControl(''),
+      toDate: new FormControl(''),
+    }
+  );
+
+  FGPOutcomeDetails = new FormGroup(
+    {
+      comments: new FormControl(''),
+      deliveryDate: new FormControl(''),
+      deliveryPlace: new FormControl(''),
+      outcome: new FormControl(''),
+    }
+  );
+
+
+  FGVisitDetails = new FormGroup(
+    {
+      comments: new FormControl(''),
+      visitedBy: new FormControl(''),
+      visitDate: new FormControl(''),
+      signAndSymptoms: new FormControl(''),
+      redFlagComments: new FormControl(''),
+      prescription: new FormControl(''),
+      LMP: new FormControl(''),
+    }
+  );
+
   DetailsChangedCheck(DetailsChanged: boolean) {
 
     if (this.PatientsDetailsTmp.firstName != this.PatientsDetails.value.firstName ||
@@ -125,6 +167,9 @@ export class MaintainPatientsComponent implements OnInit {
     this.Visits = false;
 
     this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = false;
 
 
     if (!this.VaccinesList) {
@@ -137,6 +182,8 @@ export class MaintainPatientsComponent implements OnInit {
         })
 
     }
+
+    console.log(this.VaccinesList[this.VCIndex]);
 
   }
 
@@ -153,13 +200,16 @@ export class MaintainPatientsComponent implements OnInit {
     this.Visits = false;
 
     this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = false;
 
 
     if (!this.HistoryList) {
 
       this._paitentsService.getMedicalHistory(PatientID)
         .subscribe((v: any) => {
-          this.HistoryList= v;
+          this.HistoryList = v;
 
           console.log(this.HistoryList);
         })
@@ -183,13 +233,16 @@ export class MaintainPatientsComponent implements OnInit {
 
 
     this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = false;
 
 
     if (!this.PregnancyOutcomeList) {
 
       this._paitentsService.getPregnancyOutcome(PatientID)
         .subscribe((v: any) => {
-          this.PregnancyOutcomeList= v;
+          this.PregnancyOutcomeList = v;
 
           console.log(this.PregnancyOutcomeList);
         })
@@ -212,13 +265,16 @@ export class MaintainPatientsComponent implements OnInit {
 
 
     this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = false;
 
 
     if (!this.VisitsList) {
 
       this._paitentsService.getVisits(PatientID)
         .subscribe((v: any) => {
-          this.VisitsList= v;
+          this.VisitsList = v;
 
           console.log(this.VisitsList);
         })
@@ -237,6 +293,9 @@ export class MaintainPatientsComponent implements OnInit {
     this.Visits = false;
 
     this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = false;
   }
 
   OnSave() {
@@ -361,32 +420,31 @@ export class MaintainPatientsComponent implements OnInit {
           //this.visible = false; 
           console.error('Error writing document: ', error);
         });
-        let VCLenght = this.VaccinesList.length;
-        for (let i = 0 ; i < VCLenght; i++ )
-        {
-          
-          let VCID = this.VaccinesList[i].docId;
-          console.log(this.VaccinesList[i]);
-          this.firestore
-        .collection('MotherVaccineDetails')
-        .doc('/' + VCID)
-        .update({
-          Date: this.VaccinesList[i].Date,
-          NextVaccineDate: this.VaccinesList[i].NextVaccineDate,
-          Vaccine: this.VaccinesList[i].Vaccine,
-          VaccineDetail: this.VaccinesList[i].VaccineDetail,
-          patientID: this.VaccinesList[i].patientID
-        })
-        .then(() => {
-          this.visible = true;
-          console.log('done');
-        })
-        .catch(function (error) {
-          //this.visible = false; 
-          console.error('Error writing document: ', error);
-        });
+      let VCLenght = this.VaccinesList.length;
+      for (let i = 0; i < VCLenght; i++) {
 
-        }
+        let VCID = this.VaccinesList[i].docId;
+        console.log(this.VaccinesList[i]);
+        this.firestore
+          .collection('MotherVaccineDetails')
+          .doc('/' + VCID)
+          .update({
+            Date: this.VaccinesList[i].Date,
+            NextVaccineDate: this.VaccinesList[i].NextVaccineDate,
+            Vaccine: this.VaccinesList[i].Vaccine,
+            VaccineDetail: this.VaccinesList[i].VaccineDetail,
+            patientID: this.VaccinesList[i].patientID
+          })
+          .then(() => {
+            this.visible = true;
+            console.log('done');
+          })
+          .catch(function (error) {
+            //this.visible = false; 
+            console.error('Error writing document: ', error);
+          });
+
+      }
 
     }
 
@@ -406,6 +464,9 @@ export class MaintainPatientsComponent implements OnInit {
 
     this.PagePT = false;
     this.PageVC = true;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = false;
 
     this.FGVaccineDetails.patchValue({ VaccineDetail: this.VaccineDetails.VaccineDetail });
     this.FGVaccineDetails.patchValue({ NextVaccineDate: this.VaccineDetails.NextVaccineDate });
@@ -415,16 +476,136 @@ export class MaintainPatientsComponent implements OnInit {
 
   }
 
-  OnHostoryDetails(Index: any){
+  OnMHistoryDetails(Index: any) {
+
+    this.MHIndex = Index;
+
+    console.log(this.MHistoryDetails);
+
+    this.PagePT = false;
+    this.PageVC = false;
+    this.PageHS = true;
+    this.PagePO = false;
+    this.PageVS = false;
+
+    console.log(this.PageHS);
+    console.log(this.MHIndex);
+    if (this.MHIndex == 'NEW') {
+      this.MHistoryDetails = this.FGMHistoryDetails.value;
+      //this.MHistoryDetails.Disease = 'NEW';
+      //console.log(this.MHistoryDetails.Disease);
+
+      this.FGMHistoryDetails.patchValue({ Disease: '' });
+      this.FGMHistoryDetails.patchValue({ comments: '' });
+      this.FGMHistoryDetails.patchValue({ fromDate: '' });
+      this.FGMHistoryDetails.patchValue({ toDate: '' });
+    }
+    else {
+      this.MHistoryDetails = this.HistoryList[Index];
+
+      this.FGMHistoryDetails.patchValue({ Disease: this.MHistoryDetails.Disease });
+      this.FGMHistoryDetails.patchValue({ comments: this.MHistoryDetails.comments });
+      this.FGMHistoryDetails.patchValue({ fromDate: this.MHistoryDetails.fromDate });
+      this.FGMHistoryDetails.patchValue({ toDate: this.MHistoryDetails.toDate });
+
+    }
+  }
+
+
+
+  OnPOutcomeDetails(Index: any) {
+
+    this.POIndex = Index;
+
+    console.log(this.POutcomeDetails);
+
+    this.PagePT = false;
+    this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = true;
+    this.PageVS = false;
+
+    console.log(this.PagePO);
+
+    if (this.POIndex == 'NEW') {
+      this.POutcomeDetails = this.FGPOutcomeDetails.value;
+      //this.POutcomeDetails.deliveryDate = 'NEW';
+     // console.log(this.POutcomeDetails.deliveryDate);
+
+     this.FGPOutcomeDetails.patchValue({ comments: ''});
+      this.FGPOutcomeDetails.patchValue({ deliveryDate: '' });
+      this.FGPOutcomeDetails.patchValue({ deliveryPlace: '' });
+      this.FGPOutcomeDetails.patchValue({ outcome: '' });
+    }
+    else {
+
+      this.POutcomeDetails = this.PregnancyOutcomeList[Index];
+
+      this.FGPOutcomeDetails.patchValue({ comments: this.POutcomeDetails.comments });
+      this.FGPOutcomeDetails.patchValue({ deliveryDate: this.POutcomeDetails.deliveryDate });
+      this.FGPOutcomeDetails.patchValue({ deliveryPlace: this.POutcomeDetails.deliveryPlace });
+      this.FGPOutcomeDetails.patchValue({ outcome: this.POutcomeDetails.outcome });
+    }
 
   }
 
-  OnVCApply(){
-    this.VaccinesList[this.VCIndex].VaccineDetail =  this.FGVaccineDetails.value.VaccineDetail;
-    this.VaccinesList[this.VCIndex].NextVaccineDate =  this.FGVaccineDetails.value.NextVaccineDate;
-    this.VaccinesList[this.VCIndex].Vaccine =  this.FGVaccineDetails.value.Vaccine;
-    this.VaccinesList[this.VCIndex].patientID =  this.FGVaccineDetails.value.patientID;
-    this.VaccinesList[this.VCIndex].Date =  this.FGVaccineDetails.value.Date;
+
+  OnVisitDetails(Index: any) {
+
+    this.VSIndex = Index;
+
+
+    //console.log(this.VisitDetails);
+
+    this.PagePT = false;
+    this.PageVC = false;
+    this.PageHS = false;
+    this.PagePO = false;
+    this.PageVS = true;
+
+    console.log(this.PageVS);
+
+    if (this.VSIndex == 'NEW') {
+
+      this.VisitDetails = this.FGVisitDetails.value;
+      //this.VisitDetails.visitDate = 'NEW';
+      //console.log(this.POutcomeDetails.visitDate);
+      this.FGVisitDetails.patchValue({ comments: '' });
+      this.FGVisitDetails.patchValue({ LMP: '' });
+      this.FGVisitDetails.patchValue({ prescription: '' });
+      this.FGVisitDetails.patchValue({ visitDate: '' });
+      this.FGVisitDetails.patchValue({ visitedBy: '' });
+      this.FGVisitDetails.patchValue({ signAndSymptoms: '' });
+      this.FGVisitDetails.patchValue({ redFlagComments: '' });
+    }
+    else {
+      this.VisitDetails = this.VisitsList[Index];
+
+      this.FGVisitDetails.patchValue({ comments: this.VisitDetails.comments });
+      this.FGVisitDetails.patchValue({ LMP: this.VisitDetails.LMP });
+      this.FGVisitDetails.patchValue({ prescription: this.VisitDetails.prescription });
+      this.FGVisitDetails.patchValue({ visitDate: this.VisitDetails.visitDate });
+      this.FGVisitDetails.patchValue({ visitedBy: this.VisitDetails.visitedBy });
+      this.FGVisitDetails.patchValue({ signAndSymptoms: this.VisitDetails.signAndSymptoms });
+      this.FGVisitDetails.patchValue({ redFlagComments: this.VisitDetails.redFlagComments });
+    }
+
+  }
+
+
+
+
+  OnVCApply() {
+    console.log(this.VaccinesList[this.VCIndex]);
+
+    this.VaccinesList[this.VCIndex].VaccineDetail = this.FGVaccineDetails.value.VaccineDetail;
+    this.VaccinesList[this.VCIndex].NextVaccineDate = this.FGVaccineDetails.value.NextVaccineDate;
+    this.VaccinesList[this.VCIndex].Vaccine = this.FGVaccineDetails.value.Vaccine;
+    this.VaccinesList[this.VCIndex].patientID = this.FGVaccineDetails.value.patientID;
+    this.VaccinesList[this.VCIndex].Date = this.FGVaccineDetails.value.Date;
+    this.VaccinesList[this.VCIndex].DataChanged = 'CHANGE';
+
+
 
     this.onSelectVaccines(this.FGVaccineDetails.value.patientID);
     // this.PagePT = true;
@@ -434,11 +615,77 @@ export class MaintainPatientsComponent implements OnInit {
     // this.Details = false;
   }
 
-  OnVCCancel(){
+  OnHCApply() {
+
+    if (this.MHIndex == 'NEW') {
+      this.MHIndex = this.HistoryList.length;
+      this.HistoryList[this.MHIndex] = this.FGMHistoryDetails.value;
+      this.HistoryList[this.MHIndex].DataChanged = 'NEW';
+    }
+
+    if (this.HistoryList[this.MHIndex].DataChanged != 'NEW') {
+      this.HistoryList[this.MHIndex].DataChanged = 'CHANGE';
+    }
+
+    this.HistoryList[this.MHIndex].Disease = this.FGMHistoryDetails.value.Disease;
+    this.HistoryList[this.MHIndex].comments = this.FGMHistoryDetails.value.comments;
+    this.HistoryList[this.MHIndex].fromDate = this.FGMHistoryDetails.value.fromDate;
+    this.HistoryList[this.MHIndex].toDate = this.FGMHistoryDetails.value.toDate;
+
+
+    this.onSelectHistory(this.Ptid);
 
   }
 
-  ShowChilds(PTID:any, PTNAME:any){
+  OnPOApply() {
+
+    if (this.POIndex == 'NEW') {
+      this.POIndex = this.PregnancyOutcomeList.length;
+      this.PregnancyOutcomeList[this.POIndex] = this.FGPOutcomeDetails.value;
+      this.PregnancyOutcomeList[this.POIndex].DataChanged = 'NEW';
+    }
+
+    if (this.PregnancyOutcomeList[this.POIndex].DataChanged != 'NEW') {
+      this.PregnancyOutcomeList[this.POIndex].DataChanged = 'CHANGE';
+    }
+
+    this.PregnancyOutcomeList[this.POIndex].comments = this.FGPOutcomeDetails.value.comments;
+    this.PregnancyOutcomeList[this.POIndex].deliveryDate = this.FGPOutcomeDetails.value.deliveryDate;
+    this.PregnancyOutcomeList[this.POIndex].deliveryPlace = this.FGPOutcomeDetails.value.deliveryPlace;
+    this.PregnancyOutcomeList[this.POIndex].outcome = this.FGPOutcomeDetails.value.outcome;
+
+    this.onSelectPregnancyOutcome(this.Ptid);
+
+  }
+
+  OnVSApply() {
+
+    if (this.VSIndex == 'NEW') {
+      this.VSIndex = this.VisitsList.length;
+      this.VisitsList[this.VSIndex] = this.FGVisitDetails.value;
+      this.VisitsList[this.VSIndex].DataChanged = 'NEW';
+    }
+
+    if (this.VisitsList[this.VSIndex].DataChanged != 'NEW') {
+      this.VisitsList[this.VSIndex].DataChanged = 'CHANGE';
+    }
+
+
+    this.VisitsList[this.VSIndex].comments = this.FGVisitDetails.value.comments;
+    this.VisitsList[this.VSIndex].LMP = this.FGVisitDetails.value.LMP;
+    this.VisitsList[this.VSIndex].prescription = this.FGVisitDetails.value.prescription;
+    this.VisitsList[this.VSIndex].visitDate = this.FGVisitDetails.value.visitDate;
+    this.VisitsList[this.VSIndex].visitedBy = this.FGVisitDetails.value.visitedBy;
+    this.VisitsList[this.VSIndex].signAndSymptoms = this.FGVisitDetails.value.signAndSymptoms;
+    this.VisitsList[this.VSIndex].redFlagComments = this.FGVisitDetails.value.redFlagComments;
+
+    this.onSelectVisits(this.Ptid);
+
+
+  }
+
+
+  ShowChilds(PTID: any, PTNAME: any) {
     this.router.navigate(['/Childs', PTID, PTNAME]);
   }
 
