@@ -1,1 +1,111 @@
-<p>maintain-user works!</p>
+
+
+
+<ng-container>
+
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link " 
+          aria-current="page">Details</a>
+      </li>
+      <!-- <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li> -->
+      <!-- <li class="nav-item">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </li> -->
+    </ul>
+    
+  
+      <div>
+        <form [formGroup]="UserDetails">
+          <div class="row FormRow">
+  
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="text" formControlName="firstName" class="form-control" id="floatingInputGrid"
+                  placeholder="enter Name Here">
+                <label for="floatingInputGrid">First Name</label>
+              </div>
+            </div>
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="text" formControlName="middleName" class="form-control" id="floatingInputGrid"
+                  placeholder="enter Name Here">
+                <label for="floatingInputGrid">middle Name</label>
+              </div>
+            </div>
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="text" formControlName="lastName" class="form-control" id="floatingInputGrid"
+                  placeholder="enter Name Here">
+                <label for="floatingInputGrid">Last Name</label>
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="row FormRow">
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="number" formControlName="mobileNumber" class="form-control" id="floatingInputGrid">
+                <label for="floatingInputGrid">Contact Number</label>
+              </div>
+            </div>
+
+            
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="number" formControlName="alternateNumber" class="form-control" id="floatingInputGrid">
+                <label for="floatingInputGrid">Alternate Number</label>
+              </div>
+            </div>
+  
+  
+            <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="text" formControlName="Email" class="form-control" id="floatingInputGrid"
+                    placeholder="Enter Email">
+                  <label for="floatingInputGrid">Email ID</label>
+                </div>
+              </div>
+  
+          </div>
+  
+  
+          <div class="row FormRow">
+  
+  
+  
+
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="text" formControlName="uid" class="form-control" id="floatingInputGrid">
+                <label for="floatingInputGrid">ID Number</label>
+              </div>
+            </div>
+  
+            <div class="col-md-4">
+              <div class="form-floating">
+                <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
+                <label for="floatingInputGrid">Date of Birth</label>
+              </div>
+            </div>
+          </div>
+  
+  
+        </form>
+      </div>
+    </ng-container>
+  
+  
+  
+    
+  

@@ -25,6 +25,7 @@ export class UserComponent implements OnInit {
   }
 
   OnSelect(user: any){
+   
     this.router.navigate(['/UserDetail', user.docId]);
 
   }
