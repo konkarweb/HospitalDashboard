@@ -42,4 +42,7 @@ export class MaintainUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  OnSave(){
+
+  }
 }
