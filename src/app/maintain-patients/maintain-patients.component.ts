@@ -92,7 +92,7 @@ export class MaintainPatientsComponent implements OnInit {
   FGVaccineDetails = new FormGroup(
     {
       VaccineDetail: new FormControl(''),
-      NextVaccineDate: new FormControl(''),
+      ScheduledOn: new FormControl(''),
       Vaccine: new FormControl(''),
       patientID: new FormControl(''),
       Date: new FormControl(''),
@@ -131,6 +131,52 @@ export class MaintainPatientsComponent implements OnInit {
       LMP: new FormControl(''),
     }
   );
+
+
+  CurruntTimeStampGet() {
+    const current = new Date();
+
+    let lv_date: string;
+    let lv_month: string;
+    let lv_year: string;
+
+    let lv_hour: string;
+    let lv_min: string;
+    let lv_sec: string;
+
+    lv_date = current.getDate() + "";
+    lv_month = current.getMonth() + "";
+    lv_year = current.getFullYear() + "";
+
+    lv_hour = current.getHours() + "";
+    lv_min = current.getMinutes() + "";
+    lv_sec = current.getSeconds() + "";
+
+    if (lv_date.length == 1) {
+      lv_date = 0 + lv_date;
+    }
+
+    if (lv_month.length == 1) {
+      lv_month = 0 + lv_month;
+    }
+
+    if (lv_hour.length == 1) {
+      lv_hour = 0 + lv_hour;
+    }
+
+
+    if (lv_min.length == 1) {
+      lv_min = 0 + lv_min;
+    }
+
+    if (lv_sec.length == 1) {
+      lv_sec = 0 + lv_sec;
+    }
+
+    let timestamp = lv_year + lv_month + lv_date + lv_hour + lv_min + lv_sec;
+
+    return timestamp;
+  }
 
   DetailsChangedCheck(DetailsChanged: boolean) {
 
@@ -183,7 +229,7 @@ export class MaintainPatientsComponent implements OnInit {
 
     }
 
-    console.log(this.VaccinesList[this.VCIndex]);
+    //console.log(this.VaccinesList[this.VCIndex]);
 
   }
 
@@ -303,7 +349,7 @@ export class MaintainPatientsComponent implements OnInit {
     if (this.Ptid === 'New') {
 
       this.firestore
-        .collection('Patients')
+        .collection('Mother')
         .add({
           firstName: this.PatientsDetails.value.firstName,
           patientId: this.PatientsDetails.value.patientId,
@@ -330,13 +376,14 @@ export class MaintainPatientsComponent implements OnInit {
           console.log(res);
 
           this.firestore
-            .collection('MotherVaccineDetails')
+            .collection('VaccineDetails')
             .add({
               patientID: id,
+              Sq: 1,
+              ScheduledOn: "",
               Date: "",
               Vaccine: "TT-1",
               VaccineDetail: "Early in pregnancy",
-              NextVaccineDate: ""
             },)
             .then(res1 => {
               console.log(res1.id);
@@ -345,13 +392,14 @@ export class MaintainPatientsComponent implements OnInit {
             });
 
           this.firestore
-            .collection('MotherVaccineDetails')
+            .collection('VaccineDetails')
             .add({
               patientID: id,
+              Sq: 2,
+              ScheduledOn: "",
               Date: "",
               Vaccine: "TT-2",
               VaccineDetail: "4 weeks After TT-1*",
-              NextVaccineDate: ""
             },)
             .then(res2 => {
               console.log(res2.id);
@@ -360,13 +408,14 @@ export class MaintainPatientsComponent implements OnInit {
             });
 
           this.firestore
-            .collection('MotherVaccineDetails')
+            .collection('VaccineDetails')
             .add({
               patientID: id,
+              Sq: 3,
+              ScheduledOn: "",
               Date: "",
               Vaccine: "TT-Booster",
               VaccineDetail: "If received 2 TT doses in a pregnancy within the last 3 yrs*",
-              NextVaccineDate: ""
             },)
             .then(res3 => {
               console.log(res3.id);
@@ -392,7 +441,7 @@ export class MaintainPatientsComponent implements OnInit {
     else {
 
       this.firestore
-        .collection('Patients')
+        .collection('Mother')
         .doc('/' + this.Ptid)
         .update({
           firstName: this.PatientsDetails.value.firstName,
@@ -420,33 +469,199 @@ export class MaintainPatientsComponent implements OnInit {
           //this.visible = false; 
           console.error('Error writing document: ', error);
         });
-      let VCLenght = this.VaccinesList.length;
-      for (let i = 0; i < VCLenght; i++) {
 
-        let VCID = this.VaccinesList[i].docId;
-        console.log(this.VaccinesList[i]);
-        this.firestore
-          .collection('MotherVaccineDetails')
-          .doc('/' + VCID)
-          .update({
-            Date: this.VaccinesList[i].Date,
-            NextVaccineDate: this.VaccinesList[i].NextVaccineDate,
-            Vaccine: this.VaccinesList[i].Vaccine,
-            VaccineDetail: this.VaccinesList[i].VaccineDetail,
-            patientID: this.VaccinesList[i].patientID
-          })
-          .then(() => {
-            this.visible = true;
-            console.log('done');
-          })
-          .catch(function (error) {
-            //this.visible = false; 
-            console.error('Error writing document: ', error);
-          });
+      if (this.VaccinesList) {
 
+        let VCLenght = this.VaccinesList.length;
+        for (let i = 0; i < VCLenght; i++) {
+
+          let VCID = this.VaccinesList[i].docId;
+          console.log(this.VaccinesList[i]);
+          this.firestore
+            .collection('VaccineDetails')
+            .doc('/' + VCID)
+            .update({
+              Date: this.VaccinesList[i].Date,
+              ScheduledOn: this.VaccinesList[i].ScheduledOn,
+              Vaccine: this.VaccinesList[i].Vaccine,
+              VaccineDetail: this.VaccinesList[i].VaccineDetail,
+              patientID: this.VaccinesList[i].patientID
+            })
+            .then(() => {
+              this.visible = true;
+              console.log('done');
+            })
+            .catch(function (error) {
+              //this.visible = false; 
+              console.error('Error writing document: ', error);
+            });
+
+        }
       }
 
+      if (this.HistoryList) {
+
+        let MHLenght = this.HistoryList.length;
+        for (let i = 0; i < MHLenght; i++) {
+
+          let DataChanged = this.HistoryList[i].DataChanged;
+          if (DataChanged == 'NEW') {
+            let tmp = "/Patients/" + this.Ptid + "/Medical History";
+            console.log(this.HistoryList[i]);
+            this.firestore
+              .collection(tmp)
+              .add({
+                Disease: this.HistoryList[i].Disease,
+                comments: this.HistoryList[i].comments,
+                fromDate: this.HistoryList[i].fromDate,
+                toDate: this.HistoryList[i].toDate,
+              },)
+              .then(res2 => {
+                console.log(res2.id);
+              }).catch(e => {
+                console.log(e);
+              });
+          }
+          else {
+            let HSID = this.HistoryList[i].docId;
+            let tmp = "/Patients/" + this.Ptid + "/Medical History";
+            console.log(this.HistoryList[i]);
+            this.firestore
+              .collection(tmp)
+              .doc('/' + HSID)
+              .update({
+                Disease: this.HistoryList[i].Disease,
+                comments: this.HistoryList[i].comments,
+                fromDate: this.HistoryList[i].fromDate,
+                toDate: this.HistoryList[i].toDate
+              })
+              .then(() => {
+                this.visible = true;
+                console.log('done');
+              })
+              .catch(function (error) {
+                //this.visible = false; 
+                console.error('Error writing document: ', error);
+              });
+          }
+
+        }
+      }
+
+
+      if (this.PregnancyOutcomeList) {
+
+        let POLenght = this.PregnancyOutcomeList.length;
+        for (let i = 0; i < POLenght; i++) {
+
+          let DataChanged = this.PregnancyOutcomeList[i].DataChanged;
+          if (DataChanged == 'NEW') {
+            let tmp = "/Patients/" + this.Ptid + "/Pregnancy Outcome";
+            console.log(this.PregnancyOutcomeList[i]);
+            this.firestore
+              .collection(tmp)
+              .add({
+                comments: this.PregnancyOutcomeList[i].comments,
+                deliveryDate: this.PregnancyOutcomeList[i].deliveryDate,
+                deliveryPlace: this.PregnancyOutcomeList[i].deliveryPlace,
+                outcome: this.PregnancyOutcomeList[i].outcome,
+              },)
+              .then(res2 => {
+                console.log(res2.id);
+              }).catch(e => {
+                console.log(e);
+              });
+          }
+          else {
+            let HSID = this.PregnancyOutcomeList[i].docId;
+            let tmp = "/Patients/" + this.Ptid + "/Pregnancy Outcome";
+            console.log(this.PregnancyOutcomeList[i]);
+            this.firestore
+              .collection(tmp)
+              .doc('/' + HSID)
+              .update({
+                comments: this.PregnancyOutcomeList[i].comments,
+                deliveryDate: this.PregnancyOutcomeList[i].deliveryDate,
+                deliveryPlace: this.PregnancyOutcomeList[i].deliveryPlace,
+                outcome: this.PregnancyOutcomeList[i].outcome,
+              })
+              .then(() => {
+                this.visible = true;
+                console.log('done');
+              })
+              .catch(function (error) {
+                //this.visible = false; 
+                console.error('Error writing document: ', error);
+              });
+          }
+
+        }
+      }
+
+
+      if (this.VisitsList) {
+
+        let VSLenght = this.VisitsList.length;
+        for (let i = 0; i < VSLenght; i++) {
+
+          let DataChanged = this.VisitsList[i].DataChanged;
+          if (DataChanged == 'NEW') {
+            let tmp = "/Patients/" + this.Ptid + "/Visit Details";
+            console.log(this.VisitsList[i]);
+            this.firestore
+              .collection(tmp)
+              .add({
+                LMP: this.VisitsList[i].LMP,
+                comments: this.VisitsList[i].comments,
+                prescription: this.VisitsList[i].prescription,
+                redFlagComments: this.VisitsList[i].redFlagComments,
+                signAndSymptoms: this.VisitsList[i].signAndSymptoms,
+                visitDate: this.VisitsList[i].visitDate,
+                visitedBy: this.VisitsList[i].visitedBy,
+              },)
+              .then(res2 => {
+                console.log(res2.id);
+              }).catch(e => {
+                console.log(e);
+              });
+          }
+          else {
+            let HSID = this.VisitsList[i].docId;
+            let tmp = "/Patients/" + this.Ptid + "/Visit Details";
+            console.log(this.VisitsList[i]);
+            this.firestore
+              .collection(tmp)
+              .doc('/' + HSID)
+              .update({
+                LMP: this.VisitsList[i].LMP,
+                comments: this.VisitsList[i].comments,
+                prescription: this.VisitsList[i].prescription,
+                redFlagComments: this.VisitsList[i].redFlagComments,
+                signAndSymptoms: this.VisitsList[i].signAndSymptoms,
+                visitDate: this.VisitsList[i].visitDate,
+                visitedBy: this.VisitsList[i].visitedBy,
+              })
+              .then(() => {
+                this.visible = true;
+                console.log('done');
+              })
+              .catch(function (error) {
+                //this.visible = false; 
+                console.error('Error writing document: ', error);
+              });
+          }
+
+        }
+      }
+
+
     }
+
+
+
+
+
+
 
     this.PatientsDetailsTmp = this.PatientsDetails.value;
     this.DetailsChanged = false;
@@ -469,7 +684,7 @@ export class MaintainPatientsComponent implements OnInit {
     this.PageVS = false;
 
     this.FGVaccineDetails.patchValue({ VaccineDetail: this.VaccineDetails.VaccineDetail });
-    this.FGVaccineDetails.patchValue({ NextVaccineDate: this.VaccineDetails.NextVaccineDate });
+    this.FGVaccineDetails.patchValue({ ScheduledOn: this.VaccineDetails.ScheduledOn });
     this.FGVaccineDetails.patchValue({ Vaccine: this.VaccineDetails.Vaccine });
     this.FGVaccineDetails.patchValue({ patientID: this.VaccineDetails.patientID });
     this.FGVaccineDetails.patchValue({ Date: this.VaccineDetails.Date });
@@ -530,9 +745,9 @@ export class MaintainPatientsComponent implements OnInit {
     if (this.POIndex == 'NEW') {
       this.POutcomeDetails = this.FGPOutcomeDetails.value;
       //this.POutcomeDetails.deliveryDate = 'NEW';
-     // console.log(this.POutcomeDetails.deliveryDate);
+      // console.log(this.POutcomeDetails.deliveryDate);
 
-     this.FGPOutcomeDetails.patchValue({ comments: ''});
+      this.FGPOutcomeDetails.patchValue({ comments: '' });
       this.FGPOutcomeDetails.patchValue({ deliveryDate: '' });
       this.FGPOutcomeDetails.patchValue({ deliveryPlace: '' });
       this.FGPOutcomeDetails.patchValue({ outcome: '' });
@@ -548,7 +763,6 @@ export class MaintainPatientsComponent implements OnInit {
     }
 
   }
-
 
   OnVisitDetails(Index: any) {
 
@@ -599,7 +813,7 @@ export class MaintainPatientsComponent implements OnInit {
     console.log(this.VaccinesList[this.VCIndex]);
 
     this.VaccinesList[this.VCIndex].VaccineDetail = this.FGVaccineDetails.value.VaccineDetail;
-    this.VaccinesList[this.VCIndex].NextVaccineDate = this.FGVaccineDetails.value.NextVaccineDate;
+    this.VaccinesList[this.VCIndex].ScheduledOn = this.FGVaccineDetails.value.ScheduledOn;
     this.VaccinesList[this.VCIndex].Vaccine = this.FGVaccineDetails.value.Vaccine;
     this.VaccinesList[this.VCIndex].patientID = this.FGVaccineDetails.value.patientID;
     this.VaccinesList[this.VCIndex].Date = this.FGVaccineDetails.value.Date;
@@ -706,7 +920,7 @@ export class MaintainPatientsComponent implements OnInit {
       this.ChangeMode = true;
 
       this.firestore
-        .collection('Patients')
+        .collection('Mother')
         .doc(this.Ptid).ref.get().then((doc) => {
           if (doc.exists) {
             console.log("Document data: ", doc.data());

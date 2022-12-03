@@ -51,7 +51,7 @@
 <div class="row"  ng *ngFor="let patient of PatientsList;  index as i">
   <div class="col-12 MotherList" (click)="OnSelect(patient)" routerLink="">
     <div class="row">
-      <div class="col-4">
+      <div class="col-md-1 col-4">
         <div class="text-center">
           <span class="Micon ">
           <span style="color:black; text-decoration: none;">{{patient.firstName[0]}}</span>
@@ -59,7 +59,7 @@
         </span>
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-md-11 col-8">
 
         <span class="Mname">{{patient.firstName}} {{ patient.middleName }} {{patient.lastName}}</span>
         <br>
@@ -70,7 +70,7 @@
   </div>
 </div>
 
-<table class="table table-hover">
+<!-- <table class="table table-hover">
     <thead>
         <tr>
         <th scope="col">Name</th>
@@ -88,7 +88,7 @@
       </tr>
       
     </tbody>
-  </table>
+  </table> -->
 
 <!-- <div class="float-end">
   <nav aria-label="Page navigation example ">

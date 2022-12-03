@@ -21,7 +21,7 @@ export class VaccineService {
     private firestore: AngularFirestore)
     { 
     //  this.Vaccine =  this.firestore
-    //  .collection("MotherVaccineDetails")
+    //  .collection("VaccineDetails")
     //  .valueChanges({ idField: 'docId' });
 
    }
@@ -29,9 +29,10 @@ export class VaccineService {
    getVaccine(Ptid:any):Observable<[]>{
 
     this.Vaccine = this.firestore
-     .collection("MotherVaccineDetails",ref => {
+     .collection("VaccineDetails",ref => {
        let query: Query = ref;
-       { query = query.where('patientID', '==', Ptid) };
+       { query = query.where('patientID', '==', Ptid),
+         query = query.orderBy('Sq', 'asc' ) };
        return query; })
      .valueChanges({ idField: 'docId' });
 

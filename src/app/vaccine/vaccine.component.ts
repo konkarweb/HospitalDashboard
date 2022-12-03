@@ -55,7 +55,7 @@ export class VaccineComponent implements OnInit {
     this.Ptid = id;
 
     this.firestore
-      .collection('Patients')
+      .collection('Mother')
       .doc(this.Ptid).ref.get().then((doc) => {
         if (doc.exists) {
           //console.log("Document data: ", doc.data());

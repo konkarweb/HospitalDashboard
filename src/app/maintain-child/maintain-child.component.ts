@@ -79,7 +79,7 @@ export class MaintainChildComponent implements OnInit {
           
           console.log(res);
           this.firestore
-          .collection('MotherVaccineDetails')
+          .collection('VaccineDetails')
           .add({
             patientID: id,
             Date: "",
@@ -94,7 +94,7 @@ export class MaintainChildComponent implements OnInit {
           });
 
           this.firestore
-          .collection('MotherVaccineDetails')
+          .collection('VaccineDetails')
           .add({
             patientID: id,
             Date: "",
@@ -109,7 +109,7 @@ export class MaintainChildComponent implements OnInit {
           });
 
           this.firestore
-          .collection('MotherVaccineDetails')
+          .collection('VaccineDetails')
           .add({
             patientID: id,
             Date: "",

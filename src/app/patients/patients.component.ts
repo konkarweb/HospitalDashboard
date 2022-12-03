@@ -42,10 +42,12 @@ export class PatientsComponent implements OnInit {
  
              
   ngOnInit(): void {
+
     this._paitentsService.getUsers()
     .subscribe((v:any) => {
       this.PatientsList = v;
       console.log(this.PatientsList);
+
     })
     
 

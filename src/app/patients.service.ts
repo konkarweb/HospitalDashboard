@@ -26,7 +26,7 @@ export class PatientsService {
 
     getPatientsCount():Observable<[]>{
       this.Patients =  this.firestore
-      .collection("Patients")
+      .collection("Mother")
       .valueChanges();
     return this.Patients;
     }
@@ -34,7 +34,7 @@ export class PatientsService {
   getUsers():Observable<IPatients[]>{
     // return this.http.get<IPatients[]>(this._url);
     this.Patients =  this.firestore
-      .collection("Patients")
+      .collection("Mother")
       .valueChanges({ idField: 'docId' });
     return this.Patients;
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/auth-service.service';
-import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,14 +10,8 @@ export class AppComponent  {
   public user:any;
   AppPage:boolean = true;
 
-  constructor(public authService: AuthServiceService,
-    public router: Router) {}
+  constructor(public authService: AuthServiceService) {}
 
-
-    
-  ngOnInit(): void {
-
-  }
 
   visible:boolean = false;
   onclick()

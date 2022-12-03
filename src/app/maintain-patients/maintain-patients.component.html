@@ -246,8 +246,8 @@
           <th>#</th>
           <th scope="col">Vaccine</th>
           <!-- <th scope="col">Detail</th> -->
-          <th scope="col">Date</th>
-          <th scope="col">Next Date</th>
+          <th scope="col">Scheduled On</th>
+          <th scope="col">Vaccinated On</th>
         </tr>
       </thead>
       <tbody ng *ngFor="let vaccine of VaccinesList; let i = index">
@@ -257,7 +257,7 @@
           <td>{{vaccine.Vaccine}}</td>
           <!-- <td>{{vaccine.VaccineDetail}}</td> -->
           <td>{{vaccine.Date}}</td>
-          <td>{{vaccine.NextVaccineDate}}</td>
+          <td>{{vaccine.ScheduledOn}}</td>
         </tr>
       </tbody>
     </table>
@@ -429,6 +429,14 @@
 
       <div class="row FormRow">
 
+        
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" formControlName="ScheduledOn" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">ScheduledOn</label>
+          </div>
+        </div>
+
         <div class="col-md-4">
           <div class="form-floating">
             <input type="date" formControlName="Date" class="form-control" id="floatingInputGrid">
@@ -436,12 +444,6 @@
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="form-floating">
-            <input type="date" formControlName="NextVaccineDate" class="form-control" id="floatingInputGrid">
-            <label for="floatingInputGrid">NextVaccineDate</label>
-          </div>
-        </div>
 
 
 
