@@ -339,9 +339,12 @@ export class MaintainPatientsComponent implements OnInit {
   OnSave() {
 
     this.CurrentTimeStamp = this.CurrentTimeStampGet();
-    this.CurrentUser = 'wVYbQJ43GSfHLtZ7DSYA';
+    //this.CurrentUser = 'wVYbQJ43GSfHLtZ7DSYA';
     let DocPath = "/Mother/" + this.Ptid;
+    let userDTL = JSON.parse(localStorage.getItem('userDTL')!);
 
+    this.CurrentUser = userDTL.docId;
+    console.log(userDTL);
     if (this.Ptid === 'New') {
 
       this.firestore

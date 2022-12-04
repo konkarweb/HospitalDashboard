@@ -85,6 +85,8 @@ export class SignInComponent implements OnInit {
     console.log(UserName, PasswordTmp);
 
     this.authService.SignIn(UserName, PasswordTmp);
+
+    localStorage.setItem('userDTL', JSON.stringify(this.UserDetl));
   }
 
   SignUp(UserName:any, Password:any){
@@ -105,6 +107,8 @@ export class SignInComponent implements OnInit {
           //this.visible = false; 
           console.error('Error writing document: ', error);
         });
+
+        localStorage.setItem('userDTL', JSON.stringify(this.UserDetl));
 
     this.authService.SignUp(UserName, PasswordTmp);
 

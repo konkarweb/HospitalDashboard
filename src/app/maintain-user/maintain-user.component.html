@@ -1,8 +1,32 @@
+<div class="row BreadcumProp">
+    <div class=" col-12">
+        <nav
+        style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+        aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="/Users">User</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{UName}}</li>
+        </ol>
+    </nav>
+
+  </div>     
+
+</div>
+
+<ng-container *ngIf="visible">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Success</strong> Record Updated.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </ng-container>
+
 <ng-container>
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link " aria-current="page">Details</a>
+            <a class="nav-link active" aria-current="page">Details</a>
         </li>
         <!-- <li class="nav-item">
       <a class="nav-link" href="#">Link</a>
@@ -14,7 +38,7 @@
 
 
     <div>
-        <form [formGroup]="UserDetails">
+        <form [formGroup]="FGUserDetails">
             <div class="row FormRow">
 
 
@@ -26,13 +50,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="text" formControlName="middleName" class="form-control" id="floatingInputGrid"
-                            placeholder="enter Name Here">
-                        <label for="floatingInputGrid">middle Name</label>
-                    </div>
-                </div>
 
                 <div class="col-md-4">
                     <div class="form-floating">
@@ -41,6 +58,18 @@
                         <label for="floatingInputGrid">Last Name</label>
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="form-floating">
+                      <select formControlName="UserType" class="form-select" id="floatingSelectGrid"
+                        aria-label="Floating label select example">
+                        <option value=""></option>
+                        <option value="Admin">Admin</option>
+                        <option value="Volunteer">Volunteer</option>
+                      </select>
+                      <label for="floatingSelectGrid">User Type</label>
+                    </div>
+                  </div>
 
             </div>
 
@@ -58,44 +87,16 @@
 
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="number" formControlName="alternateNumber" class="form-control"
+                        <input type="email" formControlName="EmailID" class="form-control"
                             id="floatingInputGrid">
-                        <label for="floatingInputGrid">Alternate Number</label>
+                        <label for="floatingInputGrid">EmailID</label>
                     </div>
                 </div>
 
 
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="text" formControlName="Email" class="form-control" id="floatingInputGrid"
-                            placeholder="Enter Email">
-                        <label for="floatingInputGrid">Email ID</label>
-                    </div>
-                </div>
 
             </div>
 
-
-            <div class="row FormRow">
-
-
-
-
-
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="text" formControlName="uid" class="form-control" id="floatingInputGrid">
-                        <label for="floatingInputGrid">ID Number</label>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-floating">
-                        <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
-                        <label for="floatingInputGrid">Date of Birth</label>
-                    </div>
-                </div>
-            </div>
 
 
         </form>

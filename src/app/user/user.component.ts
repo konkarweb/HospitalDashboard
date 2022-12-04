@@ -30,4 +30,8 @@ export class UserComponent implements OnInit {
 
   }
 
+  OnNew(){
+    this.router.navigate(['/UserDetail', 'New']);
+  }
+
 }
