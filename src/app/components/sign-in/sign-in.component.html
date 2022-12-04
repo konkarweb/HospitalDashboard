@@ -5,25 +5,53 @@
             <div class="card shadow">
                 <div class="displayTableCell">
                     <div class="card-title text-center border-bottom">
-                        <h2 class="p-3">Login</h2>
-                      </div>
-                      <div class="card-body">
+                        <h2 class="p-3">Welcome</h2>
+                    </div>
+                    <div class="card-body">
 
-                        <form>
-                            <div class="mb-3">
-                              <label for="exampleInputEmail1" class="form-label">Email address</label>
-                              <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Username" aria-describedby="emailHelp" #userName required>
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Password</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" #userPassword required>
+                        <form [formGroup]="FGLogin">
+                            
+                                <div *ngIf="ShowEmail" class="mb-3 ">
+                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" formControlName="UserName" id="exampleInputEmail1"
+                                        placeholder="Username" aria-describedby="emailHelp"  required>
+                                        <div *ngIf="InvalidEmail" style="display: block; color:  red;">
+                                            Invalid Email ID.
+                                          </div>
+                                </div>
+                           
+                            <div *ngIf="ShowPass" class="mb-3">
+                                <div *ngIf="ShowSignIn">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                </div>
+
+                                <div *ngIf="ShowSignUp">
+                                    <label for="exampleInputPassword1" class="form-label">New Password</label>
+                                </div>
+                                
+                                <input type="password" class="form-control" formControlName="Password" id="exampleInputPassword1"
+                                    placeholder="Password"  required>
                             </div>
 
+                            <div *ngIf="ShowSignIn">
                             <input type="button" class="btn btn-primary" value="Log in"
-                            (click)="authService.SignIn(userName.value, userPassword.value)">
-                          </form>
+                                (click)="SignIn(UserName, Password)">
+                            </div>
 
-                       
+                            <div *ngIf="ShowSignUp">
+                            <input type="button" class="btn btn-primary" value="Sign Up"
+                            (click)="SignUp(UserName, Password)" />
+                            </div>
+
+                            <div *ngIf="ShowNext" class="float-right">
+                                <input type="button" class="btn btn-primary" value="Next"
+                                    (click)="onEmailValidation()">
+                                </div>
+                                
+                                
+                        </form>
+
+
                         <!-- <div class="formGroup">
                             <span class="or"><span class="orInner">Or</span></span>
                         </div>
@@ -33,16 +61,17 @@
                                 Log in with Google
                             </button>
                         </div> -->
-                        
-                        <div class="forgotPassword">
-                            <span style="color:blue;cursor: pointer;" routerLink="/forgot-password">Forgot Password?</span>
+
+                        <div *ngIf="ShowSignIn" class="forgotPassword">
+                            <span style="color:blue;cursor: pointer;" routerLink="/forgot-password">Forgot
+                                Password?</span>
                         </div>
-                    
-                    <div class="redirectToLogin" style="color:rgb(13, 13, 108);cursor: pointer;">
-                        <span >Don't have an account?<span class="redirect" routerLink="/register-user"> Sign
-                                Up</span></span>
+
+                        <!-- <div class="redirectToLogin" style="color:rgb(13, 13, 108);cursor: pointer;">
+                            <span>Don't have an account?<span class="redirect" routerLink="/register-user"> Sign
+                                    Up</span></span>
+                        </div> -->
                     </div>
-                </div>
                 </div>
             </div>
 

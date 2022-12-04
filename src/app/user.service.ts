@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   public Users: any;
+  public UserDtl:any;
 
   constructor( private http: HttpClient,
     private firestore: AngularFirestore) { }
@@ -20,7 +21,14 @@ export class UserService {
       .valueChanges();
     return this.Users;
     }
-
+getLoginUser(UserName:any):Observable<[]>{
+  console.log(UserName);
+    this.UserDtl = this.firestore
+      .collection("Users", ref => ref.where('EmailID', '==', UserName))
+      .valueChanges({ idField: 'docId' });
+      
+    return this.UserDtl;
+    }
 
     getUsers():Observable<[]>{
       // return this.http.get<IPatients[]>(this._url);

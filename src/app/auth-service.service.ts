@@ -61,6 +61,7 @@ export class AuthServiceService {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
+
         //this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -74,6 +75,8 @@ export class AuthServiceService {
       .then(() => {
         this.router.navigate(['verify-email-address']);
       });
+
+      
   }
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
