@@ -24,11 +24,11 @@ export class PatientsService {
       
     }
 
-    getPatientsCount():Observable<[]>{
+    getPatientsCount():Observable<[]>{     
       this.Patients =  this.firestore
       .collection("Mother")
       .valueChanges();
-    return this.Patients;
+      return this.Patients.length;
     }
 
   getUsers():Observable<IPatients[]>{
@@ -42,7 +42,7 @@ export class PatientsService {
  
   getMedicalHistory(PTid:any):Observable<[]>{
     // return this.http.get<IPatients[]>(this._url);
-    let tmp = "/Patients/" + PTid + "/Medical History";
+    let tmp = "/Mother/" + PTid + "/Medical History";
     console.log(tmp);
     this.MedicalHistory =  this.firestore
       .collection(tmp)
@@ -52,7 +52,7 @@ export class PatientsService {
 
   getPregnancyOutcome(PTid:any):Observable<[]>{
     // return this.http.get<IPatients[]>(this._url);
-    let tmp = "/Patients/" + PTid + "/Pregnancy Outcome";
+    let tmp = "/Mother/" + PTid + "/Pregnancy Outcome";
     console.log(tmp);
     this.PregnancyOutcome =  this.firestore
       .collection(tmp)
@@ -62,7 +62,7 @@ export class PatientsService {
 
   getVisits(PTid:any):Observable<[]>{
     // return this.http.get<IPatients[]>(this._url);
-    let tmp = "/Patients/" + PTid + "/Visit Details";
+    let tmp = "/Mother/" + PTid + "/Visit Details";
     console.log(tmp);
     this.Visits =  this.firestore
       .collection(tmp)

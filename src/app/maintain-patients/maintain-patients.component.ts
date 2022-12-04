@@ -24,6 +24,12 @@ export class MaintainPatientsComponent implements OnInit {
   public VaccinesList: any;
   public VaccinesListTmp: any;
   public PatientsDetailsTmp: any;
+
+  public CurrentTimeStamp: any;
+  public CurrentUser: any;
+
+
+
   Details: Boolean = true;
   DetailsChanged: Boolean = false;
   Vaccines: Boolean = false;
@@ -85,6 +91,11 @@ export class MaintainPatientsComponent implements OnInit {
       noOfChildren: new FormControl(''),
       familyIncome: new FormControl(''),
       DataChanged: new FormControl(''),
+      AddressLine1: new FormControl(''),
+      AddressLine2: new FormControl(''),
+      State: new FormControl(''),
+      City: new FormControl(''),
+      Pincode: new FormControl(''),
     }
   );
 
@@ -133,7 +144,7 @@ export class MaintainPatientsComponent implements OnInit {
   );
 
 
-  CurruntTimeStampGet() {
+  CurrentTimeStampGet() {
     const current = new Date();
 
     let lv_date: string;
@@ -178,27 +189,6 @@ export class MaintainPatientsComponent implements OnInit {
     return timestamp;
   }
 
-  DetailsChangedCheck(DetailsChanged: boolean) {
-
-    if (this.PatientsDetailsTmp.firstName != this.PatientsDetails.value.firstName ||
-      this.PatientsDetailsTmp.patientId != this.PatientsDetails.value.patientId ||
-      this.PatientsDetailsTmp.patientType != this.PatientsDetails.value.patientType ||
-      this.PatientsDetailsTmp.lastName != this.PatientsDetails.value.lastName ||
-      this.PatientsDetailsTmp.middleName != this.PatientsDetails.value.middleName ||
-      this.PatientsDetailsTmp.bloodGroup != this.PatientsDetails.value.bloodGroup ||
-      this.PatientsDetailsTmp.mobileNumber != this.PatientsDetails.value.mobileNumber ||
-      this.PatientsDetailsTmp.alternateNumber != this.PatientsDetails.value.alternateNumber ||
-      this.PatientsDetailsTmp.qualification != this.PatientsDetails.value.qualification ||
-      this.PatientsDetailsTmp.employmentStatus != this.PatientsDetails.value.employmentStatus ||
-      this.PatientsDetailsTmp.uid != this.PatientsDetails.value.uid ||
-      this.PatientsDetailsTmp.ageAtMarraige != this.PatientsDetails.value.ageAtMarraige ||
-      this.PatientsDetailsTmp.dob != this.PatientsDetails.value.dob ||
-      this.PatientsDetailsTmp.pregnancyType != this.PatientsDetails.value.pregnancyType ||
-      this.PatientsDetailsTmp.noOfChildren != this.PatientsDetails.value.noOfChildren ||
-      this.PatientsDetailsTmp.familyIncome != this.PatientsDetails.value.familyIncome) {
-      DetailsChanged = true;
-    }
-  }
 
   onSelectVaccines(PatientID: any) {
     // console.log(Patient);
@@ -232,6 +222,8 @@ export class MaintainPatientsComponent implements OnInit {
     //console.log(this.VaccinesList[this.VCIndex]);
 
   }
+
+
 
   onSelectHistory(PatientID: any) {
     // console.log(Patient);
@@ -346,6 +338,10 @@ export class MaintainPatientsComponent implements OnInit {
 
   OnSave() {
 
+    this.CurrentTimeStamp = this.CurrentTimeStampGet();
+    this.CurrentUser = 'wVYbQJ43GSfHLtZ7DSYA';
+    let DocPath = "/Mother/" + this.Ptid;
+
     if (this.Ptid === 'New') {
 
       this.firestore
@@ -366,7 +362,16 @@ export class MaintainPatientsComponent implements OnInit {
           dob: this.PatientsDetails.value.dob,
           pregnancyType: this.PatientsDetails.value.pregnancyType,
           noOfChildren: this.PatientsDetails.value.noOfChildren,
-          familyIncome: this.PatientsDetails.value.familyIncome
+          familyIncome: this.PatientsDetails.value.familyIncome,
+
+          AddressLine1: this.PatientsDetails.value.AddressLine1,
+          AddressLine2: this.PatientsDetails.value.AddressLine2,
+          State: this.PatientsDetails.value.State,
+          City: this.PatientsDetails.value.City,
+          Pincode: this.PatientsDetails.value.Pincode,
+          AssignedVolunteer: this.CurrentUser,
+          CreatedBy: this.CurrentUser,
+          CreatedOn: this.CurrentTimeStamp
         })
         .then(res => {
           const id = res.id;
@@ -384,6 +389,8 @@ export class MaintainPatientsComponent implements OnInit {
               Date: "",
               Vaccine: "TT-1",
               VaccineDetail: "Early in pregnancy",
+              CreatedBy: this.CurrentUser,
+              CreatedOn: this.CurrentTimeStamp
             },)
             .then(res1 => {
               console.log(res1.id);
@@ -400,6 +407,8 @@ export class MaintainPatientsComponent implements OnInit {
               Date: "",
               Vaccine: "TT-2",
               VaccineDetail: "4 weeks After TT-1*",
+              CreatedBy: this.CurrentUser,
+              CreatedOn: this.CurrentTimeStamp,
             },)
             .then(res2 => {
               console.log(res2.id);
@@ -416,6 +425,8 @@ export class MaintainPatientsComponent implements OnInit {
               Date: "",
               Vaccine: "TT-Booster",
               VaccineDetail: "If received 2 TT doses in a pregnancy within the last 3 yrs*",
+              CreatedBy: this.CurrentUser,
+              CreatedOn: this.CurrentTimeStamp,
             },)
             .then(res3 => {
               console.log(res3.id);
@@ -459,7 +470,16 @@ export class MaintainPatientsComponent implements OnInit {
           dob: this.PatientsDetails.value.dob,
           pregnancyType: this.PatientsDetails.value.pregnancyType,
           noOfChildren: this.PatientsDetails.value.noOfChildren,
-          familyIncome: this.PatientsDetails.value.familyIncome
+          familyIncome: this.PatientsDetails.value.familyIncome,
+
+          AddressLine1: this.PatientsDetails.value.AddressLine1,
+          AddressLine2: this.PatientsDetails.value.AddressLine2,
+          State: this.PatientsDetails.value.State,
+          City: this.PatientsDetails.value.City,
+          Pincode: this.PatientsDetails.value.Pincode,
+
+          ChangeddBy: this.CurrentUser,
+          ChangedOn: this.CurrentTimeStamp,
         })
         .then(() => {
           this.visible = true;
@@ -485,7 +505,9 @@ export class MaintainPatientsComponent implements OnInit {
               ScheduledOn: this.VaccinesList[i].ScheduledOn,
               Vaccine: this.VaccinesList[i].Vaccine,
               VaccineDetail: this.VaccinesList[i].VaccineDetail,
-              patientID: this.VaccinesList[i].patientID
+              patientID: this.VaccinesList[i].patientID,
+              ChangeddBy: this.CurrentUser,
+              ChangedOn: this.CurrentTimeStamp,
             })
             .then(() => {
               this.visible = true;
@@ -506,7 +528,7 @@ export class MaintainPatientsComponent implements OnInit {
 
           let DataChanged = this.HistoryList[i].DataChanged;
           if (DataChanged == 'NEW') {
-            let tmp = "/Patients/" + this.Ptid + "/Medical History";
+            let tmp = DocPath + "/Medical History";
             console.log(this.HistoryList[i]);
             this.firestore
               .collection(tmp)
@@ -515,6 +537,8 @@ export class MaintainPatientsComponent implements OnInit {
                 comments: this.HistoryList[i].comments,
                 fromDate: this.HistoryList[i].fromDate,
                 toDate: this.HistoryList[i].toDate,
+                CreatedBy: this.CurrentUser,
+                CreatedOn: this.CurrentTimeStamp,
               },)
               .then(res2 => {
                 console.log(res2.id);
@@ -524,7 +548,7 @@ export class MaintainPatientsComponent implements OnInit {
           }
           else {
             let HSID = this.HistoryList[i].docId;
-            let tmp = "/Patients/" + this.Ptid + "/Medical History";
+            let tmp = DocPath + "/Medical History";
             console.log(this.HistoryList[i]);
             this.firestore
               .collection(tmp)
@@ -533,7 +557,9 @@ export class MaintainPatientsComponent implements OnInit {
                 Disease: this.HistoryList[i].Disease,
                 comments: this.HistoryList[i].comments,
                 fromDate: this.HistoryList[i].fromDate,
-                toDate: this.HistoryList[i].toDate
+                toDate: this.HistoryList[i].toDate,
+                ChangeddBy: this.CurrentUser,
+                ChangedOn: this.CurrentTimeStamp,
               })
               .then(() => {
                 this.visible = true;
@@ -556,7 +582,7 @@ export class MaintainPatientsComponent implements OnInit {
 
           let DataChanged = this.PregnancyOutcomeList[i].DataChanged;
           if (DataChanged == 'NEW') {
-            let tmp = "/Patients/" + this.Ptid + "/Pregnancy Outcome";
+            let tmp = DocPath + "/Pregnancy Outcome";
             console.log(this.PregnancyOutcomeList[i]);
             this.firestore
               .collection(tmp)
@@ -565,6 +591,8 @@ export class MaintainPatientsComponent implements OnInit {
                 deliveryDate: this.PregnancyOutcomeList[i].deliveryDate,
                 deliveryPlace: this.PregnancyOutcomeList[i].deliveryPlace,
                 outcome: this.PregnancyOutcomeList[i].outcome,
+                CreatedBy: this.CurrentUser,
+                CreatedOn: this.CurrentTimeStamp,
               },)
               .then(res2 => {
                 console.log(res2.id);
@@ -574,7 +602,7 @@ export class MaintainPatientsComponent implements OnInit {
           }
           else {
             let HSID = this.PregnancyOutcomeList[i].docId;
-            let tmp = "/Patients/" + this.Ptid + "/Pregnancy Outcome";
+            let tmp = DocPath + "/Pregnancy Outcome";
             console.log(this.PregnancyOutcomeList[i]);
             this.firestore
               .collection(tmp)
@@ -584,6 +612,8 @@ export class MaintainPatientsComponent implements OnInit {
                 deliveryDate: this.PregnancyOutcomeList[i].deliveryDate,
                 deliveryPlace: this.PregnancyOutcomeList[i].deliveryPlace,
                 outcome: this.PregnancyOutcomeList[i].outcome,
+                ChangeddBy: this.CurrentUser,
+                ChangedOn: this.CurrentTimeStamp,
               })
               .then(() => {
                 this.visible = true;
@@ -606,7 +636,7 @@ export class MaintainPatientsComponent implements OnInit {
 
           let DataChanged = this.VisitsList[i].DataChanged;
           if (DataChanged == 'NEW') {
-            let tmp = "/Patients/" + this.Ptid + "/Visit Details";
+            let tmp = DocPath + "/Visit Details";
             console.log(this.VisitsList[i]);
             this.firestore
               .collection(tmp)
@@ -618,6 +648,8 @@ export class MaintainPatientsComponent implements OnInit {
                 signAndSymptoms: this.VisitsList[i].signAndSymptoms,
                 visitDate: this.VisitsList[i].visitDate,
                 visitedBy: this.VisitsList[i].visitedBy,
+                CreatedBy: this.CurrentUser,
+                CreatedOn: this.CurrentTimeStamp,
               },)
               .then(res2 => {
                 console.log(res2.id);
@@ -627,7 +659,7 @@ export class MaintainPatientsComponent implements OnInit {
           }
           else {
             let HSID = this.VisitsList[i].docId;
-            let tmp = "/Patients/" + this.Ptid + "/Visit Details";
+            let tmp = DocPath + "/Visit Details";
             console.log(this.VisitsList[i]);
             this.firestore
               .collection(tmp)
@@ -640,6 +672,8 @@ export class MaintainPatientsComponent implements OnInit {
                 signAndSymptoms: this.VisitsList[i].signAndSymptoms,
                 visitDate: this.VisitsList[i].visitDate,
                 visitedBy: this.VisitsList[i].visitedBy,
+                ChangeddBy: this.CurrentUser,
+                ChangedOn: this.CurrentTimeStamp,
               })
               .then(() => {
                 this.visible = true;
@@ -943,6 +977,13 @@ export class MaintainPatientsComponent implements OnInit {
             this.PatientsDetails.patchValue({ dob: this.patient.dob });
             this.PatientsDetails.patchValue({ pregnancyType: this.patient.pregnancyType });
             this.PatientsDetails.patchValue({ noOfChildren: this.patient.noOfChildren });
+
+            this.PatientsDetails.patchValue({ AddressLine1: this.patient.AddressLine1 });
+            this.PatientsDetails.patchValue({ AddressLine2: this.patient.AddressLine2 });
+            this.PatientsDetails.patchValue({ State: this.patient.State });
+            this.PatientsDetails.patchValue({ City: this.patient.City });
+            this.PatientsDetails.patchValue({ Pincode: this.patient.Pincode });
+
             this.PatientsDetailsTmp = this.PatientsDetails.value;
 
           }

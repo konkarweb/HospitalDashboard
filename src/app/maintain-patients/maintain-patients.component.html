@@ -218,6 +218,58 @@
               </div> -->
         </div>
 
+        <div class="row FormRow">
+
+
+
+          <div class="col-md-12">
+            <div class="form-floating">
+              <input type="text" formControlName="AddressLine1" class="form-control" id="floatingInputGrid">
+              <label for="floatingInputGrid">Address Line 1</label>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <div class="row FormRow">
+
+
+
+          <div class="col-md-12">
+            <div class="form-floating">
+              <input type="text" formControlName="AddressLine2" class="form-control" id="floatingInputGrid">
+              <label for="floatingInputGrid">Address Line 2</label>
+            </div>
+          </div>
+
+         
+        </div>
+
+        <div class="row FormRow">
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="State" class="form-control" id="floatingInputGrid">
+              <label for="floatingInputGrid">Stae</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="City" class="form-control" id="floatingInputGrid">
+              <label for="floatingInputGrid">City</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="Pincode" class="form-control" id="floatingInputGrid">
+              <label for="floatingInputGrid">Pincode</label>
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
   </ng-container>
@@ -256,8 +308,9 @@
           <!--(click)="OnSelect(vaccine)" -->
           <td>{{vaccine.Vaccine}}</td>
           <!-- <td>{{vaccine.VaccineDetail}}</td> -->
-          <td>{{vaccine.Date}}</td>
           <td>{{vaccine.ScheduledOn}}</td>
+          <td>{{vaccine.Date}}</td>
+          
         </tr>
       </tbody>
     </table>

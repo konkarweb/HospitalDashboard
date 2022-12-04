@@ -1,36 +1,58 @@
-<nav
-  style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-  aria-label="breadcrumb">
-  <ol class="breadcrumb">
+<div class="row BreadcumProp">
+  <div class=" col-12">
+    <nav
+      style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+      aria-label="breadcrumb">
+      <ol class="breadcrumb">
 
-    <ng-container *ngIf="PagePT">
+        <ng-container *ngIf="PagePT">
 
-      <ng-container *ngIf="!CallFromMother">
-        <li class="breadcrumb-item"><a routerLink="">Home</a></li>
-        <li class="breadcrumb-item"><a routerLink="/Child">Child</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
-      </ng-container>
+          <ng-container *ngIf="!CallFromMother">
+            <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="/Child">Child</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+          </ng-container>
 
-      <ng-container *ngIf="CallFromMother">
-        <li class="breadcrumb-item"><a class="Breadnav" (click)="OnSelectMother(MotherID)">{{MotherName}}</a></li>
-        <li class="breadcrumb-item"><a class="Breadnav" (click)="ShowChilds(MotherID, MotherName)">Childs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
-      </ng-container>
+          <ng-container *ngIf="CallFromMother">
+            <li class="breadcrumb-item"><a class="Breadnav" (click)="OnSelectMother(MotherID)">{{MotherName}}</a></li>
+            <li class="breadcrumb-item"><a class="Breadnav" (click)="ShowChilds(MotherID, MotherName)">Childs</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{PtName}}</li>
+          </ng-container>
 
-    </ng-container>
+        </ng-container>
 
-    <!-- <ng-container *ngIf="PageVC">
-      <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()">{{PtName}}</a></li>
-      <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectVaccines(Ptid)">Vaccines</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{VaccineDetails.Vaccine}}</li>
-    </ng-container> -->
+        <ng-container *ngIf="PageVC">
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()">{{PtName}}</a></li>
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectVaccines(Ptid)">Vaccines</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{VaccineDetails.Vaccine}}</li>
+        </ng-container>
+
+        <ng-container *ngIf="PageHS">
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()">{{PtName}}</a></li>
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectHistory(Ptid)">Medical History</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{MHistoryDetails.Disease}}</li>
+        </ng-container>
+
+
+        <ng-container *ngIf="PageVS">
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectDetails()">{{PtName}}</a></li>
+          <li class="breadcrumb-item"><a class="Breadnav" (click)="onSelectVisits(Ptid)">Visits</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{VisitDetails.visitDate}}</li>
+        </ng-container>
 
 
 
 
-  </ol>
-</nav>
+      </ol>
+    </nav>
+  </div>
+  <!-- <div class="  Actions col-2">
+  <div class="float-end">
 
+    <a type="button" (click)="ShowChilds(Ptid, PtName)" class="">Childs</a>
+  </div>
+</div> -->
+</div>
 
 <!-- <p>maintain-patients works! Id Is {{ Ptid }}</p> -->
 <ng-container *ngIf="visible">
@@ -45,12 +67,26 @@
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="#">Details</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="onSelect(Ptid)">Vaccines</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Medical History</a>
-    </li>
+    <ng-container *ngIf="ChangeMode">
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active': Vaccines === true}" (click)="onSelectVaccines(Ptid)">Vaccines</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+          aria-expanded="false">Other</a>
+        <ul class="dropdown-menu">
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': History === true}" (click)="onSelectHistory(Ptid)">Medical
+              History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': Visits === true}" (click)="onSelectVisits(Ptid)">Visit
+              Details</a>
+          </li>
+        </ul>
+      </li>
+    </ng-container>
 
     <!-- <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
@@ -69,114 +105,116 @@
   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
 </li> -->
   </ul>
+  <ng-container *ngIf="Details">
 
-  <form [formGroup]="ChildDetails">
-    <div class="row FormRow">
+    <div>
+      <form [formGroup]="ChildDetails">
+        <div class="row FormRow">
 
 
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid"
-            placeholder="enter Name Here">
-          <label for="floatingInputGrid">First Name</label>
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid"
+                placeholder="enter Name Here">
+              <label for="floatingInputGrid">First Name</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid"
+                placeholder="enter Name Here">
+              <label for="floatingInputGrid">Middle Name</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid"
+                placeholder="enter Name Here">
+              <label for="floatingInputGrid">Last Name</label>
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid"
-            placeholder="enter Name Here">
-          <label for="floatingInputGrid">Middle Name</label>
+
+        <div class="row FormRow">
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <select formControlName="Gender" class="form-select" id="floatingSelectGrid"
+                aria-label="Floating label select example">
+                <option value="M">M</option>
+                <option value="F">F</option>
+              </select>
+              <label for="floatingSelectGrid">Gender</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid">
+              <label for="floatingInputGrid">Date of Birth</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <select formControlName="BloodGroup" class="form-select" id="floatingSelectGrid"
+                aria-label="Floating label select example">
+                <option value=""></option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB">AB</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+              <label for="floatingSelectGrid">Blood Group</label>
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid"
-            placeholder="enter Name Here">
-          <label for="floatingInputGrid">Last Name</label>
+        <div class="row FormRow last">
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="BirthHeadCircumference" class="form-control" id="floatingInputGrid"
+                placeholder="enter Name Here">
+              <label for="floatingInputGrid">Birth Head Circumference (cm)</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="BirthHeight" class="form-control" id="floatingInputGrid"
+                placeholder="enter Name Here">
+              <label for="floatingInputGrid">Birth Height (in)</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" formControlName="BirthWeight" class="form-control" id="floatingInputGrid"
+                placeholder="enter Name Here">
+              <label for="floatingInputGrid">Birth Weight (kg)</label>
+            </div>
+          </div>
+
+
+
         </div>
-      </div>
-
-    </div>
 
 
-    <div class="row FormRow">
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <select formControlName="Gender" class="form-select" id="floatingSelectGrid"
-            aria-label="Floating label select example">
-            <option value="M">M</option>
-            <option value="F">F</option>
-          </select>
-          <label for="floatingSelectGrid">Gender</label>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid">
-          <label for="floatingInputGrid">Date of Birth</label>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <select formControlName="BloodGroup" class="form-select" id="floatingSelectGrid"
-            aria-label="Floating label select example">
-            <option value=""></option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB">AB</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
-          <label for="floatingSelectGrid">Blood Group</label>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="row FormRow last">
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="text" formControlName="BirthHeadCircumference" class="form-control" id="floatingInputGrid"
-            placeholder="enter Name Here">
-          <label for="floatingInputGrid">Birth Head Circumference (cm)</label>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="text" formControlName="BirthHeight" class="form-control" id="floatingInputGrid"
-            placeholder="enter Name Here">
-          <label for="floatingInputGrid">Birth Height (in)</label>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="form-floating">
-          <input type="text" formControlName="BirthWeight" class="form-control" id="floatingInputGrid"
-            placeholder="enter Name Here">
-          <label for="floatingInputGrid">Birth Weight (kg)</label>
-        </div>
-      </div>
+        <div class="row FormRow">
 
 
 
-    </div>
-
-
-    <div class="row FormRow">
-
-
-
-      <!-- <div class="col-md-4">
+          <!-- <div class="col-md-4">
       <div class="form-floating">
         <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
           <option selected>Select ID Type</option>
@@ -188,14 +226,150 @@
       </div>
     </div> -->
 
-      <!-- <div class="col-md-4">
+          <!-- <div class="col-md-4">
       <div class="form-floating">
         <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
         <label for="floatingInputGrid">Date of Birth</label>
       </div>
     </div> -->
+        </div>
+      </form>
     </div>
-  </form>
+  </ng-container>
+
+  <ng-container *ngIf="Vaccines">
+    <div class="TableToolbar">
+      <div class="row">
+        <div class="col-9">
+          <strong>Vaccines </strong>
+        </div>
+        <div class="col-3">
+          <div class="float-end">
+            <button type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336c44.2 0 80-35.8 80-80s-35.8-80-80-80s-80 35.8-80 80s35.8 80 80 80z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th scope="col">Vaccine</th>
+          <!-- <th scope="col">Detail</th> -->
+          <th scope="col">Scheduled On</th>
+          <th scope="col">Vaccinated On</th>
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let vaccine of VaccinesList; let i = index">
+        <tr (click)="OnVaccineDetails(i)">
+          <td>{{i+1}}</td>
+          <!--(click)="OnSelect(vaccine)" -->
+          <td>{{vaccine.Vaccine}}</td>
+          <!-- <td>{{vaccine.VaccineDetail}}</td> -->
+          <td>{{vaccine.ScheduledOn}}</td>
+          <td>{{vaccine.Date}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </ng-container>
+
+  <ng-container *ngIf="History">
+    <div class="TableToolbar">
+      <div class="row">
+        <div class="col-10">
+          <strong>Medical History </strong>
+        </div>
+        <div class="col-2">
+          <div class="float-end">
+            <button type="button" (click)="OnMHistoryDetails('NEW')">
+              <a class="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                  <path
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                </svg>
+              </a>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Disease</th>
+          <th scope="col">comments</th>
+          <th scope="col">fromDate</th>
+          <th scope="col">toDate</th>
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let history of HistoryList;  index as i">
+        <tr (click)="OnMHistoryDetails(i)">
+          <td>{{history.Disease}}</td>
+          <td>{{history.comments}}</td>
+          <td>{{history.fromDate}}</td>
+          <td>{{history.toDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-container *ngIf="Visits">
+    <div class="TableToolbar">
+      <div class="row">
+        <div class="col-9">
+          <strong>Visit Details </strong>
+        </div>
+        <div class="col-3">
+          <div class="float-end">
+            <button type="button" (click)="OnVisitDetails('NEW')">
+              <a class="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                  <path
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                </svg>
+              </a>
+            </button>
+
+            <button type="button" style="margin-left:2px ;" class="btn btn-sm btn-outline-dark">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336c44.2 0 80-35.8 80-80s-35.8-80-80-80s-80 35.8-80 80s35.8 80 80 80z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Visited By</th>
+          <th scope="col">Visit Date</th>
+        </tr>
+      </thead>
+      <tbody ng *ngFor="let Visit of VisitsList;  index as i">
+        <tr (click)="OnVisitDetails(i)">
+          <td>{{Visit.visitedBy}}</td>
+          <td>{{Visit.visitDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
 </ng-container>
 
 
@@ -205,7 +379,228 @@
 
 
 
-{{ChildDetails.value | json}}
+<!-- {{ChildDetails.value | json}} -->
+
+
+<ng-container *ngIf="PageVC">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page">Details</a>
+    </li>
+  </ul>
+
+  <div>
+    <form [formGroup]="FGVaccineDetails">
+      <div class="row FormRow">
+
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="text" formControlName="Vaccine" class="form-control" id="floatingInputGrid"
+              placeholder="enter Vaccine Here">
+            <label for="floatingInputGrid">Vaccine</label>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="form-floating">
+            <input type="text" formControlName="VaccineDetail" class="form-control" id="floatingInputGrid"
+              placeholder="enter Vaccine Details Here">
+            <label for="floatingInputGrid">Vaccine Details</label>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="row FormRow">
+
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" formControlName="ScheduledOn" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">ScheduledOn</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" formControlName="Date" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">Vaccine Taken On</label>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+
+
+
+    </form>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="PageHS">
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page">Details</a>
+    </li>
+  </ul>
+
+  <div>
+    <form [formGroup]="FGMHistoryDetails">
+      <div class="row FormRow">
+
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="text" formControlName="Disease" class="form-control" id="floatingInputGrid"
+              placeholder="enter Disease Here">
+            <label for="floatingInputGrid">Disease</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" formControlName="fromDate" class="form-control" id="floatingInputGrid" placeholder="">
+            <label for="floatingInputGrid">From Date</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" formControlName="toDate" class="form-control" id="floatingInputGrid" placeholder="">
+            <label for="floatingInputGrid">To Date</label>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="row FormRow">
+
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input type="text" formControlName="comments" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">Comment</label>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+    </form>
+  </div>
+
+</ng-container>
+
+
+
+
+<ng-container *ngIf="PageVS">
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page">Details</a>
+    </li>
+  </ul>
+
+  <div>
+    <form [formGroup]="FGVisitDetails">
+      <div class="row FormRow">
+
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="date" formControlName="visitDate" class="form-control" id="floatingInputGrid" placeholder="">
+            <label for="floatingInputGrid">visitDate</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input type="text" formControlName="visitedBy" class="form-control" id="floatingInputGrid" placeholder="">
+            <label for="floatingInputGrid">visitedBy</label>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row FormRow">
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" formControlName="signAndSymptoms" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">signAndSymptoms</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" formControlName="redFlagComments" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">redFlagComments</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row FormRow">
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" formControlName="comments" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">comments</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" formControlName="prescription" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">prescription</label>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row FormRow">
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" formControlName="Weight" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">Weight in Kg</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" formControlName="Height" class="form-control" id="floatingInputGrid">
+            <label for="floatingInputGrid">Height in cm</label>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+
+    </form>
+  </div>
+
+</ng-container>
+
 <br>
 <br>
 <br>
@@ -214,8 +609,46 @@
 <div class="fixed-bottom FormFooterActions border border-secondary">
   <div class="row float-end">
 
-    <div>
-      <button (click)="OnSave()" type="button" class="btn btn-primary Save">Save</button>
-    </div>
+    <ng-container *ngIf="PagePT">
+      <div>
+        <button (click)="OnSave()" type="button" class="btn btn-primary Save">Save</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="PageVC">
+
+      <div class="col-4">
+        <button (click)="OnVCApply()" type="button" class="btn btn-primary Save">Apply</button>
+      </div>
+      <div class="col-4">
+        <button (click)="onSelectVaccines(Ptid)" type="button" class="btn btn-default Save">cancel</button>
+      </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="PageHS">
+
+      <div class="col-4">
+        <button (click)="OnHCApply()" type="button" class="btn btn-primary Save">Apply</button>
+      </div>
+      <div class="col-4">
+        <button (click)="onSelectHistory(Ptid)" type="button" class="btn btn-default Save">cancel</button>
+      </div>
+
+    </ng-container>
+
+
+  
+    <ng-container *ngIf="PageVS">
+
+      <div class="col-4">
+        <button (click)="OnVSApply()" type="button" class="btn btn-primary Save">Apply</button>
+      </div>
+      <div class="col-4">
+        <button (click)="onSelectVisits(Ptid)" type="button" class="btn btn-default Save">cancel</button>
+      </div>
+
+    </ng-container>
+
   </div>
 </div>

@@ -28,13 +28,17 @@ export class VaccineService {
 
    getVaccine(Ptid:any):Observable<[]>{
 
+    //  this.Vaccine = this.firestore
+    //   .collection("VaccineDetails",ref => {
+    //     let query: Query = ref;
+    //     { query = query.where('patientID', '==', Ptid ) ,
+    //       query = query.orderBy('Sq', 'asc' ) };
+    //     return query; })
+    //   .valueChanges({ idField: 'docId' });
+
     this.Vaccine = this.firestore
-     .collection("VaccineDetails",ref => {
-       let query: Query = ref;
-       { query = query.where('patientID', '==', Ptid),
-         query = query.orderBy('Sq', 'asc' ) };
-       return query; })
-     .valueChanges({ idField: 'docId' });
+    .collection("VaccineDetails",ref => ref.where('patientID', '==', Ptid).orderBy('Sq'))
+    .valueChanges({ idField: 'docId' });
 
       return this.Vaccine;
     // return this.http.post<any>(this._urlSavept, PatientData);

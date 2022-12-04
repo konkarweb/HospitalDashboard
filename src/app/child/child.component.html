@@ -1,8 +1,7 @@
-<div class="row">
+
+<div class="row BreadcumProp">
   <div class=" col-10">
-    <nav
-      style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-      aria-label="breadcrumb">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="">Home</a></li>
         <ng-container *ngIf="CallFromMother">
@@ -12,19 +11,52 @@
       </ol>
     </nav>
   </div>
-  <div class=" col-2"> 
+  <div class="Actions col-2"> 
     <div class="float-end">
 
-      <button type="button" (click)="OnNewChild(Ptid, PtName)" class="btn btn-primary">New</button>
+      <a  style="cursor: pointer;" (click)="OnNewChild(Ptid, PtName)" >New</a>
     </div>
   </div>
 </div>
 
+<div class="row MotherListSerch">
+  <h3 class="text-center">Child List</h3>
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="input-group">
+                <input class="form-control border-end-0 border rounded-pill" placeholder="Search Here" type="search" value="" id="example-search-input">
+                <span class="input-group-append">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table table-hover">
+<div class="row"  ng *ngFor="let Childs of ChildList;  index as i">
+  <div class="col-12 MotherList" (click)="OnSelect(Childs, Ptid, PtName)" routerLink="">
+    <div class="row">
+      <div class="col-md-1 col-4">
+        <div class="text-center">
+          <span class="Micon ">
+          <span style="color:black; text-decoration: none;">{{Childs.FirstName[0]}}</span>
+          <span style="color:black ; text-decoration: none;">{{Childs.LastName[0]}}</span>
+        </span>
+        </div>
+      </div>
+      <div class="col-md-11 col-8">
+
+        <span class="Mname">{{Childs.FirstName}} {{ Childs.MiddleName }} {{Childs.LastName}}</span>
+        <br>
+        <span class="Mnumber"><strong>DOB: </strong>{{Childs.DOB}}</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- <table class="table table-hover">
   <thead>
     <tr>
-      <!-- <th scope="col">#</th> -->
       <th scope="col">Name</th>
       <th scope="col">Blood Group</th>
       <th scope="col">Gender</th>
@@ -33,7 +65,6 @@
   </thead>
   <tbody ng *ngFor="let Childs of ChildList;  index as i">
     <tr (click)="OnSelect(Childs, Ptid, PtName)" routerLink="">
-      <!-- <th scope="row"><a (click)="OnSelect(Childs)" routerLink="">{{i+1}}</a></th> -->
       <td>{{Childs.FirstName}} {{ Childs.MiddleName }} {{Childs.LastName}}</td>
       <td>{{Childs.BloodGroup}}</td>
       <td>{{Childs.Gender}}</td>
@@ -41,7 +72,7 @@
     </tr>
 
   </tbody>
-</table>
+</table> -->
 
 <!-- <div class="float-end">
   <nav aria-label="Page navigation example ">
