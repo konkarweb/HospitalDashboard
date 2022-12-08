@@ -8,15 +8,28 @@ import { AuthServiceService } from 'src/app/auth-service.service';
 })
 export class AppComponent  {
   public user:any;
+  public userDTL:any;
+  public Name : any;
   AppPage:boolean = true;
+  visible:boolean = false;
 
   constructor(public authService: AuthServiceService) {}
+  
+  
 
+  SignOut(){
+    this.authService.SignOut();
+    this.visible = false;
+  }
+  
 
-  visible:boolean = false;
+  
   onclick()
   {
-   
+    
+     this.userDTL = JSON.parse(localStorage.getItem('userDTL')!);
+      console.log(this.userDTL);
+      this.Name = this.userDTL.firstName + " " + this.userDTL.lastName;
     this.visible = !this.visible
   }
 }
