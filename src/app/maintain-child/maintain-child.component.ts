@@ -867,10 +867,10 @@ export class MaintainChildComponent implements OnInit {
         MobileNumber: ['', Validators.required],
         DOB: ['', Validators.required],
         Gender: ['', Validators.required],
-        BirthHeadCircumference: ['', Validators.required],
-        BirthHeight: ['', Validators.required],
-        BirthWeight: ['', Validators.required],
-        MotherID: ['', Validators.required],
+        BirthHeadCircumference: [''],
+        BirthHeight: [''],
+        BirthWeight: [''],
+        MotherID: [''],
       }
     );
 

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import Validation from '../utils/validation';
 
 @Component({
   selector: 'app-maintain-user',
   templateUrl: './maintain-user.component.html',
   styleUrls: ['./maintain-user.component.css']
 })
-export class MaintainUserComponent implements OnInit {
 
+export class MaintainUserComponent implements OnInit {
 
   public UserDetails: any;
   public Uid:any;
@@ -19,7 +20,8 @@ export class MaintainUserComponent implements OnInit {
 
   constructor( private route: ActivatedRoute,
     private router: Router,
-    private firestore: AngularFirestore) { }
+    private firestore: AngularFirestore,
+    private formBuilder: FormBuilder) { }
 
 
     FGUserDetails = new FormGroup(
@@ -33,8 +35,23 @@ export class MaintainUserComponent implements OnInit {
       }
     );
 
+  submitted = false;
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.FGUserDetails.controls;
+  }
+
 
   ngOnInit(): void {
+
+    this.FGUserDetails = this.formBuilder.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        mobileNumber: ['', Validators.required],
+        EmailID: ['', Validators.required],
+        UserType: ['', Validators.required],
+      });
 
     let id = this.route.snapshot.paramMap.get('id');
     this.Uid = id;
@@ -70,6 +87,13 @@ export class MaintainUserComponent implements OnInit {
   }
 
   OnSave(){
+
+    this.submitted = true;
+
+    if (this.FGUserDetails.invalid) {
+      return;
+    }
+
     if (this.Uid === 'New') {
       this.firestore
         .collection('Users')

@@ -99,28 +99,39 @@
       <form [formGroup]="PatientsDetails">
         <div class="row FormRow">
 
-
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="firstName" class="form-control" id="floatingInputGrid"
-                placeholder="Enter First Name Here" required>
+                placeholder="Enter First Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
               <label for="floatingInputGrid">First Name</label>
+              <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+              </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="middleName" class="form-control" id="floatingInputGrid"
-                placeholder="Enter Middle Name Here">
+                placeholder="Enter Middle Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['middleName'].errors }">
               <label for="floatingInputGrid">Middle Name</label>
+              <div *ngIf="submitted && f['middleName'].errors" class="invalid-feedback">
+                <div *ngIf="f['middleName'].errors['required']">Middle name is required</div>
+              </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="lastName" class="form-control" id="floatingInputGrid"
-                placeholder="Enter Last Name Here">
+                placeholder="Enter Last Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
               <label for="floatingInputGrid">Last Name</label>
+              <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+              </div>
             </div>
           </div>
 
@@ -131,8 +142,12 @@
 
           <div class="col-md-4">
             <div class="form-floating">
-              <input type="number" formControlName="mobileNumber" class="form-control" id="floatingInputGrid">
+              <input type="number" formControlName="mobileNumber" class="form-control" id="floatingInputGrid"
+              [ngClass]="{ 'is-invalid': submitted && f['mobileNumber'].errors }">
               <label for="floatingInputGrid">Contact Number</label>
+              <div *ngIf="submitted && f['mobileNumber'].errors" class="invalid-feedback">
+                <div *ngIf="f['mobileNumber'].errors['required']">Mobile number is required</div>
+              </div>
             </div>
           </div>
 
@@ -147,7 +162,8 @@
           <div class="col-md-4">
             <div class="form-floating">
               <select formControlName="bloodGroup" class="form-select" id="floatingSelectGrid"
-                aria-label="Floating label select example">
+                aria-label="Floating label select example"
+                [ngClass]="{ 'is-invalid': submitted && f['bloodGroup'].errors }">
                 <option value=""></option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
@@ -159,6 +175,9 @@
                 <option value="O-">O-</option>
               </select>
               <label for="floatingSelectGrid">Blood Group</label>
+              <div *ngIf="submitted && f['bloodGroup'].errors" class="invalid-feedback">
+                <div *ngIf="f['bloodGroup'].errors['required']">Blood group is required</div>
+              </div>
             </div>
           </div>
 
@@ -174,25 +193,37 @@
 
               <select formControlName="pregnancyType" class="form-select" id="floatingSelectGrid"
                 aria-label="Floating label select example">
+                <!-- [ngClass]="{ 'is-invalid': submitted && f['pregnancyType'].errors }"> -->
                 <option value=""></option>
                 <option value="Primy Gravida">Primy Gravida</option>
                 <option value="Multi Gravida">Multi Gravida</option>
               </select>
               <label for="floatingSelectGrid">Pregnancy Type</label>
+              <!-- <div *ngIf="submitted && f['pregnancyType'].errors" class="invalid-feedback">
+                <div *ngIf="f['pregnancyType'].errors['required']">Pregnancy type is required</div>
+              </div> -->
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="uid" class="form-control" id="floatingInputGrid">
+              <!-- [ngClass]="{ 'is-invalid': submitted && f['uid'].errors }"> -->
               <label for="floatingInputGrid">ID Number</label>
+              <!-- <div *ngIf="submitted && f['uid'].errors" class="invalid-feedback">
+                <div *ngIf="f['uid'].errors['required']">UID is required</div>
+              </div> -->
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
-              <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid">
+              <input type="date" formControlName="dob" class="form-control" id="floatingInputGrid"
+              [ngClass]="{ 'is-invalid': submitted && f['dob'].errors }">
               <label for="floatingInputGrid">Date of Birth</label>
+              <div *ngIf="submitted && f['dob'].errors" class="invalid-feedback">
+                <div *ngIf="f['dob'].errors['required']">DOB is required</div>
+              </div>
             </div>
           </div>
         </div>
@@ -205,7 +236,11 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="noOfChildren" class="form-control" id="floatingInputGrid">
+              <!-- [ngClass]="{ 'is-invalid': submitted && f['noOfChildren'].errors }"> -->
               <label for="floatingInputGrid">No. of Children</label>
+              <!-- <div *ngIf="submitted && f['noOfChildren'].errors" class="invalid-feedback">
+                <div *ngIf="f['noOfChildren'].errors['required']">Number of children is required</div>
+              </div> -->
             </div>
           </div>
 
@@ -224,7 +259,11 @@
           <div class="col-md-12">
             <div class="form-floating">
               <input type="text" formControlName="AddressLine1" class="form-control" id="floatingInputGrid">
+              <!-- [ngClass]="{ 'is-invalid': submitted && f['AddressLine1'].errors }"> -->
               <label for="floatingInputGrid">Address Line 1</label>
+              <!-- <div *ngIf="submitted && f['AddressLine1'].errors" class="invalid-feedback">
+                <div *ngIf="f['AddressLine1'].errors['required']">Address Line1 is required</div>
+              </div> -->
             </div>
           </div>
 
@@ -238,7 +277,11 @@
           <div class="col-md-12">
             <div class="form-floating">
               <input type="text" formControlName="AddressLine2" class="form-control" id="floatingInputGrid">
+              <!-- [ngClass]="{ 'is-invalid': submitted && f['AddressLine2'].errors }"> -->
               <label for="floatingInputGrid">Address Line 2</label>
+              <!-- <div *ngIf="submitted && f['AddressLine2'].errors" class="invalid-feedback">
+                <div *ngIf="f['AddressLine2'].errors['required']">Address Line2 is required</div>
+              </div> -->
             </div>
           </div>
 
@@ -250,14 +293,22 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="State" class="form-control" id="floatingInputGrid">
+              <!-- [ngClass]="{ 'is-invalid': submitted && f['State'].errors }"> -->
               <label for="floatingInputGrid">State</label>
+              <!-- <div *ngIf="submitted && f['State'].errors" class="invalid-feedback">
+                <div *ngIf="f['State'].errors['required']">State is required</div>
+              </div> -->
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="City" class="form-control" id="floatingInputGrid">
+              <!-- [ngClass]="{ 'is-invalid': submitted && f['City'].errors }"> -->
               <label for="floatingInputGrid">City</label>
+              <!-- <div *ngIf="submitted && f['City'].errors" class="invalid-feedback">
+                <div *ngIf="f['City'].errors['required']">City is required</div>
+              </div> -->
             </div>
           </div>
 
@@ -649,7 +700,7 @@
           <div class="form-floating">
             <input type="date" formControlName="visitDate" class="form-control" id="floatingInputGrid"
               placeholder="">
-            <label for="floatingInputGrid">visitDate</label>
+            <label for="floatingInputGrid">Visit Date</label>
           </div>
         </div>
 
@@ -657,7 +708,7 @@
           <div class="form-floating">
             <input type="text" formControlName="visitedBy" class="form-control" id="floatingInputGrid"
               placeholder="">
-            <label for="floatingInputGrid">visitedBy</label>
+            <label for="floatingInputGrid">Visited By</label>
           </div>
         </div>
 
@@ -669,14 +720,14 @@
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" formControlName="signAndSymptoms" class="form-control" id="floatingInputGrid">
-            <label for="floatingInputGrid">signAndSymptoms</label>
+            <label for="floatingInputGrid">Sign and Symptoms</label>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" formControlName="redFlagComments" class="form-control" id="floatingInputGrid">
-            <label for="floatingInputGrid">redFlagComments</label>
+            <label for="floatingInputGrid">Red Flag Comment</label>
           </div>
         </div>
 
@@ -687,14 +738,14 @@
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" formControlName="comments" class="form-control" id="floatingInputGrid">
-            <label for="floatingInputGrid">comments</label>
+            <label for="floatingInputGrid">Comment</label>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" formControlName="prescription" class="form-control" id="floatingInputGrid">
-            <label for="floatingInputGrid">prescription</label>
+            <label for="floatingInputGrid">Prescription</label>
           </div>
         </div>
 
