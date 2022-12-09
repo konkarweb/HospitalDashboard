@@ -395,7 +395,7 @@
           <th scope="col">Disease</th>
           <th scope="col">Comment</th>
           <th scope="col">From Date</th>
-          <th scope="col">To Date</th>
+          <!-- <th scope="col">To Date</th> -->
         </tr>
       </thead>
       <tbody ng *ngFor="let history of HistoryList;  index as i">
@@ -403,7 +403,7 @@
           <td>{{history.Disease}}</td>
           <td>{{history.comments}}</td>
           <td>{{history.fromDate}}</td>
-          <td>{{history.toDate}}</td>
+          <!-- <td>{{history.toDate}}</td> -->
         </tr>
       </tbody>
     </table>
@@ -590,13 +590,13 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <div class="form-floating">
             <input type="date" formControlName="toDate" class="form-control" id="floatingInputGrid"
               placeholder="">
             <label for="floatingInputGrid">To Date</label>
           </div>
-        </div>
+        </div> -->
 
 
       </div>
@@ -639,7 +639,7 @@
           <div class="form-floating">
             <input type="date" formControlName="deliveryDate" class="form-control" id="floatingInputGrid"
               placeholder="">
-            <label for="floatingInputGrid">deliveryDate</label>
+            <label for="floatingInputGrid">Delivery Date</label>
           </div>
         </div>
 
@@ -647,7 +647,7 @@
           <div class="form-floating">
             <input type="text" formControlName="deliveryPlace" class="form-control" id="floatingInputGrid"
               placeholder="">
-            <label for="floatingInputGrid">delivery Place</label>
+            <label for="floatingInputGrid">Delivery Place</label>
           </div>
         </div>
 
@@ -655,7 +655,7 @@
           <div class="form-floating">
             <input type="text" formControlName="outcome" class="form-control" id="floatingInputGrid"
               placeholder="">
-            <label for="floatingInputGrid">outcome</label>
+            <label for="floatingInputGrid">Outcome</label>
           </div>
         </div>
 
@@ -668,7 +668,7 @@
         <div class="col-md-12">
           <div class="form-floating">
             <input type="text" formControlName="comments" class="form-control" id="floatingInputGrid">
-            <label for="floatingInputGrid">Comment</label>
+            <label for="floatingInputGrid">Comments</label>
           </div>
         </div>
 
