@@ -45,8 +45,12 @@
                 <div class="col-md-4">
                     <div class="form-floating">
                         <input type="text" formControlName="firstName" class="form-control" id="floatingInputGrid"
-                            placeholder="enter Name Here">
+                            placeholder="enter Name Here"
+                            [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
                         <label for="floatingInputGrid">First Name</label>
+                        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                        </div>
                     </div>
                 </div>
 
@@ -54,20 +58,28 @@
                 <div class="col-md-4">
                     <div class="form-floating">
                         <input type="text" formControlName="lastName" class="form-control" id="floatingInputGrid"
-                            placeholder="enter Name Here">
+                            placeholder="enter Name Here"
+                            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
                         <label for="floatingInputGrid">Last Name</label>
+                        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-floating">
                       <select formControlName="UserType" class="form-select" id="floatingSelectGrid"
-                        aria-label="Floating label select example">
+                        aria-label="Floating label select example"
+                        [ngClass]="{ 'is-invalid': submitted && f['UserType'].errors }">
                         <option value=""></option>
                         <option value="Admin">Admin</option>
                         <option value="Volunteer">Volunteer</option>
                       </select>
                       <label for="floatingSelectGrid">User Type</label>
+                      <div *ngIf="submitted && f['UserType'].errors" class="invalid-feedback">
+                        <div *ngIf="f['UserType'].errors['required']">User Type is required</div>
+                      </div>
                     </div>
                   </div>
 
@@ -78,18 +90,24 @@
 
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="number" formControlName="mobileNumber" class="form-control" id="floatingInputGrid">
+                        <input type="number" formControlName="mobileNumber" class="form-control" id="floatingInputGrid"
+                        [ngClass]="{ 'is-invalid': submitted && f['mobileNumber'].errors }">
                         <label for="floatingInputGrid">Contact Number</label>
+                        <div *ngIf="submitted && f['mobileNumber'].errors" class="invalid-feedback">
+                            <div *ngIf="f['mobileNumber'].errors['required']">Mobile Number is required</div>
+                          </div>
                     </div>
                 </div>
-
-
 
                 <div class="col-md-4">
                     <div class="form-floating">
                         <input type="email" formControlName="EmailID" class="form-control"
-                            id="floatingInputGrid">
+                            id="floatingInputGrid"
+                            [ngClass]="{ 'is-invalid': submitted && f['EmailID'].errors }">
                         <label for="floatingInputGrid">Email ID</label>
+                        <div *ngIf="submitted && f['EmailID'].errors" class="invalid-feedback">
+                            <div *ngIf="f['EmailID'].errors['required']">Email is required</div>
+                        </div>
                     </div>
                 </div>
 

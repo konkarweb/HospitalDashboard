@@ -118,6 +118,9 @@
                 placeholder="enter Name Here"
                 [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
               <label for="floatingInputGrid">First Name</label>
+              <div *ngIf="submitted && f['FirstName'].errors" class="invalid-feedback">
+                <div *ngIf="f['FirstName'].errors['required']">First name is required</div>
+              </div>
             </div>
           </div>
 
@@ -125,8 +128,11 @@
             <div class="form-floating">
               <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid"
                 placeholder="enter Name Here"
-                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
+                [ngClass]="{ 'is-invalid': submitted && f['MiddleName'].errors }">
               <label for="floatingInputGrid">Middle Name</label>
+              <div *ngIf="submitted && f['MiddleName'].errors" class="invalid-feedback">
+                <div *ngIf="f['MiddleName'].errors['required']">Middle name is required</div>
+              </div>
             </div>
           </div>
 
@@ -134,8 +140,11 @@
             <div class="form-floating">
               <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid"
                 placeholder="enter Name Here"
-                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
-              <label for="floatingInputGrid">Last Name</label>
+                [ngClass]="{ 'is-invalid': submitted && f['LastName'].errors }">
+              <label for="floatingInputGrid">Last name</label>
+              <div *ngIf="submitted && f['LastName'].errors" class="invalid-feedback">
+                <div *ngIf="f['LastName'].errors['required']">Last name is required</div>
+              </div>
             </div>
           </div>
 
@@ -148,26 +157,33 @@
             <div class="form-floating">
               <select formControlName="Gender" class="form-select" id="floatingSelectGrid"
                 aria-label="Floating label select example" 
-                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
+                [ngClass]="{ 'is-invalid': submitted && f['Gender'].errors }">
                 <option value="M">M</option>
                 <option value="F">F</option>
               </select>
               <label for="floatingSelectGrid">Gender</label>
+              <div *ngIf="submitted && f['Gender'].errors" class="invalid-feedback">
+                <div *ngIf="f['Gender'].errors['required']">Gender is required</div>
+              </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid"
-              [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
+              [ngClass]="{ 'is-invalid': submitted && f['DOB'].errors }">
               <label for="floatingInputGrid">Date of Birth</label>
+              <div *ngIf="submitted && f['DOB'].errors" class="invalid-feedback">
+                <div *ngIf="f['DOB'].errors['required']">DOB is required</div>
+              </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <select formControlName="BloodGroup" class="form-select" id="floatingSelectGrid"
-                aria-label="Floating label select example">
+                aria-label="Floating label select example"
+                [ngClass]="{ 'is-invalid': submitted && f['BloodGroup'].errors }">
                 <option value=""></option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
@@ -179,6 +195,9 @@
                 <option value="O-">O-</option>
               </select>
               <label for="floatingSelectGrid">Blood Group</label>
+              <div *ngIf="submitted && f['BloodGroup'].errors" class="invalid-feedback">
+                <div *ngIf="f['BloodGroup'].errors['required']">Blood Group is required</div>
+              </div>
             </div>
           </div>
 
@@ -189,28 +208,38 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="BirthHeadCircumference" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="enter Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['BirthHeadCircumference'].errors }" >
               <label for="floatingInputGrid">Birth Head Circumference (cm)</label>
+              <div *ngIf="submitted && f['BirthHeadCircumference'].errors" class="invalid-feedback">
+                <div *ngIf="f['BirthHeadCircumference'].errors['required']">Birth Head Circumference is required</div>
+              </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="BirthHeight" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="enter Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['BirthHeight'].errors }">
               <label for="floatingInputGrid">Birth Height (in)</label>
+              <div *ngIf="submitted && f['BirthHeight'].errors" class="invalid-feedback">
+                <div *ngIf="f['BirthHeight'].errors['required']">Birth Height is required</div>
+              </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="BirthWeight" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="enter Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['BirthWeight'].errors }">
               <label for="floatingInputGrid">Birth Weight (kg)</label>
+              <div *ngIf="submitted && f['BirthWeight'].errors" class="invalid-feedback">
+                <div *ngIf="f['BirthWeight'].errors['required']">Birth Weight is required</div>
+              </div>
             </div>
           </div>
-
-
 
         </div>
 

@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientsService } from '../patients.service';
 import { VaccineService } from '../vaccine.service';
 import { MedicalHistoryService } from '../medical-history.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Call } from '@angular/compiler';
 import { ignoreElements } from 'rxjs';
+import Validation from '../utils/validation';
 
 @Component({
   selector: 'app-maintain-patients',
@@ -66,7 +67,8 @@ export class MaintainPatientsComponent implements OnInit {
     private _paitentsService: PatientsService,
     private _vaccineService: VaccineService,
     private _medicalHistoryServive: MedicalHistoryService,
-    private firestore: AngularFirestore) {
+    private firestore: AngularFirestore,
+    private formBuilder: FormBuilder) {
 
   }
 
@@ -98,6 +100,12 @@ export class MaintainPatientsComponent implements OnInit {
       Pincode: new FormControl(''),
     }
   );
+
+  submitted = false;
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.PatientsDetails.controls;
+  }
 
 
   FGVaccineDetails = new FormGroup(
@@ -337,6 +345,12 @@ export class MaintainPatientsComponent implements OnInit {
   }
 
   OnSave() {
+
+    this.submitted = true;
+
+    if (this.PatientsDetails.invalid) {
+      return;
+    }
 
     this.CurrentTimeStamp = this.CurrentTimeStampGet();
     //this.CurrentUser = 'wVYbQJ43GSfHLtZ7DSYA';
@@ -942,7 +956,31 @@ export class MaintainPatientsComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.PatientsDetails = this.formBuilder.group(
+      {
+        patientId: [''],
+        patientType: [''],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        middleName: ['', Validators.required],
+        bloodGroup: ['', Validators.required],
+        mobileNumber: ['', Validators.required],
+        alternateNumber: [''],
+        qualification: [''],
+        employmentStatus: [''],
+        uid: [''],
+        ageAtMarraige: [''],
+        dob: ['', Validators.required],
+        pregnancyType: [''],
+        noOfChildren: [''],
+        familyIncome: [''],
+        DataChanged: [''],
+        AddressLine1: [''],
+        AddressLine2: [''],
+        State: [''],
+        City: [''],
+        Pincode: ['']
+      });
 
     let id = this.route.snapshot.paramMap.get('id');
     let idtmp = this.route.snapshot.paramMap.get('idtemp');
