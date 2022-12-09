@@ -146,8 +146,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng *ngFor="let Upcmng of UpcmngList;  index as i">
-            <td>{{Upcmng.patientID}} </td>
+          <tr ng *ngFor="let Upcmng of UpcmngListFinal;  index as i">
+            <td>{{Upcmng.FirstName}} {{Upcmng.LastName}} </td>
             <td>{{Upcmng.Vaccine}}</td>
             <td>{{Upcmng.ScheduledOn}}</td>
           </tr>
@@ -169,10 +169,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng *ngFor="let Upcmng of UpcmngList;  index as i">
-            <td>{{Upcmng.patientID}} </td>
-            <td>{{Upcmng.Vaccine}}</td>
-            <td>{{Upcmng.ScheduledOn}}</td>
+          <tr ng *ngFor="let Due of DueListFinal;  index as i">
+            <td>{{Due.FirstName}} </td>
+            <td>{{Due.Vaccine}}</td>
+            <td>{{Due.ScheduledOn}}</td>
           </tr>
         </tbody>
       </table>
