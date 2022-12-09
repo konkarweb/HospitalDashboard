@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChildService } from '../child.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl,  FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { VaccineService } from '../vaccine.service';
+import Validation from '../utils/validation';
 
 @Component({
   selector: 'app-maintain-child',
@@ -70,7 +71,8 @@ export class MaintainChildComponent implements OnInit {
     private router: Router,
     private _paitentsService: ChildService,
     private firestore: AngularFirestore,
-    private _vaccineService: VaccineService) {
+    private _vaccineService: VaccineService,
+    private formBuilder: FormBuilder) {
 
   }
 
@@ -93,6 +95,10 @@ export class MaintainChildComponent implements OnInit {
       MotherID: new FormControl(''),
     }
   );
+  submitted = false;
+  get f(): { [key: string]: AbstractControl } {
+    return this.ChildDetails.controls;
+  }
 
 
   PatientsDetails = new FormGroup(
@@ -362,6 +368,12 @@ export class MaintainChildComponent implements OnInit {
 
 
   OnSave() {
+
+    this.submitted = true;
+
+    if (this.ChildDetails.invalid) {
+      return;
+    }
 
     this.CurrentTimeStamp = this.CurrentTimeStampGet();
     this.CurrentUser = 'wVYbQJ43GSfHLtZ7DSYA';
@@ -844,7 +856,23 @@ export class MaintainChildComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.ChildDetails = this.formBuilder.group(
+      {
+        ChildId: [''],
+        patientType: ['', Validators.required],
+        FirstName: ['', Validators.required],
+        LastName: ['', Validators.required],
+        MiddleName: ['', Validators.required],
+        BloodGroup: ['', Validators.required],
+        MobileNumber: ['', Validators.required],
+        DOB: ['', Validators.required],
+        Gender: ['', Validators.required],
+        BirthHeadCircumference: ['', Validators.required],
+        BirthHeight: ['', Validators.required],
+        BirthWeight: ['', Validators.required],
+        MotherID: ['', Validators.required],
+      }
+    );
 
     let id = this.route.snapshot.paramMap.get('id');
     this.MotherID = this.route.snapshot.paramMap.get('MTid');

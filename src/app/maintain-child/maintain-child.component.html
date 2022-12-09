@@ -115,7 +115,8 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="FirstName" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="enter Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
               <label for="floatingInputGrid">First Name</label>
             </div>
           </div>
@@ -123,7 +124,8 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="MiddleName" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="enter Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
               <label for="floatingInputGrid">Middle Name</label>
             </div>
           </div>
@@ -131,7 +133,8 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="LastName" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="enter Name Here"
+                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
               <label for="floatingInputGrid">Last Name</label>
             </div>
           </div>
@@ -144,7 +147,8 @@
           <div class="col-md-4">
             <div class="form-floating">
               <select formControlName="Gender" class="form-select" id="floatingSelectGrid"
-                aria-label="Floating label select example">
+                aria-label="Floating label select example" 
+                [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
                 <option value="M">M</option>
                 <option value="F">F</option>
               </select>
@@ -154,7 +158,8 @@
 
           <div class="col-md-4">
             <div class="form-floating">
-              <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid">
+              <input type="date" formControlName="DOB" class="form-control" id="floatingInputGrid"
+              [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
               <label for="floatingInputGrid">Date of Birth</label>
             </div>
           </div>

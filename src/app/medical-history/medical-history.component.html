@@ -14,7 +14,7 @@
     </div>
     <div class=" col-2">
       <div class="float-end">
-        <button type="button" (click)="onNew()" class="btn btn-primary">New</button>
+        <button type="button" (click)="onNew()" class="btn btn-primary Save">New</button>
       </div>
     </div>
   </div>
@@ -22,9 +22,9 @@
     <thead>
       <tr>
         <th scope="col">Disease</th>
-        <th scope="col">comments</th>
-        <th scope="col">fromDate</th>
-        <th scope="col">toDate</th>
+        <th scope="col">Comment</th>
+        <th scope="col">From Date</th>
+        <th scope="col">To Date</th>
       </tr>
     </thead>
     <tbody ng *ngFor="let history of HistoryDetails;  index as i">

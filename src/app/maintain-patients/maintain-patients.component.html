@@ -40,8 +40,7 @@
   </div>
   <div class="  Actions col-2">
     <div class="float-end">
-
-      <a type="button" (click)="ShowChilds(Ptid, PtName)" class="">Childs</a>
+      <a type="button" (click)="ShowChilds(Ptid, PtName)" class="btn btn-outline-primary">Child</a>
     </div>
   </div>
 </div>
@@ -104,7 +103,7 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="firstName" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="Enter First Name Here" required>
               <label for="floatingInputGrid">First Name</label>
             </div>
           </div>
@@ -112,15 +111,15 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="middleName" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
-              <label for="floatingInputGrid">middle Name</label>
+                placeholder="Enter Middle Name Here">
+              <label for="floatingInputGrid">Middle Name</label>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="lastName" class="form-control" id="floatingInputGrid"
-                placeholder="enter Name Here">
+                placeholder="Enter Last Name Here">
               <label for="floatingInputGrid">Last Name</label>
             </div>
           </div>
@@ -251,7 +250,7 @@
           <div class="col-md-4">
             <div class="form-floating">
               <input type="text" formControlName="State" class="form-control" id="floatingInputGrid">
-              <label for="floatingInputGrid">Stae</label>
+              <label for="floatingInputGrid">State</label>
             </div>
           </div>
 
@@ -343,9 +342,9 @@
       <thead>
         <tr>
           <th scope="col">Disease</th>
-          <th scope="col">comments</th>
-          <th scope="col">fromDate</th>
-          <th scope="col">toDate</th>
+          <th scope="col">Comment</th>
+          <th scope="col">From Date</th>
+          <th scope="col">To Date</th>
         </tr>
       </thead>
       <tbody ng *ngFor="let history of HistoryList;  index as i">
