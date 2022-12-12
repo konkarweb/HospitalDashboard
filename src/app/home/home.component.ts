@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   public VACUPC: any;
 
   public UpcmngList: any;
-  public UpcmngListFinal: any;
+  public UpcmngListFinal: Array<any> = [];
+  public UpcmngListCFinal: Array<any> = [];
 
   public DueList:any;
   public DueListFinal: any;
@@ -51,26 +52,30 @@ export class HomeComponent implements OnInit {
                 // console.log(this.ChildList);
                 this.childCount = this.ChildList.length;
                 let i = 0;
+                let m = 0;
+                let c = 0;
 
-                this.UpcmngListFinal = this.UpcmngList;
+               // this.UpcmngListFinal = this.UpcmngList;
                 this.UpcmngList.forEach((Upcmng: any) => {
 
 
                   this.TempData = this.MotherList.filter((x: { docId: any; }) => x.docId == Upcmng.patientID)[0];
 
                   if (this.TempData) {
-
-                    this.UpcmngListFinal[i].FirstName = this.TempData.firstName;
-                    this.UpcmngListFinal[i].LastName = this.TempData.lastName;
-                    console.log(this.UpcmngListFinal[i]);
+                    this.UpcmngListFinal[m] = Upcmng;
+                    this.UpcmngListFinal[m].FirstName = this.TempData.firstName;
+                    this.UpcmngListFinal[m].LastName = this.TempData.lastName;
+                    console.log(this.UpcmngListFinal[m]);
+                    m = m + 1;
                   }
                   else {
 
                     this.TempData = this.ChildList.filter((x: { docId: any; }) => x.docId == Upcmng.patientID)[0];
-
-                    this.UpcmngListFinal[i].FirstName = this.TempData.FirstName;
-                    this.UpcmngListFinal[i].LastName = this.TempData.LastName;
-                    console.log(this.UpcmngListFinal[i]);
+                    this.UpcmngListCFinal[c] = Upcmng;
+                    this.UpcmngListCFinal[c].FirstName = this.TempData.FirstName;
+                    this.UpcmngListCFinal[c].LastName = this.TempData.LastName;
+                    console.log(this.UpcmngListCFinal[c]);
+                    c = c + 1;
                   }
 
 

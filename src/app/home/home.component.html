@@ -133,9 +133,12 @@
 
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
+      <h2 class="text-center">Upcomming Vaccines</h2>
+    </div>
+    <div class="col-md-6">
       <div class="row">
-        <h4 style="color:#553c9a;">Upcomming Vaccines</h4>
+        <h4 class="text-center" style="color:#553c9a;">Mother</h4>
       </div>
       <table class="table table-hover table-striped">
         <thead style="background: linear-gradient(90deg, rgba(57,93,191,1) 10%, rgba(0,212,255,0.23012955182072825) 100%);">
@@ -146,18 +149,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng *ngFor="let Upcmng of UpcmngListFinal;  index as i">
-            <td>{{Upcmng.FirstName}} {{Upcmng.LastName}} </td>
-            <td>{{Upcmng.Vaccine}}</td>
-            <td>{{Upcmng.ScheduledOn}}</td>
+          <tr ng *ngFor="let Upcmngt of UpcmngListFinal;  index as i">
+            <td>{{Upcmngt.FirstName}} {{Upcmngt.LastName}} </td>
+            <td>{{Upcmngt.Vaccine}}</td>
+            <td>{{Upcmngt.ScheduledOn}}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
 
-    <div class="col-6">
-      <div class="row">
+    <div class="col-md-6">
+      <!-- <div class="row">
         <h4 style="color:#553c9a;">Due Vaccines</h4>
       </div>
       <table class="table table-hover table-striped">
@@ -177,6 +180,24 @@
         </tbody>
       </table>
     </div>
+  </div> -->
+  <div class="row">
+    <h4 class="text-center" style="color:#553c9a;">Child</h4>
   </div>
-
+  <table class="table table-hover table-striped">
+    <thead style="background: linear-gradient(90deg, rgba(57,93,191,1) 10%, rgba(0,212,255,0.23012955182072825) 100%);">
+      <tr>
+        <th>Name</th>
+        <th>Vaccine</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng *ngFor="let Upcmng of UpcmngListCFinal;  index as i">
+        <td>{{Upcmng.FirstName}} {{Upcmng.LastName}} </td>
+        <td>{{Upcmng.Vaccine}}</td>
+        <td>{{Upcmng.ScheduledOn}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
