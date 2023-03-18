@@ -23,6 +23,9 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { AuthServiceService } from './auth-service.service';
 import { UserComponent } from './user/user.component';
 import { MaintainUserComponent } from './maintain-user/maintain-user.component';
+import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
+import { VaccineDetailsTableComponent } from './vaccine-details-table/vaccine-details-table.component';
+import { ApploadingComponent } from './apploading/apploading.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { MaintainUserComponent } from './maintain-user/maintain-user.component';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     UserComponent,
-    MaintainUserComponent
+    MaintainUserComponent,
+    VaccineDetailsComponent,
+    VaccineDetailsTableComponent,
+    ApploadingComponent
   ],
   imports: [
     BrowserModule,

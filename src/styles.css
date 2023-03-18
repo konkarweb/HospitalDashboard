@@ -135,7 +135,7 @@ body {
 }
 
 .HomeCards {
-    background-image: linear-gradient(to right, #badaf7, #2f7fff);
+    /* background-image: linear-gradient(to right, #badaf7, #2f7fff); */
     color: black;
     padding-left: 10px;
     padding-right: 10px;

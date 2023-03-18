@@ -1,0 +1,91 @@
+
+<div class="row BreadcumProp">
+    <div class=" col-10">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Vaccine Details</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+
+<div class="row MotherListSerch" style="height:fit-content;">
+    <h3 class="text-center">Vaccine Details</h3>
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="input-group">
+                <input class="form-control border-end-0 border rounded-pill" placeholder="Search Here" type="search"
+                    value="" id="example-search-input">
+                <span class="input-group-append">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" style="align-items: center;">
+        <div class="row" style="justify-content: center;">
+            <div class="col-md-2 col-6">
+                
+                <div class="HomeCards" (click)="OnSelect('Red')" style="background-color: red;background-image: none;">
+
+                    <div class="row" style="color: white;text-align: center;">
+                        <div class="col-9">
+                            <h3>Due</h3>
+                        </div>
+
+                        <div class="col-9">
+                            <span class="count">{{totalDue}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-2 col-6">
+
+                <div class="HomeCards" (click)="OnSelect('Blue')" style="background-color: blue;background-image: none;">
+
+                    <div class="row" style="color: white;text-align: center;">
+                        <div class="col-9">
+                            <h3>Upcoming</h3>
+                        </div>
+
+                        <div class="col-9">
+                            <span class="count">{{totalUpco}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-2 col-6">
+
+                <div class="HomeCards" (click)="OnSelect('Green')" style="background-color: green;background-image: none;">
+
+                    <div class="row"  style="color: white;text-align: center;">
+                        <div class="col-9">
+                            <h3>Completed</h3>
+
+                        </div>
+
+                        <div class="col-9">
+                            <span class="count">{{totalComp}}</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-apploading  *ngIf="isLoading">
+
+</app-apploading>
+<div *ngIf="showTableFlag">
+    <app-vaccine-details-table [colorValue]= "Color"></app-vaccine-details-table>
+</div>
+

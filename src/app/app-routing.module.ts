@@ -14,6 +14,9 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { AuthGuard } from './shared/guard/auth.guard';
 import { UserComponent } from './user/user.component';
 import { MaintainUserComponent } from './maintain-user/maintain-user.component';
+import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
+import { VaccineDetailsTableComponent } from './vaccine-details-table/vaccine-details-table.component';
+
 const routes: Routes = [
   // { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
@@ -35,6 +38,9 @@ const routes: Routes = [
 
   {path: 'Users',component: UserComponent, canActivate : [AuthGuard]},
   {path: 'UserDetail/:id', component:MaintainUserComponent,canActivate:[AuthGuard]},
+
+  {path: 'VaccineDetails/:tab', component: VaccineDetailsComponent, canActivate : [AuthGuard]},
+  {path: 'VaccineDetailsTable/:userType/:flag', component: VaccineDetailsTableComponent, canActivate:[AuthGuard]},
 ];
 
 @NgModule({

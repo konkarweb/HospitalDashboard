@@ -1,0 +1,50 @@
+<app-apploading  *ngIf="isLoading">
+
+</app-apploading>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <!-- <th scope="col">Detail</th> -->
+        <th scope="col">Blood Group</th>
+        <th scope="col" *ngIf="colorValue == 'Red'" >Due Date</th>
+        <th scope="col" *ngIf="colorValue == 'Green'">Completed Date</th>
+        <th scope="col" *ngIf="colorValue == 'Blue'">Next Date</th>
+
+      </tr>
+    </thead>
+    <tbody ng *ngFor="let patient of data;">
+       <tr > <!--(click)="OnSelect(vaccine)" -->
+        <!-- <td data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="vaccine.VaccineDetail">{{vaccine.Vaccine}}</td> -->
+        <!-- <td>{{vaccine.VaccineDetail}}</td> -->
+        <td>{{patient.FirstName}}</td>
+        <td>{{patient.BloodGroup}}</td>
+        <td *ngIf="colorValue == 'Red'">{{patient.ScheduledOn}}</td>
+        <td *ngIf="colorValue == 'Green'">{{patient.Date}}</td>
+        <td *ngIf="colorValue == 'Blue'">{{patient.ScheduledOn}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+<!-- <div class="row" ng *ngFor="let Patient of Patients;  index as i">
+    <div class="col-12 MotherList">
+        <div class="row">
+            <div class="col-md-1 col-4">
+                <div class="text-center">
+                    <span class="Micon ">
+                        <span style="color:black; text-decoration: none;">{{Patient.Fname}}</span>
+                        <span style="color:black ; text-decoration: none;">{{Patient.Lname}}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-11 col-8">
+
+                <span class="Mname">{{Patient.Fname}} {{ Patient.Id }} {{Patient.Fname}}</span>
+                <br>
+                <span class="Mnumber"><strong>DOB: </strong>{{Patient.Contact_No}}</span>
+            </div>
+
+        </div>
+    </div>
+</div> -->
