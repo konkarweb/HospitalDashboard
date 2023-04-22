@@ -23,21 +23,42 @@ export class VaccineDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userType = this.route.snapshot.params['tab'];
     this.isLoading = true;
-    this.dataService.getChildCompletedVaccineData().subscribe(data => {
-      this.dataComp = data;
-      this.totalComp = data.length;
-      
-    });
-
-    this.dataService.getChildDueVaccineData().subscribe(data => {
-      this.dataDue = data;
-      this.totalDue = data.length;
-    });
-
-    this.dataService.getChildUpcomingVaccineData().subscribe(data => {
-      this.dataUpcom = data;
-      this.totalUpco = data.length;
-    });
+    
+    if (this.userType === 'Child'){
+      console.log(this.userType);
+      this.dataService.getChildCompletedVaccineData().subscribe(data => {
+        this.dataComp = data;
+        this.totalComp = data.length;
+        
+      });
+  
+      this.dataService.getChildDueVaccineData().subscribe(data => {
+        this.dataDue = data;
+        this.totalDue = data.length;
+      });
+  
+      this.dataService.getChildUpcomingVaccineData().subscribe(data => {
+        this.dataUpcom = data;
+        this.totalUpco = data.length;
+      });
+    }else{
+      this.dataService.getParentCompletedVaccineData().subscribe(data => {
+        this.dataComp = data;
+        this.totalComp = data.length;
+        
+      });
+  
+      this.dataService.getParentDueVaccineData().subscribe(data => {
+        this.dataDue = data;
+        this.totalDue = data.length;
+      });
+  
+      this.dataService.getParentUpcomingVaccineData().subscribe(data => {
+        this.dataUpcom = data;
+        this.totalUpco = data.length;
+      });
+    }
+   
     this.isLoading = false;
   }
   OnSelect(Color :any){

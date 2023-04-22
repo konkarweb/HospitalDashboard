@@ -22,4 +22,17 @@ export class VaccineDetailsTableService {
   getChildUpcomingVaccineData(): Observable<any> {
     return this.http.get('http://localhost:3000/UpcomingVaccine');
   }
+
+
+  getParentCompletedVaccineData(): Observable<any> {
+    return this.http.get('http://localhost:3000/ParentVaccineTaken');
+  }
+
+  getParentDueVaccineData(): Observable<any> {
+    return this.http.get('http://localhost:3000/ParentDueVaccine');
+  }
+
+  getParentUpcomingVaccineData(): Observable<any> {
+    return this.http.get('http://localhost:3000/ParentUpcomingVaccine');
+  }
 }

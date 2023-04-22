@@ -53,11 +53,53 @@ export class VaccineDetailsTableComponent implements OnInit {
         });
       }
 
+    } if (this.colorValue == 'Green') {
+      this.dataService.getChildCompletedVaccineData().subscribe(data => {
+        this.data = data;
+        this.isLoading = false;
+        console.log(data);
+      });
+    }
+    if (this.colorValue == 'Red') {
+      this.dataService.getChildDueVaccineData().subscribe(data => {
+        this.data = data;
+        this.isLoading = false;
+        console.log(data);
+      });
+    }
+    if (this.colorValue == 'Blue') {
+      this.dataService.getChildUpcomingVaccineData().subscribe(data => {
+        this.data = data;
+        this.isLoading = false;
+        console.log(data);
+      });
+    } else {
+      if (this.colorValue == 'Green') {
+        this.dataService.getParentCompletedVaccineData().subscribe(data => {
+          this.data = data;
+          this.isLoading = false;
+          console.log(data);
+        });
+      }
+      if (this.colorValue == 'Red') {
+        this.dataService.getParentDueVaccineData().subscribe(data => {
+          this.data = data;
+          this.isLoading = false;
+          console.log(data);
+        });
+      }
+      if (this.colorValue == 'Blue') {
+        this.dataService.getParentUpcomingVaccineData().subscribe(data => {
+          this.data = data;
+          this.isLoading = false;
+          console.log(data);
+        });
+      }
     }
   }
 
   ngOnInit(): void {
-    
+
   }
 
 
