@@ -26,6 +26,7 @@ import { MaintainUserComponent } from './maintain-user/maintain-user.component';
 import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
 import { VaccineDetailsTableComponent } from './vaccine-details-table/vaccine-details-table.component';
 import { ApploadingComponent } from './apploading/apploading.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ApploadingComponent } from './apploading/apploading.component';
     MaintainUserComponent,
     VaccineDetailsComponent,
     VaccineDetailsTableComponent,
-    ApploadingComponent
+    ApploadingComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,

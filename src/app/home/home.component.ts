@@ -1,9 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { VacReportService } from '../vac-report.service';
 
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
